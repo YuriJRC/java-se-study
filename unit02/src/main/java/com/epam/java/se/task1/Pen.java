@@ -77,4 +77,9 @@ public class Pen {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Pen: (" + "color - " + getColor() + ", " +
+                "type - " + getType() + ", " + "price - " + getPrice() + ")";
+    }
 }
