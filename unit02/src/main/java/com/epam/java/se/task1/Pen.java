@@ -41,6 +41,7 @@ public class Pen {
         this.price = price;
     }
 
+    @Override
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -65,4 +66,15 @@ public class Pen {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getColor() == null) ? 0 : getColor().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + getPrice();
+        return result;
+    }
+
 }
