@@ -32,6 +32,15 @@ public class EmployeeWorkSpace {
             }
         }
     }
-
+    public int calculateSum(){
+        int sum =0;
+        for (int i=0; i<stationeriesList.size(); i++){
+            if (stationeriesList.get(i).getPrice()==Integer.MAX_VALUE){
+                return Integer.MAX_VALUE;
+            }
+            sum += stationeriesList.get(i).getPrice();
+        }
+        return sum;
+    }
 }
 

@@ -40,4 +40,17 @@ public class EmployeeWorkSpaceTest {
 
         System.out.println(workSpace.getStationeriesList());
     }
+
+    @Test
+    public void calculateSumTest(){
+        EmployeeWorkSpace workSpace = new EmployeeWorkSpace();
+        workSpace.addStationery(new Stationery("Pen", 150));
+        workSpace.addStationery(new Stationery("null", -500));
+        workSpace.addStationery(new Stationery(null, 100));
+        workSpace.addStationery(new Stationery("Paper", Integer.MAX_VALUE));
+        workSpace.addStationery(new Stationery("Clipboard", 50));
+
+        System.out.println(workSpace.calculateSum());
+    }
+
 }
