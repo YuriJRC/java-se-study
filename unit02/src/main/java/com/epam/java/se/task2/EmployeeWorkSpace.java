@@ -9,7 +9,7 @@ import java.util.List;
 public class EmployeeWorkSpace {
     private List<Stationery> stationeriesList;
 
-    public EmployeeWorkSpace (){
+    public EmployeeWorkSpace() {
         stationeriesList = new ArrayList<Stationery>();
     }
 
@@ -17,8 +17,21 @@ public class EmployeeWorkSpace {
         return stationeriesList;
     }
 
-    public void addStationery(Stationery stationery){
+    public void addStationery(Stationery stationery) {
         stationeriesList.add(stationery);
+
+    }
+
+    public void removeStationeryByName(String name) {
+        if (name == null){
+            name = "null";
+        }
+        for (int i=0; i<stationeriesList.size(); i++){
+            if (stationeriesList.get(i).getName().equalsIgnoreCase(name)){
+                stationeriesList.remove(i);
+            }
         }
     }
+
+}
 

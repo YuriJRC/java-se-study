@@ -24,4 +24,20 @@ public class EmployeeWorkSpaceTest {
         assertFalse(workSpace.getStationeriesList().get(2).getName()==null);
 
     }
+    @Test
+    public void removeStationaryTest(){
+        EmployeeWorkSpace workSpace = new EmployeeWorkSpace();
+        workSpace.addStationery(new Stationery("Pen", 150));
+        workSpace.addStationery(new Stationery("null", -500));
+        workSpace.addStationery(new Stationery(null, 100));
+        workSpace.addStationery(new Stationery("Paper", Integer.MAX_VALUE));
+        workSpace.addStationery(new Stationery("Clipboard", 50));
+
+        workSpace.removeStationeryByName("pen");
+        workSpace.removeStationeryByName(null);
+        workSpace.removeStationeryByName("null");
+        workSpace.removeStationeryByName("paPER");
+
+        System.out.println(workSpace.getStationeriesList());
+    }
 }
