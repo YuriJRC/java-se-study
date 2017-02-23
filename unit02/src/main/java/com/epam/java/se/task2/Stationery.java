@@ -5,8 +5,8 @@ package com.epam.java.se.task2;
  */
 public class Stationery {
     private int id;
-    private String name;
-    private int price;
+    protected String name;
+    protected int price;
     private static int staticId;
 
     public Stationery (String name, int price){
