@@ -14,4 +14,12 @@ public class Mark <T extends Number>{
         return mark;
     }
 
+    public void setMark(T mark) {
+        this.mark = mark;
+    }
+
+    @Override
+    public String toString() {
+        return "" + mark;
+    }
 }
