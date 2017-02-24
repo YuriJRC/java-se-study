@@ -17,12 +17,12 @@ public class GroupManager {
         groups.add(group);
     }
 
-    public HashMap <Student, Mark> returnStudentAndMark(Student student) {
-        HashMap  <Student, Mark> singleStudent = new HashMap<>();
+    public HashMap <Student, Number> returnStudentAndMark(Student student) {
+        HashMap  <Student, Number> singleStudent = new HashMap<>();
         for (int i=0; i<groups.size(); i++) {
             if (groups.get(i).isStudent(student.getName())) {
-                Mark m = groups.get(i).getStudents().get(student);
-                System.out.println(groups.get(i).getDiscipline()+": "+m);
+                Number m = groups.get(i).getStudents().get(student);
+                System.out.println(student.getName() + ": " + groups.get(i).getDiscipline()+" - "+m);
             }
         }
         return singleStudent;

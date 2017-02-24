@@ -18,24 +18,24 @@ public class GroupsOfStudentsTest {
         Student student6 = new Student("Valdemar");
 
         Group groupMaths = new Group(Discipline.MATHEMATICS);
-        groupMaths.addStudent(student, new Mark<>(5));
-        groupMaths.addStudent(student2, new Mark<>(4));
+        groupMaths.addMark(student, 5);
+        groupMaths.addMark(student2, 4);
+        groupMaths.addMark(student3, 2);
 
         Group groupGEO = new Group(Discipline.GEOGRAPHIC);
-        groupGEO.addStudent(student, new Mark<>(5));
-        groupGEO.addStudent(student3, new Mark<>(3));
+        groupGEO.addMark(student, 3);
+        groupGEO.addMark(student3, 1);
 
         Group groupInformatics = new Group(Discipline.INFORMATICS);
-        groupGEO.addStudent(student4, new Mark<>(5.8));
-        groupGEO.addStudent(student5, new Mark<>(3.4));
-        groupGEO.addStudent(student2, new Mark<>(7.7));
+        groupInformatics.addMark(student4, 2.7);
+        groupInformatics.addMark(student5, 3.1);
+        groupInformatics.addMark(student2, 2.9);
 
         Group groupPhysics = new Group(Discipline.PHYSICS);
-        groupPhysics.addStudent(student, new Mark<>(5.6));
-        groupPhysics.addStudent(student6, new Mark<>(8.8));
-        groupPhysics.addStudent(student5, new Mark<>(3.4));
-        groupPhysics.addStudent(student2, new Mark<>(11.7));
-        groupPhysics.addStudent(student5, new Mark<>(5.7));
+        groupPhysics.addMark(student, 4.6);
+        groupPhysics.addMark(student6, 3.2);
+        groupPhysics.addMark(student2, 3.6);
+        groupPhysics.addMark(student5, 2.2);
 
         GroupManager gm = new GroupManager();
         gm.setGroup(groupMaths);
@@ -44,5 +44,10 @@ public class GroupsOfStudentsTest {
         gm.setGroup(groupPhysics);
 
         gm.returnStudentAndMark(student);
+        gm.returnStudentAndMark(student2);
+        gm.returnStudentAndMark(student3);
+        gm.returnStudentAndMark(student4);
+        gm.returnStudentAndMark(student5);
+        gm.returnStudentAndMark(student6);
     }
 }
