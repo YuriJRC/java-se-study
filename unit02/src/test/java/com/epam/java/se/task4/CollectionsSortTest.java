@@ -1,6 +1,5 @@
 package com.epam.java.se.task4;
 
-import com.epam.java.se.task3.BeginnersSet;
 import org.junit.Test;
 
 import java.util.*;

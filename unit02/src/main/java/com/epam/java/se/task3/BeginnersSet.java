@@ -12,7 +12,8 @@ public class BeginnersSet extends ArrayList <Stationery>{
     public BeginnersSet (){
         add(new OfficePaper("Svetocopy", 400, 3, "A4"));
         add(new Notebook("Notebook", 500, 20, "yellow"));
+        add(new EngineerCalculator("Casio", 1000, 7));
+        add(new Calculator("Citizen", 400));
+        add(new Abacus("Abacus", 200));
     }
-
-
 }
