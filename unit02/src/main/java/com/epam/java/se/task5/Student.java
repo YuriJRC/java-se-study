@@ -7,6 +7,9 @@ public class Student {
     private String name;
 
     public Student (String name){
+        if (name==null){
+            throw new IllegalArgumentException("Name can't be null");
+        }
         this.name=name;
     }
 

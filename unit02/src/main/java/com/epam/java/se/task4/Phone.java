@@ -8,6 +8,10 @@ public class Phone {
     private int price;
 
     public Phone(String name, int price) {
+        if (name==null || price<0){
+            throw new IllegalArgumentException("Name can't be null," +
+                    "price can't be negative");
+        }
         this.name = name;
         this.price = price;
     }
