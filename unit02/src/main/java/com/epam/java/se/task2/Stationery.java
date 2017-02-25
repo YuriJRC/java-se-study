@@ -10,6 +10,10 @@ public class Stationery {
     private static int staticId;
 
     public Stationery (String name, int price){
+        if (name==null || price<0){
+            throw new IllegalArgumentException("Name can't be null," +
+                    "price can't be negative");
+        }
         this.name=name;
         this.price=price;
         id =staticId++;
@@ -20,21 +24,16 @@ public class Stationery {
     }
 
     public String getName() {
-        if (name == null){
-            return "null";
-        }
         return name;
     }
 
     public int getPrice() {
-        if (price<0){
-            return 0;
-        }
         return price;
     }
 
     @Override
     public String toString() {
-        return "(" + "id: "+ getId() +", "+"name - " + getName() + ", " + "price - " + getPrice() + ")";
+        String format = "(id - %d, name - %s, price - %d)";
+        return String.format(format, getId(), getName(), getPrice());
     }
 }

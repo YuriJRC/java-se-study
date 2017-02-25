@@ -68,7 +68,7 @@ public class Pen {
 
     @Override
     public String toString() {
-        return "Pen: (" + "color - " + getColor() + ", " +
-                "type - " + getType() + ", " + "price - " + getPrice() + ")";
+        String format = "Pen: (color - %s, type - %s, price - %d)";
+        return String.format(format, getColor(), getType(), getPrice());
     }
 }
