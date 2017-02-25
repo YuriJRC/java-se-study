@@ -1,7 +1,6 @@
 package com.epam.java.se.task5;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Мария on 24.02.2017.

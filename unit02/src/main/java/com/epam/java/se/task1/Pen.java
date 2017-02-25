@@ -9,6 +9,10 @@ public class Pen {
     private int price;
 
     public Pen(String color, String type, int price) {
+        if (color==null || type==null || price<0){
+            throw new IllegalArgumentException("Color and type can't be null," +
+                    "price can't be negative");
+        }
         this.color = color;
         this.type = type;
         this.price = price;
@@ -23,22 +27,7 @@ public class Pen {
     }
 
     public int getPrice() {
-        if (price<0){
-            return 0;
-        }
         return price;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     @Override

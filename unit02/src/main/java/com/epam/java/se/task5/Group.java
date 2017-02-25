@@ -47,8 +47,7 @@ public class Group implements IntegerMark, DoubleMark {
                 case GEOGRAPHIC:
                         students.put(name, number);
             }
-        }
-        else System.out.println("Wrong number");
+        } else System.out.println("Wrong number");
     }
 
     @Override

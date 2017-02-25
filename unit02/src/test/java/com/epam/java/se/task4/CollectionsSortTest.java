@@ -1,6 +1,7 @@
 package com.epam.java.se.task4;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.*;
 
@@ -37,7 +38,6 @@ public class CollectionsSortTest {
         phones3.add(new Phone("Samsung2", 150));
         phones3.add(new Phone("Asus", 200));
         phones3.add(new Phone("Samsung", 150));
-
         Collections.sort(phones3, comparatorByPriceAndName);
 
         for (Phone p : phones) {
