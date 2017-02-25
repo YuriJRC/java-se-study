@@ -14,12 +14,13 @@ public class OfficePaper extends AbstractPaperProduct{
     }
     @Override
     public int changeNumberOfPages (int number){
-        return 300;
+        return number;
     }
+
+
     @Override
     public String toString() {
-        return "name: " + name + ", price:" + price + ", sizeX: " + sizeX
-                + ", sizeY: " + sizeY + ", numberOfPages: " + numberOfPages
-                + ", format: " + format;
+        String format = "(name: %s, price %d, sizeX: %d, sizeY: %d, numberOfPages: %d,  format: %s)";
+        return String.format(format, name, price, sizeX, sizeY, numberOfPages, this.format);
     }
 }

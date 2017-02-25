@@ -11,6 +11,7 @@ public class Abacus extends AbstractCalculatingTool{
     }
     @Override
     public String toString() {
-        return "name: " + name + ", price:" + price + ", type: " + type;
+        String format = "(name: %s, price %d, type: %s)";
+        return String.format(format, name, price, type);
     }
 }

@@ -17,4 +17,8 @@ public abstract class AbstractPaperProduct extends Stationery{
         this.numberOfPages=numberOfPages;
     }
     public abstract int changeNumberOfPages(int number);
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
 }

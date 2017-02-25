@@ -13,7 +13,7 @@ public class Calculator extends Abacus {
     }
     @Override
     public String toString() {
-        return "name: " + name + ", price:" + price + ", type: " + type
-                + ", numberOfFunctions: " + numberOfFunctions;
+        String format = "(name: %s, price %d, type: %s, numberOfFunctions: %d)";
+        return String.format(format, name, price, type, numberOfFunctions);
     }
 }

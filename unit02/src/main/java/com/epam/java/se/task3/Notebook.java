@@ -17,8 +17,7 @@ public class Notebook extends AbstractPaperProduct{
 
     @Override
     public String toString() {
-        return "name: " + name + ", price:" + price + ", sizeX: " + sizeX
-                + ", sizeY: " + sizeY + ", numberOfPages: " + numberOfPages
-                + ", colorOfPages: " + colorOfPages;
+        String format = "(name: %s, price %d, sizeX: %d, sizeY: %d, numberOfPages: %d,  colorOfPages: %s)";
+        return String.format(format, name, price, sizeX, sizeY, numberOfPages, colorOfPages);
     }
 }

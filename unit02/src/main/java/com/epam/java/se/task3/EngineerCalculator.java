@@ -25,8 +25,8 @@ public class EngineerCalculator extends Calculator{
     }
     @Override
     public String toString() {
-        return "name: " + name + ", price:" + price + ", type: " + type
-                + ", numberOfFunctions: " + numberOfFunctions
-                + ", numberOfExtendedFunctions: " + numberOfExtendedFunctions;
+        String format = "(name: %s, price %d, type: %s, " +
+                "numberOfFunctions: %d, numberOfExtendedFunctions: %d)";
+        return String.format(format, name, price, type, numberOfFunctions, numberOfExtendedFunctions);
     }
 }
