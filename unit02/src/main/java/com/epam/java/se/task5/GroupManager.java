@@ -17,15 +17,13 @@ public class GroupManager {
         groups.add(group);
     }
 
-    public HashMap <Student, Number> returnStudentAndMark(Student student) {
-        HashMap  <Student, Number> singleStudent = new HashMap<>();
+    public void returnStudentAndMark(Student student) {
         for (int i=0; i<groups.size(); i++) {
             if (groups.get(i).isStudent(student.getName())) {
                 Number m = groups.get(i).getStudents().get(student);
                 System.out.println(student.getName() + ": " + groups.get(i).getDiscipline()+" - "+m);
             }
         }
-        return singleStudent;
     }
 
 }
