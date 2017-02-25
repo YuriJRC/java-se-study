@@ -1,8 +1,12 @@
 package com.epam.java.se.task6;
 
+import com.epam.java.se.task7.SubmarineAnnotation;
+
+
 /**
  * Created by Мария on 25.02.2017.
  */
+@SubmarineAnnotation (type = "Nuclear", location = "Saint-Petersburg")
 public class Submarine {
     private String name;
     private boolean isMoving = false;
@@ -25,6 +29,7 @@ public class Submarine {
     public static SubmarineEngine newSubmarine() {
         return new Submarine().new SubmarineEngine();
     }
+
     public class SubmarineEngine{
 
         private SubmarineEngine (){}
