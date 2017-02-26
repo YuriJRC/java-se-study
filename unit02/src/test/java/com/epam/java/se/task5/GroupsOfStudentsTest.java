@@ -41,6 +41,7 @@ public class GroupsOfStudentsTest {
         groupInformatics.addMark(student3, 1.9);
 
         Group groupPhysics = new Group(Discipline.PHYSICS);
+        groupPhysics.addMark(student4, 4.7);
         groupPhysics.addMark(student, 4.6);
         groupPhysics.addMark(student6, 3.2);
         groupPhysics.addMark(student2, 3.6);
@@ -58,5 +59,8 @@ public class GroupsOfStudentsTest {
         gm.returnStudentAndMark(student4);
         gm.returnStudentAndMark(student5);
         gm.returnStudentAndMark(student6);
+
+        gm.printResult();
+
     }
 }
