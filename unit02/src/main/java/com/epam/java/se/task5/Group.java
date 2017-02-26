@@ -4,8 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class represent a single group by
+ * particular discipline. Contains a Map
+ * of students and their marks.
+ * Implements interfaces with parametrisation
+ * to filter Integer and Double marks
+ * @see IntegerMark
+ * @see DoubleMark
+ *
  * Created by Мария on 24.02.2017.
  */
+
+
+
 public class Group implements IntegerMark, DoubleMark {
     private Discipline discipline;
     private HashMap<Student, Number> students;
@@ -16,6 +27,12 @@ public class Group implements IntegerMark, DoubleMark {
 
     }
 
+    /**
+     * @param name - checks if student is in group,
+     * this method is used in GroupManager
+     * @see GroupManager#getStudentAndHisMarksSorted(Student)
+     * @return true or false
+     */
     public boolean isStudent(String name) {
         for (Map.Entry<Student, Number> entry : students.entrySet()){
             if (name.equals(entry.getKey().getName())){
@@ -33,11 +50,11 @@ public class Group implements IntegerMark, DoubleMark {
         return discipline;
     }
 
-    @Override
-    public String toString() {
-        return "" + students;
-    }
-
+    /**
+     *
+     * @param name -add Student to HashMap
+     * @param number -add IntegerMark to HashMap
+     */
     @Override
     public void addMark(Student name, Integer number) {
         if (number>0 && number<=5) {
@@ -50,6 +67,11 @@ public class Group implements IntegerMark, DoubleMark {
         } else System.out.println("Wrong number");
     }
 
+    /**
+     *
+     * @param name -add Student to HashMap
+     * @param number -add IntegerMark to HashMap
+     */
     @Override
     public void addMark(Student name, Double number) {
         if (number > 0 && number <= 5) {

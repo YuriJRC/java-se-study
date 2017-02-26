@@ -33,6 +33,7 @@ public class GroupsOfStudentsTest {
         Group groupGEO = new Group(Discipline.GEOGRAPHIC);
         groupGEO.addMark(student, 3);
         groupGEO.addMark(student3, 1);
+        groupGEO.addMark(student6, 5);
 
         Group groupInformatics = new Group(Discipline.INFORMATICS);
         groupInformatics.addMark(student4, 2.7);
@@ -53,12 +54,12 @@ public class GroupsOfStudentsTest {
         gm.setGroup(groupInformatics);
         gm.setGroup(groupPhysics);
 
-        gm.returnStudentAndMark(student);
-        gm.returnStudentAndMark(student2);
-        gm.returnStudentAndMark(student3);
-        gm.returnStudentAndMark(student4);
-        gm.returnStudentAndMark(student5);
-        gm.returnStudentAndMark(student6);
+        gm.getStudentAndHisMarksSorted(student);
+        gm.getStudentAndHisMarksSorted(student2);
+        gm.getStudentAndHisMarksSorted(student3);
+        gm.getStudentAndHisMarksSorted(student4);
+        gm.getStudentAndHisMarksSorted(student5);
+        gm.getStudentAndHisMarksSorted(student6);
 
         gm.printResult();
 
