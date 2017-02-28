@@ -7,12 +7,14 @@ import org.junit.Test;
  */
 public class GroupsOfStudentsTest {
     @Test
-    public void contractTest() throws Exception{
-        Student student = new Student(null);
-        Student student2 = new Student("aaa");
-        Group groupMaths = new Group(Discipline.MATHEMATICS);
-        groupMaths.addMark(student, 5.6);
-        groupMaths.addMark(student, 10);
+           (expected = IllegalArgumentException.class)
+    public void valuesThatNotFollowContract() throws Exception{
+            Student student = new Student(null);
+            Student student2 = new Student("aaa");
+            Group groupMaths = new Group(Discipline.MATHEMATICS);
+            groupMaths.addDoubleMark(student, 5.6);
+            groupMaths.addDoubleMark(student2, 15.6);
+            groupMaths.addIntegerMark(student, 10); // must be not > 5
     }
 
     @Test
@@ -26,27 +28,27 @@ public class GroupsOfStudentsTest {
         Student student6 = new Student("Valdemar");
 
         Group groupMaths = new Group(Discipline.MATHEMATICS);
-        groupMaths.addMark(student, 5);
-        groupMaths.addMark(student2, 4);
-        groupMaths.addMark(student3, 2);
+        groupMaths.addIntegerMark(student, 5);
+        groupMaths.addIntegerMark(student2, 4);
+        groupMaths.addIntegerMark(student3, 2);
 
         Group groupGEO = new Group(Discipline.GEOGRAPHIC);
-        groupGEO.addMark(student, 3);
-        groupGEO.addMark(student3, 1);
-        groupGEO.addMark(student6, 5);
+        groupGEO.addIntegerMark(student, 3);
+        groupGEO.addIntegerMark(student3, 1);
+        groupGEO.addIntegerMark(student6, 5);
 
         Group groupInformatics = new Group(Discipline.INFORMATICS);
-        groupInformatics.addMark(student4, 2.7);
-        groupInformatics.addMark(student5, 3.1);
-        groupInformatics.addMark(student2, 2.9);
-        groupInformatics.addMark(student3, 1.9);
+        groupInformatics.addDoubleMark(student4, 2.7);
+        groupInformatics.addDoubleMark(student5, 3.1);
+        groupInformatics.addDoubleMark(student2, 2.9);
+        groupInformatics.addDoubleMark(student3, 1.9);
 
         Group groupPhysics = new Group(Discipline.PHYSICS);
-        groupPhysics.addMark(student4, 4.7);
-        groupPhysics.addMark(student, 4.6);
-        groupPhysics.addMark(student6, 3.2);
-        groupPhysics.addMark(student2, 3.6);
-        groupPhysics.addMark(student5, 2.2);
+        groupPhysics.addDoubleMark(student4, 4.7);
+        groupPhysics.addDoubleMark(student, 4.6);
+        groupPhysics.addDoubleMark(student6, 3.2);
+        groupPhysics.addDoubleMark(student2, 3.6);
+        groupPhysics.addDoubleMark(student5, 2.2);
 
         GroupManager gm = new GroupManager();
         gm.setGroup(groupMaths);

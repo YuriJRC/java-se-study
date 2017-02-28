@@ -56,7 +56,7 @@ public class Group implements IntegerMark, DoubleMark {
      * @param number -add IntegerMark to HashMap
      */
     @Override
-    public void addMark(Student name, Integer number) {
+    public void addIntegerMark(Student name, Integer number) {
         if (number>0 && number<=5) {
             switch (discipline) {
                 case MATHEMATICS:
@@ -73,7 +73,7 @@ public class Group implements IntegerMark, DoubleMark {
      * @param number -add IntegerMark to HashMap
      */
     @Override
-    public void addMark(Student name, Double number) {
+    public void addDoubleMark(Student name, Double number) {
         if (number > 0 && number <= 5) {
             switch (discipline) {
                 case INFORMATICS:

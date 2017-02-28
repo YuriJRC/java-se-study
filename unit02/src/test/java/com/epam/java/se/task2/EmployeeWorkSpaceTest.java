@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
  */
 public class EmployeeWorkSpaceTest {
     @Test
-    public void contractTest() throws Exception{
+    public void valuesThatNotFollowContract() throws Exception{
         EmployeeWorkSpace workSpace = new EmployeeWorkSpace();
         workSpace.addStationery(new Stationery(null, 100));
         workSpace.addStationery(new Stationery("Paper", -200));

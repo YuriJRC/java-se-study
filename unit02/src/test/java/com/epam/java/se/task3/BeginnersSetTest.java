@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class BeginnersSetTest {
     @Test
-    public void contractTest()throws Exception{
+    public void valuesThatNotFollowContract()throws Exception{
         Notebook n = new Notebook("Notebook", -20, 300, "black");
 
         assertFalse(n.getPrice()==-20);
