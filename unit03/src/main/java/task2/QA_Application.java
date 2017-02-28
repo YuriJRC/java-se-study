@@ -34,11 +34,12 @@ public class QA_Application {
                         System.out.println(questions.getString(value));
                     }
                     input = reader.readLine();
-                    if (keys.contains(String.valueOf(input))){
+                    if (keys.contains(input)){
                         System.out.println(answers.getString(input));
                     }
                     else System.out.println("Wrong input");
                 }
+
                 else if (input.equals("2")) {
                     locale = new Locale("ru", "RU");
                     questions = ResourceBundle.getBundle("Questions_ru_RU", locale);
@@ -49,7 +50,7 @@ public class QA_Application {
                         System.out.println(questions.getString(value));
                     }
                     input = reader.readLine();
-                    if (keys.contains(String.valueOf(input))){
+                    if (keys.contains(input)){
                         System.out.println(answers.getString(input));
                     }
                     else System.out.println("Неверный ввод");
