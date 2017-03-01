@@ -1,5 +1,6 @@
 package com.epam.java.se.task6;
 
+import com.epam.java.se.task3.Notebook;
 import com.epam.java.se.task7.SubmarineAnnotation;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -7,6 +8,15 @@ import static org.junit.Assert.*;
  * Created by Мария on 25.02.2017.
  */
 public class SubmarineAndAnnotationTest {
+    @Test
+            (expected = IllegalArgumentException.class)
+    public void valuesThatNotFollowContract()throws Exception{
+        Submarine submarine = Submarine.newSubmarine()
+                .setName(null)
+                .setSpeed(-100)
+                .build();
+    }
+
     @Test
     public void build() throws Exception{
         Submarine submarine = Submarine.newSubmarine()

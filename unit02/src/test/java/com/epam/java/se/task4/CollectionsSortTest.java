@@ -1,5 +1,6 @@
 package com.epam.java.se.task4;
 
+import com.epam.java.se.task3.Notebook;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -9,6 +10,12 @@ import java.util.*;
  * Created by Мария on 23.02.2017.
  */
 public class CollectionsSortTest {
+    @Test
+            (expected = IllegalArgumentException.class)
+    public void valuesThatNotFollowContract()throws Exception{
+        Phone p = new Phone(null, -100);
+    }
+
     @Test
     public void collectionsSort() throws Exception{
         Comparator<Phone> comparatorByName = new Sorter(CompareMethod.ByName);

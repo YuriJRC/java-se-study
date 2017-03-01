@@ -7,16 +7,15 @@ import static org.junit.Assert.*;
  */
 public class EmployeeWorkSpaceTest {
     @Test
+            (expected = IllegalArgumentException.class)
     public void valuesThatNotFollowContract() throws Exception{
         EmployeeWorkSpace workSpace = new EmployeeWorkSpace();
         workSpace.addStationery(new Stationery(null, 100));
         workSpace.addStationery(new Stationery("Paper", -200));
-
-        assertFalse(workSpace.getStationeriesList().get(0).getName().equals("null"));
-        assertFalse(workSpace.getStationeriesList().get(1).getPrice()==-200);
     }
+
     @Test
-    public void nullTest()throws Exception{
+    public void notNullTest()throws Exception{
         EmployeeWorkSpace workSpace = new EmployeeWorkSpace();
         workSpace.addStationery(new Stationery("Pen", 500));
 

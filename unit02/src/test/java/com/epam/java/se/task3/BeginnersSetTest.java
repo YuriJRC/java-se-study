@@ -8,10 +8,10 @@ import org.junit.Test;
  */
 public class BeginnersSetTest {
     @Test
+            (expected = IllegalArgumentException.class)
     public void valuesThatNotFollowContract()throws Exception{
         Notebook n = new Notebook("Notebook", -20, 300, "black");
-
-        assertFalse(n.getPrice()==-20);
+        Notebook n2 = new Notebook("Notebook", 20, 300, null);
     }
     @Test
     public void notNullTest() throws Exception{
