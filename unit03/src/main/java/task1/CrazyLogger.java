@@ -38,7 +38,7 @@ public class CrazyLogger {
         StringBuilder result = new StringBuilder();
         String [] separator = logger.toString().split("\\n");
         if (message == null || message.equals("")){
-            return result.append("Wrong input").toString();
+            return result.append("wrong input").toString();
         }
         for (int i=0; i<separator.length; i++){
             if (separator[i].indexOf(message,
@@ -47,13 +47,16 @@ public class CrazyLogger {
             }
         }
         if (result.toString().equals("")) {
-            return result.append("No matches found").toString();
+            return result.append("no matches found").toString();
         }
         return result.toString();
     }
 
     public String searchEntriesByData(String inputDate){
         StringBuilder result = new StringBuilder();
+        if (inputDate == null) {
+            return result.append("input can't be null").toString();
+        }
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         String [] separator = logger.toString().split("\\n");
         try {
@@ -64,11 +67,11 @@ public class CrazyLogger {
                     result.append(separator[i] + "\n");
                 }
             }
-            if (result.toString().equals("")) {
-                return result.append("No matches found" + "\n").toString();
-            }
         } catch (ParseException e) {
-            System.out.println("Wrong format");
+            return  result.append("wrong format").toString();
+        }
+        if (result.toString().equals("")) {
+            return result.append("no matches found").toString();
         }
         return result.toString();
     }

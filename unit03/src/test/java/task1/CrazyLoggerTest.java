@@ -1,6 +1,11 @@
 package task1;
 
 import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,7 +20,7 @@ public class CrazyLoggerTest {
     }
 
     @Test
-    public void addMessageTest() {
+    public void addMessageTest() throws Exception{
         CrazyLogger logger = new CrazyLogger();
         logger.addMessage("hello");
         logger.addMessage(null);
@@ -28,17 +33,17 @@ public class CrazyLoggerTest {
     }
 
     @Test
-    public void searchEntriesByMessageTest() {
+    public void searchEntriesByMessageTest() throws Exception{
         CrazyLogger logger = new CrazyLogger();
 
         logger.addMessage("ipsum");
         logger.addMessage("dolor");
         logger.addMessage("Lorem ipsum dolor sit amet consectetur adipisci");
 
-        assertTrue(logger.searchEntriesByMessage(null).equals("Wrong input"));
-        assertTrue(logger.searchEntriesByMessage("").equals("Wrong input"));
+        assertTrue(logger.searchEntriesByMessage(null).equals("wrong input"));
+        assertTrue(logger.searchEntriesByMessage("").equals("wrong input"));
 
-        assertTrue(logger.searchEntriesByMessage("hello").equals("No matches found"));
+        assertTrue(logger.searchEntriesByMessage("hello").equals("no matches found"));
 
         assertTrue(logger.searchEntriesByMessage("ipsum").contains("ipsum") &&
                 logger.searchEntriesByMessage("ipsum").contains("Lorem ipsum dolor sit amet consectetur adipisci"));
@@ -49,14 +54,20 @@ public class CrazyLoggerTest {
     }
 
     @Test
-    public void searchByData() {
+    public void searchEntriesByDataTest() throws Exception{
         CrazyLogger logger = new CrazyLogger();
         logger.addMessage("ipsum");
         logger.addMessage("dolor");
         logger.addMessage("sit");
 
-        System.out.println(logger.searchEntriesByData("12-15-2017"));
-        System.out.println(logger.searchEntriesByData("27-02-2017"));
-        System.out.println(logger.searchEntriesByData("27.02.2017"));
+        assertTrue(logger.searchEntriesByData(null).equals("input can't be null"));
+
+        assertTrue(logger.searchEntriesByData("rwe.wfwe.wefwefwfw").equals("wrong format"));
+        assertTrue(logger.searchEntriesByData("rwe.wfwe.wefwefwfw").equals("wrong format"));
+
+        assertTrue(logger.searchEntriesByData("01-01-2017").equals("no matches found"));
+
+        assertTrue(logger.searchEntriesByData("01-03-2017").contains("sit"));
+
     }
 }
