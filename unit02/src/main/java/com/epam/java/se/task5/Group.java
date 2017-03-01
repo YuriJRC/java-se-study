@@ -33,9 +33,10 @@ public class Group implements IntegerMark, DoubleMark {
      * @see GroupManager#getStudentAndHisMarksSorted(Student)
      * @return true or false
      */
-    public boolean isStudent(String name) {
+    public boolean hasStudent(String name, String surname) {
         for (Map.Entry<Student, Number> entry : students.entrySet()){
-            if (name.equals(entry.getKey().getName())){
+            if (name.equals(entry.getKey().getName()) &&
+                    surname.equals(entry.getKey().getSurname())){
                 return true;
             }
         }

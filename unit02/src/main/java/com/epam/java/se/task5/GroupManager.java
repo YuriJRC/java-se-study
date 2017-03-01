@@ -38,7 +38,7 @@ public class GroupManager {
         }
         Map<Discipline, Number> marksForDiscipline = new HashMap<>();
         for (int i=0; i<groups.size(); i++) {
-            if (groups.get(i).isStudent(student.getName())) {
+            if (groups.get(i).hasStudent(student.getName(), student.getSurname())) {
 
                 Number mark = groups.get(i).getStudents().get(student);
 

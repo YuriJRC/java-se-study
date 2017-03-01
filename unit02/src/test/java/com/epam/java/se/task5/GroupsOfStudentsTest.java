@@ -1,6 +1,7 @@
 package com.epam.java.se.task5;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Created by Мария on 24.02.2017.
@@ -9,16 +10,55 @@ public class GroupsOfStudentsTest {
     @Test
            (expected = IllegalArgumentException.class)
     public void valuesThatNotFollowContract() throws Exception{
-            Student student = new Student(null, "aaa");
-            Student student2 = new Student("aaa", "bbb");
             Group groupMaths = new Group(Discipline.MATHEMATICS);
-            groupMaths.addDoubleMark(student, 5.6);
+
+            Student student = new Student(null, "aaa");
+            groupMaths.addIntegerMark(student, 4);
+
+            Student student2 = new Student("aaa", "bbb");
+            groupMaths.addDoubleMark(student2, 5.6); // must be integer
+            groupMaths.addIntegerMark(student2, 10); // must be not > 5
             groupMaths.addDoubleMark(student2, 15.6);
-            groupMaths.addIntegerMark(student, 10); // must be not > 5
     }
 
     @Test
-    public void groupsTest() throws Exception{
+    public void addStudentsTest() throws Exception{
+        Student student = new Student("Vasya", "Pupkin");
+        Student student2 = new Student("Masha", "Ivanova");
+
+        assertTrue(student.getName().equals("Vasya"));
+        assertTrue(student2.getSurname().equals("Ivanova"));
+
+    }
+    @Test
+    public void ifGroupHasStudentTest()throws Exception{
+        Student student3 = new Student("Yura", "Petrov");
+        Student student4 = new Student("Petya", "Sidorov");
+
+        Group groupPhysics = new Group(Discipline.PHYSICS);
+        groupPhysics.addDoubleMark(student3, 4.7);
+
+        Group groupInformatics = new Group(Discipline.INFORMATICS);
+        groupInformatics.addDoubleMark(student4, 2.7);
+
+        assertTrue(groupPhysics.hasStudent("Yura", "Petrov"));
+        assertFalse(groupInformatics.hasStudent("Petya", "Kot"));
+    }
+
+    @Test
+    public void addGroupsAndMarksTest() throws Exception{
+        Student student = new Student("Vasya", "Pupkin");
+
+        Group groupMaths = new Group(Discipline.MATHEMATICS);
+        groupMaths.addIntegerMark(student, 5);
+
+        Group groupInformatics = new Group(Discipline.INFORMATICS);
+        groupInformatics.addDoubleMark(student, 2.7);
+    }
+
+
+    @Test
+    public void groupManagerTest() throws Exception{
 
         Student student = new Student("Vasya", "Pupkin");
         Student student2 = new Student("Masha", "Ivanova");
