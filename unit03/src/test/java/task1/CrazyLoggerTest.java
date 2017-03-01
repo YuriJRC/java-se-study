@@ -28,22 +28,24 @@ public class CrazyLoggerTest {
     }
 
     @Test
-    public void searchInfoTest() {
+    public void searchEntriesByMessageTest() {
         CrazyLogger logger = new CrazyLogger();
 
         logger.addMessage("ipsum");
         logger.addMessage("dolor");
         logger.addMessage("Lorem ipsum dolor sit amet consectetur adipisci");
 
-        System.out.println(logger.searchEntriesByMessage(null));
-        System.out.println(logger.searchEntriesByMessage(""));
-        System.out.println(logger.searchEntriesByMessage("ipsum"));
-        System.out.println(logger.searchEntriesByMessage("dolor"));
-        System.out.println(logger.searchEntriesByMessage("amet consectetur"));
-        System.out.println(logger.searchEntriesByMessage("hello"));
+        assertTrue(logger.searchEntriesByMessage(null).equals("Wrong input"));
+        assertTrue(logger.searchEntriesByMessage("").equals("Wrong input"));
 
+        assertTrue(logger.searchEntriesByMessage("hello").equals("No matches found"));
 
+        assertTrue(logger.searchEntriesByMessage("ipsum").contains("ipsum") &&
+                logger.searchEntriesByMessage("ipsum").contains("Lorem ipsum dolor sit amet consectetur adipisci"));
 
+       assertTrue(logger.searchEntriesByMessage("dolor").substring(19, 24).equals("dolor"));
+
+       logger.printLog();
     }
 
     @Test
