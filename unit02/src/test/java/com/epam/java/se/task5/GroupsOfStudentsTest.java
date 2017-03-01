@@ -1,6 +1,11 @@
 package com.epam.java.se.task5;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 /**
@@ -8,21 +13,21 @@ import static org.junit.Assert.*;
  */
 public class GroupsOfStudentsTest {
     @Test
-           (expected = IllegalArgumentException.class)
-    public void valuesThatNotFollowContract() throws Exception{
-            Group groupMaths = new Group(Discipline.MATHEMATICS);
+            (expected = IllegalArgumentException.class)
+    public void valuesThatNotFollowContract() throws Exception {
+        Group groupMaths = new Group(Discipline.MATHEMATICS);
 
-            Student student = new Student(null, "aaa");
-            groupMaths.addIntegerMark(student, 4);
+        Student student = new Student(null, "aaa");
+        groupMaths.addIntegerMark(student, 4);
 
-            Student student2 = new Student("aaa", "bbb");
-            groupMaths.addDoubleMark(student2, 5.6); // must be integer
-            groupMaths.addIntegerMark(student2, 10); // must be not > 5
-            groupMaths.addDoubleMark(student2, 15.6);
+        Student student2 = new Student("aaa", "bbb");
+        groupMaths.addDoubleMark(student2, 5.6); // must be integer
+        groupMaths.addIntegerMark(student2, 10); // must be not > 5
+        groupMaths.addDoubleMark(student2, 15.6);
     }
 
     @Test
-    public void addStudentsTest() throws Exception{
+    public void addStudentsTest() throws Exception {
         Student student = new Student("Vasya", "Pupkin");
         Student student2 = new Student("Masha", "Ivanova");
 
@@ -30,15 +35,16 @@ public class GroupsOfStudentsTest {
         assertTrue(student2.getSurname().equals("Ivanova"));
 
     }
-    @Test
-    public void ifGroupHasStudentTest()throws Exception{
-        Student student3 = new Student("Yura", "Petrov");
-        Student student4 = new Student("Petya", "Sidorov");
 
+    @Test
+    public void ifGroupHasStudentTest() throws Exception {
         Group groupPhysics = new Group(Discipline.PHYSICS);
+        Group groupInformatics = new Group(Discipline.INFORMATICS);
+
+        Student student3 = new Student("Yura", "Petrov");
         groupPhysics.addDoubleMark(student3, 4.7);
 
-        Group groupInformatics = new Group(Discipline.INFORMATICS);
+        Student student4 = new Student("Petya", "Sidorov");
         groupInformatics.addDoubleMark(student4, 2.7);
 
         assertTrue(groupPhysics.hasStudent("Yura", "Petrov"));
@@ -46,49 +52,46 @@ public class GroupsOfStudentsTest {
     }
 
     @Test
-    public void addGroupsAndMarksTest() throws Exception{
-        Student student = new Student("Vasya", "Pupkin");
-
+    public void addGroupsAndMarksTest() throws Exception {
         Group groupMaths = new Group(Discipline.MATHEMATICS);
-        groupMaths.addIntegerMark(student, 5);
-
         Group groupInformatics = new Group(Discipline.INFORMATICS);
+
+        Student student = new Student("Vasya", "Pupkin");
+        groupMaths.addIntegerMark(student, 5);
         groupInformatics.addDoubleMark(student, 2.7);
     }
 
-
     @Test
-    public void groupManagerTest() throws Exception{
+    public void groupManagerSetGroupsMethodTest() throws Exception {
+        Group groupGEO = new Group(Discipline.GEOGRAPHIC);
+        Group groupMaths = new Group(Discipline.MATHEMATICS);
 
         Student student = new Student("Vasya", "Pupkin");
-        Student student2 = new Student("Masha", "Ivanova");
-        Student student3 = new Student("Yura", "Petrov");
-        Student student4 = new Student("Petya", "Sidorov");
-        Student student5 = new Student("Kuzja", "Kot");
-        Student student6 = new Student("Valdemar", "Sigizmundov");
-
-        Group groupMaths = new Group(Discipline.MATHEMATICS);
-        groupMaths.addIntegerMark(student, 5);
-        groupMaths.addIntegerMark(student2, 4);
-        groupMaths.addIntegerMark(student3, 2);
-
-        Group groupGEO = new Group(Discipline.GEOGRAPHIC);
         groupGEO.addIntegerMark(student, 3);
-        groupGEO.addIntegerMark(student3, 1);
-        groupGEO.addIntegerMark(student6, 5);
+        groupMaths.addIntegerMark(student, 5);
 
+        GroupManager gm = new GroupManager();
+        gm.setGroup(groupMaths);
+        gm.setGroup(groupGEO);
+
+        for (int i = 0; i < gm.getGroups().size(); i++) {
+            assertTrue(gm.getGroups().get(0).getDiscipline().equals(Discipline.MATHEMATICS));
+            assertTrue(gm.getGroups().get(1).getStudents().containsKey(student));
+        }
+    }
+
+    @Test
+    public void groupManagerGetStudentAndHisMarksSortedTest() throws Exception {
+        Group groupMaths = new Group(Discipline.MATHEMATICS);
+        Group groupGEO = new Group(Discipline.GEOGRAPHIC);
         Group groupInformatics = new Group(Discipline.INFORMATICS);
-        groupInformatics.addDoubleMark(student4, 2.7);
-        groupInformatics.addDoubleMark(student5, 3.1);
-        groupInformatics.addDoubleMark(student2, 2.9);
-        groupInformatics.addDoubleMark(student3, 1.9);
-
         Group groupPhysics = new Group(Discipline.PHYSICS);
-        groupPhysics.addDoubleMark(student4, 4.7);
+
+        Student student = new Student("Vasya", "Pupkin");
+        groupMaths.addIntegerMark(student, 5);
+        groupGEO.addIntegerMark(student, 3);
+        groupInformatics.addDoubleMark(student, 1.9);
         groupPhysics.addDoubleMark(student, 4.6);
-        groupPhysics.addDoubleMark(student6, 3.2);
-        groupPhysics.addDoubleMark(student2, 3.6);
-        groupPhysics.addDoubleMark(student5, 2.2);
 
         GroupManager gm = new GroupManager();
         gm.setGroup(groupMaths);
@@ -97,13 +100,26 @@ public class GroupsOfStudentsTest {
         gm.setGroup(groupPhysics);
 
         gm.getStudentAndHisMarksSorted(student);
+
+        List<String> expectedValues = new ArrayList<>();
+        expectedValues.add("INFORMATICS=1.9");
+        expectedValues.add("GEOGRAPHIC=3");
+        expectedValues.add("PHYSICS=4.6");
+        expectedValues.add("MATHEMATICS=5");
+
+        for (Map.Entry<String, List> entry : gm.getResult().entrySet()){
+            assertTrue(entry.getValue().toString().equals(expectedValues.toString()));
+        }
+
+        Student student2 = new Student("Masha", "Ivanova");
+        groupMaths.addIntegerMark(student2, 4);
+        groupGEO.addIntegerMark(student2, 4);
+        groupInformatics.addDoubleMark(student2, 2.9);
+        groupPhysics.addDoubleMark(student2, 3.6);
+
         gm.getStudentAndHisMarksSorted(student2);
-        gm.getStudentAndHisMarksSorted(student3);
-        gm.getStudentAndHisMarksSorted(student4);
-        gm.getStudentAndHisMarksSorted(student5);
-        gm.getStudentAndHisMarksSorted(student6);
 
         gm.printResult();
-
     }
+
 }

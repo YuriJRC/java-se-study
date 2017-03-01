@@ -23,6 +23,14 @@ public class GroupManager {
         groups.add(group);
     }
 
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public Map<String, List> getResult() {
+        return result;
+    }
+
     /**
      * @param student - enter student's name for getting
      * information about student's name, all groups
