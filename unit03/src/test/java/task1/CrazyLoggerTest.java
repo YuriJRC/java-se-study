@@ -1,11 +1,19 @@
 package task1;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Created by Мария on 27.02.2017.
  */
 public class CrazyLoggerTest {
+    @Test
+            (expected = NullPointerException.class)
+    public void nullPointerExceptionTest() throws Exception{
+        CrazyLogger logger = null;
+        logger.printLog();
+    }
+
     @Test
     public void addMessageTest() {
         CrazyLogger logger = new CrazyLogger();
@@ -14,6 +22,9 @@ public class CrazyLoggerTest {
         logger.addMessage("world");
 
         logger.printLog();
+
+        assertTrue(logger.getLogger().length()>0);
+        assertTrue(logger.getLogger().substring(0, 25).contains("hello"));
     }
 
     @Test
@@ -30,6 +41,8 @@ public class CrazyLoggerTest {
         System.out.println(logger.searchEntriesByMessage("dolor"));
         System.out.println(logger.searchEntriesByMessage("amet consectetur"));
         System.out.println(logger.searchEntriesByMessage("hello"));
+
+
 
     }
 

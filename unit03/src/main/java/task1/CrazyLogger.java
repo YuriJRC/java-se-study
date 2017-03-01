@@ -25,6 +25,11 @@ public class CrazyLogger {
         logger.append(message + "\n");
 
     }
+
+    public StringBuilder getLogger() {
+        return logger;
+    }
+
     public void printLog() {
         System.out.println(logger.toString());
     }
