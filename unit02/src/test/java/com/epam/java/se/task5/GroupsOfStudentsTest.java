@@ -9,8 +9,8 @@ public class GroupsOfStudentsTest {
     @Test
            (expected = IllegalArgumentException.class)
     public void valuesThatNotFollowContract() throws Exception{
-            Student student = new Student(null);
-            Student student2 = new Student("aaa");
+            Student student = new Student(null, "aaa");
+            Student student2 = new Student("aaa", "bbb");
             Group groupMaths = new Group(Discipline.MATHEMATICS);
             groupMaths.addDoubleMark(student, 5.6);
             groupMaths.addDoubleMark(student2, 15.6);
@@ -20,12 +20,12 @@ public class GroupsOfStudentsTest {
     @Test
     public void groupsTest() throws Exception{
 
-        Student student = new Student("Vasya");
-        Student student2 = new Student("Masha");
-        Student student3 = new Student("Yura");
-        Student student4 = new Student("Petya");
-        Student student5 = new Student("Kuzja");
-        Student student6 = new Student("Valdemar");
+        Student student = new Student("Vasya", "Pupkin");
+        Student student2 = new Student("Masha", "Ivanova");
+        Student student3 = new Student("Yura", "Petrov");
+        Student student4 = new Student("Petya", "Sidorov");
+        Student student5 = new Student("Kuzja", "Kot");
+        Student student6 = new Student("Valdemar", "Sigizmundov");
 
         Group groupMaths = new Group(Discipline.MATHEMATICS);
         groupMaths.addIntegerMark(student, 5);

@@ -18,6 +18,7 @@ public class SubmarineAndAnnotationTest {
         System.out.println(submarine.toString());
 
         assertTrue(submarine.isMoving());
+        assertTrue(submarine.getName()!=null);
 
         System.out.println(submarine.getClass().getAnnotation(SubmarineAnnotation.class));
     }

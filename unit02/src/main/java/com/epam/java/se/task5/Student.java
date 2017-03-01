@@ -5,12 +5,14 @@ package com.epam.java.se.task5;
  */
 public class Student {
     private String name;
+    private String surname;
 
-    public Student (String name){
-        if (name==null){
+    public Student (String name, String surname){
+        if (name==null || surname==null){
             throw new IllegalArgumentException("Name can't be null");
         }
         this.name=name;
+        this.surname=surname;
     }
 
 
@@ -18,4 +20,7 @@ public class Student {
         return name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
 }

@@ -49,7 +49,7 @@ public class GroupManager {
                     int res = Double.compare(o1.getValue().doubleValue(),o2.getValue().doubleValue());
                     return res;
                 });
-                result.put(student.getName(),list);
+                result.put(student.getName() + " " + student.getSurname(),list);
             }
         }
     }
