@@ -3,7 +3,6 @@ package task2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
@@ -17,6 +16,12 @@ public class QA_Application {
     private static ArrayList<String> keys;
     private static Locale locale;
 
+    /**
+     * There is only one method in this task for ideology reason:
+     * user can enter the program and use it as long
+     * as he wants. There is no need to input parameters
+     * or use methods, only to choose menu numbers.
+     */
     public static void runApplication() {
         while (true) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
