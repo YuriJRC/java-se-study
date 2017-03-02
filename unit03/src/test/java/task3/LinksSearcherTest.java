@@ -9,8 +9,19 @@ import static org.junit.Assert.*;
  */
 public class LinksSearcherTest {
     @Test
+            (expected = NullPointerException.class)
+    public void nullTest(){
+        LinksSearcher linksSearcher = new LinksSearcher();
+
+        linksSearcher.getSequenceBuilder();
+        linksSearcher.areLinksInRightOrder();
+        linksSearcher.getAllSentencesWithLinks();
+    }
+
+    @Test
     public void readSentencesTest() throws Exception {
         LinksSearcher linksSearcher = new LinksSearcher();
+
         linksSearcher.readSentences();
 
         assertTrue(linksSearcher.getSequenceBuilder().length() > 0);
