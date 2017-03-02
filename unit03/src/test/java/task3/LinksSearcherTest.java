@@ -27,12 +27,17 @@ public class LinksSearcherTest {
         assertTrue(linksSearcher.getSequenceBuilder().length() > 0);
 
     }
+    @Test
+    public void areLinksInRightOrderTest(){
+        LinksSearcher linksSearcher = new LinksSearcher();
+
+        linksSearcher.readSentences();
+
+        assertFalse(linksSearcher.areLinksInRightOrder());
+
+    }
 
 
-//        linksSearcher.readSentences();
-//
-//        assertFalse(linksSearcher.areLinksInRightOrder());
-//
 //        System.out.println(linksSearcher.getAllSentencesWithLinks());
 
 
