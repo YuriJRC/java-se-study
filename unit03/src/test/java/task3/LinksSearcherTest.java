@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class LinksSearcherTest {
     @Test
             (expected = NullPointerException.class)
-    public void nullTest(){
+    public void nullTest() {
         LinksSearcher linksSearcher = new LinksSearcher();
 
         linksSearcher.getSequenceBuilder();
@@ -27,8 +27,9 @@ public class LinksSearcherTest {
         assertTrue(linksSearcher.getSequenceBuilder().length() > 0);
 
     }
+
     @Test
-    public void areLinksInRightOrderTest(){
+    public void areLinksInRightOrderTest() {
         LinksSearcher linksSearcher = new LinksSearcher();
 
         linksSearcher.readSentences();
@@ -37,8 +38,16 @@ public class LinksSearcherTest {
 
     }
 
+    @Test
+    public void getAllSentencesWithLinksTest() {
+        LinksSearcher linksSearcher = new LinksSearcher();
 
-//        System.out.println(linksSearcher.getAllSentencesWithLinks());
+        linksSearcher.readSentences();
 
+        System.out.println(linksSearcher.getAllSentencesWithLinks());
 
+        assertTrue(linksSearcher.getAllSentencesWithLinks().contains("рис") ||
+                linksSearcher.getAllSentencesWithLinks().contains("Рис."));
+    }
+    
 }
