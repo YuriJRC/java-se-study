@@ -29,6 +29,7 @@ public class QA_Application {
                     "russian(русский) - 2\nexit(выход) - 3");
             try {
                 String input = reader.readLine();
+
                 if (input.equals("1")) {
                     locale = new Locale("en", "UK");
                     questions = ResourceBundle.getBundle("Questions_en_UK", locale);
@@ -60,6 +61,7 @@ public class QA_Application {
                     }
                     else System.out.println("Неверный ввод");
                 }
+
                 else if (input.equals("3")) {
                     break;
                 }
