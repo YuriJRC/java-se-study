@@ -49,5 +49,5 @@ public class LinksSearcherTest {
         assertTrue(linksSearcher.getAllSentencesWithLinks().contains("рис") ||
                 linksSearcher.getAllSentencesWithLinks().contains("Рис."));
     }
-    
+
 }

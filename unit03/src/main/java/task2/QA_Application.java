@@ -17,7 +17,7 @@ public class QA_Application {
     private static Locale locale;
 
     /**
-     * There is only one method in this task for ideology reason:
+     * There is only one method in this task for conceptual reasons:
      * user can enter the program and use it as long
      * as he wants. There is no need to input parameters
      * or use methods, only to choose menu numbers.
