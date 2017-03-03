@@ -4,7 +4,7 @@ double
 if
 do
 for
-try 
+try
 throw
 private
 public

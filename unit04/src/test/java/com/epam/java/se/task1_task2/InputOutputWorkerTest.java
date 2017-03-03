@@ -152,7 +152,7 @@ public class InputOutputWorkerTest {
         worker.writeKeyWordsAndTheirCountToFileWithByteWriter(OUTPUT_FILE_PATH, getKeyWords);
 
         assertTrue(file.exists());
-        assertTrue(file.length() > 0);
+        assertTrue(file.length() > 100);
 
     }
 
