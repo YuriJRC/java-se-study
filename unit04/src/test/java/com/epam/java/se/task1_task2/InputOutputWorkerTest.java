@@ -44,6 +44,7 @@ public class InputOutputWorkerTest {
 
         worker.printKeys(keysList);
     }
+
     @Test
     public void getArrayOfKeysFromFileWithByteReaderTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
@@ -65,6 +66,22 @@ public class InputOutputWorkerTest {
         String word = "package";
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
 
+        System.out.println(javaCode);
+
+        assertTrue(javaCode.length() > 0 && javaCode.length() < 3000);
+        assertFalse(javaCode.length() < 2000);
+        assertTrue(javaCode.contains(word));
+    }
+
+    @Test
+    public void getStringWithJavaCodeFromFileWithByteReaderTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+
+        String word = "final";
+        String javaCode = worker.getStringWithJavaCodeFromFileWithByteReader(INPUT_FILE_PATH);
+
+        System.out.println(javaCode);
+
         assertTrue(javaCode.length() > 0 && javaCode.length() < 3000);
         assertFalse(javaCode.length() < 2000);
         assertTrue(javaCode.contains(word));
@@ -78,7 +95,7 @@ public class InputOutputWorkerTest {
         String count = "16";
         String fake = "hello";
 
-        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
+        ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
@@ -91,14 +108,14 @@ public class InputOutputWorkerTest {
         InputOutputWorker worker = new InputOutputWorker();
         File file = new File(OUTPUT_FILE_PATH);
 
-        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
+        ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
         worker.writeKeyWordsAndTheirCountToFileWithByteOutputStream(OUTPUT_FILE_PATH, getKeyWords);
 
         assertTrue(file.exists());
-        assertTrue(file.length()>0);
+        assertTrue(file.length() > 0);
 
     }
 

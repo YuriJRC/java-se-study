@@ -42,8 +42,8 @@ public class InputOutputWorker {
             while ((read = byteReader.read()) != -1) {
                 builder.append((char) read);
             }
-            String[] introduction = builder.toString().split("[\\s]+");
-            Collections.addAll(keysCollection, introduction);
+            String[] separator = builder.toString().split("[\\s]+");
+            Collections.addAll(keysCollection, separator);
 
             byteReader.close();
         } catch (IOException e) {
@@ -51,7 +51,6 @@ public class InputOutputWorker {
         }
         return keysCollection;
     }
-
 
     public void printKeys(ArrayList<String> keys) {
         if (keys == null){
@@ -63,6 +62,9 @@ public class InputOutputWorker {
     }
 
     public String getStringWithJavaCodeFromFileWithCharReader(String inputFilePath) {
+        if (inputFilePath==null){
+            throw new NullPointerException("File not found");
+        }
         builder = new StringBuilder();
         try {
             charReader = new BufferedReader(new FileReader(inputFilePath));
@@ -70,6 +72,22 @@ public class InputOutputWorker {
                 builder.append(line).append("\n");
             }
             charReader.close();
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+        return builder.toString();
+    }
+    public String getStringWithJavaCodeFromFileWithByteReader(String inputFilePath) {
+        if (inputFilePath==null){
+            throw new NullPointerException("File not found");
+        }
+        builder = new StringBuilder();
+        try {
+            byteReader = new FileInputStream(inputFilePath);
+            while ((read = byteReader.read()) != -1) {
+                builder.append((char)read);
+            }
+            byteReader.close();
         } catch (IOException e) {
             System.out.println("File not found");
         }
