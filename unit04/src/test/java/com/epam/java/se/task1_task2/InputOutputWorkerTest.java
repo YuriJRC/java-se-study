@@ -34,11 +34,26 @@ public class InputOutputWorkerTest {
 
         String word = "package";
 
-        assertTrue(worker.getStringWithJavaCodeFromFileWithByteStream().length()>0 &&
-                worker.getStringWithJavaCodeFromFileWithByteStream().length()<3000);
-        assertFalse(worker.getStringWithJavaCodeFromFileWithByteStream().length()<2000);
+        assertTrue(worker.getStringWithJavaCodeFromFileWithByteStream().length() > 0 &&
+                worker.getStringWithJavaCodeFromFileWithByteStream().length() < 3000);
+        assertFalse(worker.getStringWithJavaCodeFromFileWithByteStream().length() < 2000);
         assertTrue(worker.getStringWithJavaCodeFromFileWithByteStream().contains(word));
 
+    }
+
+    @Test
+    public void getKeyWordsAndTheirCountFromFileTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+
+        String count = "16";
+        String fake = "hello";
+
+        worker.getArrayOfKeysFromFileWithByteReader();
+
+        assertTrue(worker.getKeyWordsAndTheirCountFromFile
+                (worker.getStringWithJavaCodeFromFileWithByteStream()).contains(count));
+        assertFalse(worker.getKeyWordsAndTheirCountFromFile
+                (worker.getStringWithJavaCodeFromFileWithByteStream()).contains(fake));
     }
 
 }
