@@ -26,7 +26,7 @@ public class InputOutputWorkerTest {
 
         worker.getArrayOfKeysFromFileWithByteReader(null);
 
-        worker.writeKeyWordsAndTheirCountToFileWithByteOutputStream(null, "");
+        worker.writeKeyWordsAndTheirCountToFileWithByteWriter(null, "");
 
         worker.getKeyWordsAndTheirCountFromFile(null, "");
     }
@@ -123,9 +123,8 @@ public class InputOutputWorkerTest {
         assertTrue(getKeyWords.contains(key));
         assertFalse(getKeyWords.contains(fake));
     }
-
     @Test
-    public void writeKeyWordsAndTheirCountToFileWithByteStreamTest() throws Exception {
+    public void writeKeyWordsAndTheirCountToFileWithCharWriterTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
         File file = new File(OUTPUT_FILE_PATH);
 
@@ -133,7 +132,24 @@ public class InputOutputWorkerTest {
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
-        worker.writeKeyWordsAndTheirCountToFileWithByteOutputStream(OUTPUT_FILE_PATH, getKeyWords);
+        worker.writeKeyWordsAndTheirCountToFileWithCharWriter(OUTPUT_FILE_PATH, getKeyWords);
+
+        assertTrue(file.exists());
+        assertTrue(file.length() > 0);
+
+    }
+
+
+    @Test
+    public void writeKeyWordsAndTheirCountToFileWithByteWriterTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+        File file = new File(OUTPUT_FILE_PATH);
+
+        ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
+        String javaCode = worker.getStringWithJavaCodeFromFileWithByteReader(INPUT_FILE_PATH);
+        String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
+
+        worker.writeKeyWordsAndTheirCountToFileWithByteWriter(OUTPUT_FILE_PATH, getKeyWords);
 
         assertTrue(file.exists());
         assertTrue(file.length() > 0);

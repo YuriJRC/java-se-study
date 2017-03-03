@@ -110,8 +110,21 @@ public class InputOutputWorker {
         }
         return builder.append("Count: ").append(count).toString();
     }
+    public void writeKeyWordsAndTheirCountToFileWithCharWriter(String outputFilePath, String keywords) {
+        if (keywords == null || keywords.equals("")) {
+            throw new NullPointerException("Empty data");
+        }
+        try {
+            BufferedWriter charWriter = new BufferedWriter(new FileWriter(outputFilePath));
+            charWriter.write(keywords);
+            charWriter.flush();
+            charWriter.close();
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
 
-    public void writeKeyWordsAndTheirCountToFileWithByteOutputStream(String outputFilePath, String keywords) {
+    public void writeKeyWordsAndTheirCountToFileWithByteWriter(String outputFilePath, String keywords) {
         if (keywords == null || keywords.equals("")) {
             throw new NullPointerException("Empty data");
         }
