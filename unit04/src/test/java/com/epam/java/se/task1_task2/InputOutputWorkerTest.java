@@ -1,6 +1,7 @@
 package com.epam.java.se.task1_task2;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,8 +17,9 @@ public class InputOutputWorkerTest {
 
         worker.getKeyWordsAndTheirCountFromFile("");
     }
+
     @Test
-    public void getKeyWordsFromFileTest(){
+    public void getArrayOfKeysFromFileWithByteReaderTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
         String key = "private";
         String key2 = "hello";
@@ -25,4 +27,18 @@ public class InputOutputWorkerTest {
         assertTrue(worker.getArrayOfKeysFromFileWithByteReader().contains(key));
         assertFalse(worker.getArrayOfKeysFromFileWithByteReader().contains(key2));
     }
+
+    @Test
+    public void getStringWithJavaCodeFromFileWithByteStreamTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+
+        String word = "package";
+
+        assertTrue(worker.getStringWithJavaCodeFromFileWithByteStream().length()>0 &&
+                worker.getStringWithJavaCodeFromFileWithByteStream().length()<3000);
+        assertFalse(worker.getStringWithJavaCodeFromFileWithByteStream().length()<2000);
+        assertTrue(worker.getStringWithJavaCodeFromFileWithByteStream().contains(word));
+
+    }
+
 }

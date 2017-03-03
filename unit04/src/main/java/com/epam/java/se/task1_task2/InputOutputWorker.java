@@ -37,7 +37,7 @@ public class InputOutputWorker {
         }
     }
 
-    public String getFileWithJavaCodeToStringWithByteStream() {
+    public String getStringWithJavaCodeFromFileWithByteStream() {
         builder = new StringBuilder();
         try {
             streamReader = new BufferedReader(new InputStreamReader(
