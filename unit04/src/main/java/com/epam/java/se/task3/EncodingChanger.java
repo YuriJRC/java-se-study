@@ -27,7 +27,7 @@ public class EncodingChanger {
     }
 
     public void writeFileToUTF_16(String outputFilePath, String dataToWrite){
-        if (outputFilePath == null) {
+        if (outputFilePath == null || dataToWrite == null) {
             throw new NullPointerException("File not found");
         }
         try{

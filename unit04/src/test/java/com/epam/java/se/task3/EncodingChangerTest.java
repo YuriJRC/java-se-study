@@ -10,6 +10,16 @@ public class EncodingChangerTest {
     private static String OUTPUT_FILE_PATH = "utf-16_output.txt";
 
     @Test
+            (expected = NullPointerException.class)
+    public void nullPointerTest() throws Exception {
+        EncodingChanger encodingChanger = new EncodingChanger();
+
+        encodingChanger.writeFileToUTF_16(null, null);
+        encodingChanger.readFileInUTF_8(null);
+    }
+
+
+    @Test
             public void readerTest(){
         EncodingChanger encodingChanger = new EncodingChanger();
         String read = encodingChanger.readFileInUTF_8(INPUT_FILE_PATH);

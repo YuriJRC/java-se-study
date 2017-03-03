@@ -96,8 +96,7 @@ public class InputOutputWorker {
 
     public String getKeyWordsAndTheirCountFromFile(ArrayList<String> keys, String stringWithJavaCode) {
         builder = new StringBuilder();
-        if (stringWithJavaCode == null || stringWithJavaCode.equals("")
-                || keys == null) {
+        if (stringWithJavaCode == null || keys == null) {
             throw new NullPointerException("Empty data");
         }
         int count = 0;
@@ -111,8 +110,8 @@ public class InputOutputWorker {
         return builder.append("Count: ").append(count).toString();
     }
     public void writeKeyWordsAndTheirCountToFileWithCharWriter(String outputFilePath, String keywords) {
-        if (keywords == null || keywords.equals("")) {
-            throw new NullPointerException("Empty data");
+        if (outputFilePath==null || keywords == null) {
+            throw new NullPointerException("Empty path or data");
         }
         try {
             BufferedWriter charWriter = new BufferedWriter(new FileWriter(outputFilePath));
@@ -125,8 +124,8 @@ public class InputOutputWorker {
     }
 
     public void writeKeyWordsAndTheirCountToFileWithByteWriter(String outputFilePath, String keywords) {
-        if (keywords == null || keywords.equals("")) {
-            throw new NullPointerException("Empty data");
+        if (outputFilePath==null || keywords == null) {
+            throw new NullPointerException("Empty path or data");
         }
         try {
             FileOutputStream byteWriter = new FileOutputStream(outputFilePath);
