@@ -89,7 +89,7 @@ public class InputOutputWorkerTest {
     }
 
     @Test
-    public void getKeyWordsAndTheirCountFromFileTest() throws Exception {
+    public void getKeyWordsAndTheirCountFromFileWithCharReaderTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
 
         String count = "16";
@@ -99,7 +99,28 @@ public class InputOutputWorkerTest {
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
+        System.out.println(getKeyWords);
+
         assertTrue(getKeyWords.contains(count));
+        assertFalse(getKeyWords.contains(fake));
+    }
+
+    @Test
+    public void getKeyWordsAndTheirCountFromFileWithByteReaderTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+
+        String count = "16";
+        String key = "void";
+        String fake = "hello";
+
+        ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
+        String javaCode = worker.getStringWithJavaCodeFromFileWithByteReader(INPUT_FILE_PATH);
+        String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
+
+        System.out.println(getKeyWords);
+
+        assertTrue(getKeyWords.contains(count));
+        assertTrue(getKeyWords.contains(key));
         assertFalse(getKeyWords.contains(fake));
     }
 
