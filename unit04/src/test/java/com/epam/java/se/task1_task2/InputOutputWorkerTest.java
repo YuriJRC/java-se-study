@@ -1,25 +1,28 @@
 package com.epam.java.se.task1_task2;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Created by Мария on 02.03.2017.
  */
 public class InputOutputWorkerTest {
     @Test
-    public void arrayOfKeysTest() throws Exception{
+            (expected = NullPointerException.class)
+    public void nullPointerTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
 
-        worker.getArrayOfKeysFromFileWithByteReader();
-//        worker.printKeys();
-//        worker.getFileWithJavaCodeToStringWithByteStream();
+        worker.writeKeyWordsAndTheirCountToFileWithByteStream(null);
 
-//        System.out.println(worker.getKeyWordsAndTheirCountFromFile
-//                (worker.getFileWithJavaCodeToStringWithByteStream()));
+        worker.getKeyWordsAndTheirCountFromFile("");
+    }
+    @Test
+    public void getKeyWordsFromFileTest(){
+        InputOutputWorker worker = new InputOutputWorker();
+        String key = "private";
+        String key2 = "hello";
 
-        worker.writeKeyWordsAndTheirCountToFileWithByteStream
-                (worker.getKeyWordsAndTheirCountFromFile(worker.getFileWithJavaCodeToStringWithByteStream()));
-
-
+        assertTrue(worker.getArrayOfKeysFromFileWithByteReader().contains(key));
+        assertFalse(worker.getArrayOfKeysFromFileWithByteReader().contains(key2));
     }
 }
