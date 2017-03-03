@@ -3,7 +3,6 @@ package com.epam.java.se.task1_task2;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -23,15 +22,32 @@ public class InputOutputWorkerTest {
 
         worker.printKeys(null);
 
-        worker.writeKeyWordsAndTheirCountToFileWithByteStream(null, "");
+        worker.getArrayOfKeysFromFileWithCharReader(null);
+
+        worker.getArrayOfKeysFromFileWithByteReader(null);
+
+        worker.writeKeyWordsAndTheirCountToFileWithByteOutputStream(null, "");
 
         worker.getKeyWordsAndTheirCountFromFile(null, "");
     }
 
     @Test
-    public void getArrayOfKeysFromFileWithByteReaderTest() throws Exception {
+    public void getArrayOfKeysFromFileWithCharReaderTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
         String key = "private";
+        String key2 = "hello";
+
+        ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
+
+        assertTrue(keysList.contains(key));
+        assertFalse(keysList.contains(key2));
+
+        worker.printKeys(keysList);
+    }
+    @Test
+    public void getArrayOfKeysFromFileWithByteReaderTest() throws Exception {
+        InputOutputWorker worker = new InputOutputWorker();
+        String key = "int";
         String key2 = "hello";
 
         ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
@@ -43,11 +59,11 @@ public class InputOutputWorkerTest {
     }
 
     @Test
-    public void getStringWithJavaCodeFromFileWithByteStreamTest() throws Exception {
+    public void getStringWithJavaCodeFromFileWithCharReaderTest() throws Exception {
         InputOutputWorker worker = new InputOutputWorker();
 
         String word = "package";
-        String javaCode = worker.getStringWithJavaCodeFromFileWithByteStream(INPUT_FILE_PATH);
+        String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
 
         assertTrue(javaCode.length() > 0 && javaCode.length() < 3000);
         assertFalse(javaCode.length() < 2000);
@@ -62,8 +78,8 @@ public class InputOutputWorkerTest {
         String count = "16";
         String fake = "hello";
 
-        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
-        String javaCode = worker.getStringWithJavaCodeFromFileWithByteStream(INPUT_FILE_PATH);
+        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
+        String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
         assertTrue(getKeyWords.contains(count));
@@ -75,11 +91,11 @@ public class InputOutputWorkerTest {
         InputOutputWorker worker = new InputOutputWorker();
         File file = new File(OUTPUT_FILE_PATH);
 
-        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
-        String javaCode = worker.getStringWithJavaCodeFromFileWithByteStream(INPUT_FILE_PATH);
+        ArrayList<String> keysList =  worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
+        String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
         String getKeyWords = worker.getKeyWordsAndTheirCountFromFile(keysList, javaCode);
 
-        worker.writeKeyWordsAndTheirCountToFileWithByteStream(OUTPUT_FILE_PATH, getKeyWords);
+        worker.writeKeyWordsAndTheirCountToFileWithByteOutputStream(OUTPUT_FILE_PATH, getKeyWords);
 
         assertTrue(file.exists());
         assertTrue(file.length()>0);
