@@ -3,6 +3,7 @@ package com.epam.java.se.task4;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -83,8 +84,27 @@ public class FilmCollectionTest {
 
     @Test
     public void deserialize() throws Exception {
+        FilmCollection before = new FilmCollection();
 
+        FilmCollection after = before.loadCollection(PATH);
+
+        after.printFilmCollection();
+
+        String film = "Dogma";
+        Iterator<Map.Entry<Film, List<Actor>>> iter = after.getFilmCollection().entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<Film, List<Actor>> entry = iter.next();
+            if (film.equalsIgnoreCase(entry.getKey().getTitle())) {
+                assertTrue(entry.getKey().getTitle().equals(film));
+            }
+        }
     }
+//        for (Map.Entry<Film, List<Actor>> entry : after.getFilmCollection().entrySet()) {
+//
+//            System.out.println(entry.getKey().getTitle());
+//            assertTrue(entry.getKey().getTitle().equals(film));
+//        }
+//    }
 
     @Test
     public void applicationTest() throws Exception {
