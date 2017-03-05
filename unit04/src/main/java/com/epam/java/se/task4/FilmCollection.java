@@ -48,6 +48,10 @@ public class FilmCollection implements Serializable {
         }
     }
 
+    public HashMap<Film, List<Actor>> getFilmCollection() {
+        return films;
+    }
+
     public void saveCollection(String filePath, FilmCollection collection) {
         if (filePath == null || collection == null) {
             throw new NullPointerException("Empty data");

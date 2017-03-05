@@ -3,7 +3,6 @@ package com.epam.java.se.task3;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.File;
-import java.nio.charset.Charset;
 
 /**
  * Created by Мария on 03.03.2017.
