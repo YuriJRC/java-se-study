@@ -2,6 +2,7 @@ package com.epam.java.se.task4;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class FilmCollectionTest {
 
         films.printFilmCollection();
 
-        assertTrue(films.getFilmCollection().size()==1);
+        assertTrue(films.getFilmCollection().size() == 1);
 
         for (Map.Entry<Film, List<Actor>> entry : films.getFilmCollection().entrySet()) {
             assertTrue(!entry.getKey().equals(film));
@@ -64,7 +65,20 @@ public class FilmCollectionTest {
 
     @Test
     public void serialize() throws Exception {
+        FilmCollection films = new FilmCollection();
 
+        File file = new File(PATH);
+
+        films.addFilm(new Film("Lord of the rings", "fantasy", 2005),
+                new Actor("aaa"), new Actor("bbb"), new Actor("ccc"));
+        films.addFilm(new Film("Titanic", "drama", 1998),
+                new Actor("Leo Dicaprio"), new Actor("Kate Winslet"));
+        films.addFilm(new Film("Dogma", "fantasy, drama", 1999),
+                new Actor("Matt Damon"), new Actor("Ben Affleck"), new Actor("Salma Hayek"));
+
+        films.saveCollection(PATH, films);
+
+        assertTrue(file.exists() && file.length() > 100);
     }
 
     @Test
@@ -76,11 +90,4 @@ public class FilmCollectionTest {
     public void applicationTest() throws Exception {
 
     }
-
-
-//    @Test
-//    public void addFilmTest(){
-//        films.saveCollection(PATH, films);
-//        FilmCollection collection = films.loadCollection(PATH);
-
 }

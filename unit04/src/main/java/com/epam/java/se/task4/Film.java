@@ -1,7 +1,6 @@
 package com.epam.java.se.task4;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Мария on 05.03.2017.
