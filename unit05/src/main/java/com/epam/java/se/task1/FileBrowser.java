@@ -43,4 +43,22 @@ public class FileBrowser {
             System.out.println("Directory not found");
         }
     }
+
+    public void goUp(File file) throws FileNotFoundException{
+            if (file.exists()) {
+                path = file.getParent();
+                System.out.println(path);
+            } else throw new FileNotFoundException("File not found");
+        }
+
+    public void goDown(File directory, String catalogue){
+        try{
+            if (directory.isDirectory()) {
+                path = directory.getAbsolutePath() + "\\" + catalogue;
+                System.out.println(path);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Directory not found");
+        }
+    }
 }
