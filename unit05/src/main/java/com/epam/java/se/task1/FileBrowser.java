@@ -11,16 +11,25 @@ public class FileBrowser {
     private String path;
 
 
-    public void showAbsolutePath(File file)throws FileNotFoundException{
-        if (file.exists()){
+    public void showAbsolutePath(File file) throws FileNotFoundException {
+        if (file.exists()) {
             path = file.getAbsolutePath();
-            System.out.println("Absolute pathname "+ path);
+            System.out.println("Absolute pathname " + path);
+        } else throw new FileNotFoundException("File not found");
+    }
+
+    public void showDirectoryContent(File directory) {
+        try {
+            if (directory.isDirectory()) {
+                for (File file : directory.listFiles()) {
+                    if (file.isDirectory()) {
+                        System.out.println(file.getName() + "  \tcatalogue");
+                    } else System.out.println(file.getName() + "\tfile");
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Directory not found");
         }
-        else throw new FileNotFoundException("File not found");
     }
-
-    public void showDirectoryContent(){
-    }
-
 
 }
