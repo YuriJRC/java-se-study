@@ -39,10 +39,12 @@ public class FileBrowser {
 
     public void searchOnlyTXTFiles(File directory) throws NullPointerException{
         try {
-            FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
-            String[] fileList = directory.list(filter);
-            for (String s : fileList) {
-                System.out.println(s + " ");
+            if (directory.isDirectory()) {
+                FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
+                String[] fileList = directory.list(filter);
+                for (String s : fileList) {
+                    System.out.println(s + " ");
+                }
             }
         } catch (NullPointerException e) {
             System.out.println("Directory not found");
@@ -65,7 +67,7 @@ public class FileBrowser {
             if (directory.isDirectory()) {
                 path = directory.getAbsolutePath() + "\\" + catalogue;
                 System.out.println(path);
-            }
+            } else System.out.println("Directory not found");
         } catch (NullPointerException e) {
             System.out.println("Directory not found");
         }
