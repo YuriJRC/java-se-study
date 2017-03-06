@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.nio.file.NotDirectoryException;
-import java.util.NoSuchElementException;
 
 /**
  * Created by Мария on 06.03.2017.
@@ -66,10 +65,9 @@ public class FileBrowser {
 
     public void createNewDirectory(File directory) {
         try {
-            if (!directory.exists()) {
-                directory.mkdir();
+            if (directory.mkdir()) {
                 System.out.println("New directory created");
-            }
+            } else System.out.println("Directory already exists");
         } catch (NullPointerException e){
             System.out.println("Directory not found");
         }
@@ -82,5 +80,4 @@ public class FileBrowser {
         }
         else throw new NotDirectoryException("Wrong path or directory");
     }
-
 }
