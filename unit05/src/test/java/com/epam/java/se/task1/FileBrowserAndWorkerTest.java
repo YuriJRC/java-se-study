@@ -30,10 +30,10 @@ public class FileBrowserAndWorkerTest {
 
         try {
             browser.showDirectoryContent(fake);
+            browser.searchOnlyTXTFiles(fake);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Directory not found");
         }
-
     }
 
     @Test
@@ -53,6 +53,18 @@ public class FileBrowserAndWorkerTest {
         FileBrowser browser = new FileBrowser();
 
         browser.showDirectoryContent(directory);
+
+        assertTrue(directory.isDirectory());
+
+    }
+    @Test
+    public void searchOnlyTXTFilesTest() throws Exception{
+        File directory = new File(".\\");
+
+        FileBrowser browser = new FileBrowser();
+
+        browser.searchOnlyTXTFiles(directory);
+
 
     }
 
