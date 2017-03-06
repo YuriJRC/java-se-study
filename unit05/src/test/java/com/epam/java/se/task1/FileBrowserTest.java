@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 /**
  * Created by Мария on 06.03.2017.
  */
-public class FileBrowserrTest {
+public class FileBrowserTest {
     @Test
             (expected = FileNotFoundException.class)
     public void FileNotFoundExceptionTest() throws Exception {
