@@ -77,7 +77,7 @@ public class FileBrowser {
 
     public void renameDirectory(File directory, File newDirectory) throws NotDirectoryException{
         boolean isRenamed = directory.renameTo(newDirectory);
-        if (isRenamed){
+        if (isRenamed || newDirectory.exists()){
             System.out.println("Directory renamed");
         }
         else throw new NotDirectoryException("Wrong path or directory");

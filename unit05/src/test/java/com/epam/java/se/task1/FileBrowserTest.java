@@ -120,6 +120,8 @@ public class FileBrowserTest {
         FileBrowser browser = new FileBrowser();
 
         browser.renameDirectory(directory, newDirectory);
+
+        assertTrue(newDirectory.exists());
     }
 
 }
