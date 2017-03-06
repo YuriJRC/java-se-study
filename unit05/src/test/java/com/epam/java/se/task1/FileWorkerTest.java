@@ -13,7 +13,26 @@ import static org.junit.Assert.*;
  */
 public class FileWorkerTest {
     @Test
-    public void NullPointerExceptionCaughtTest() throws Exception {
+    public void NullPointerExceptionCaughtTest() throws Exception{
+        FileWorker worker = new FileWorker();
+
+        try {
+            worker.createNewFile(null);
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(), "Wrong input data");
+        }
+
+        try {
+            worker.deleteFile(null);
+            worker.writeToFile(null, null);
+            worker.readFromFile(null);
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(), "File not found");
+        }
+    }
+
+    @Test
+    public void FileNotFoundExceptionCaughtTest() throws Exception {
         File file = new File("C:\\Users\\fake\\fake");
         String text = "Testtesttesttest";
 
@@ -21,16 +40,23 @@ public class FileWorkerTest {
 
         try {
             worker.writeToFile(file, text);
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             assertEquals(e.getMessage(), "Wrong input data");
         }
     }
 
     @Test
-    public void FileNotFoundExceptionCaughtTest() throws Exception {
+    public void IOExceptionCaughtTest() throws Exception {
         File file = new File("C:\\Users\\fake\\fake");
 
         FileWorker worker = new FileWorker();
+
+        try {
+            worker.readFromFile(file);
+            worker.deleteFile(file);
+        } catch (IOException e) {
+            assertEquals(e.getMessage(), "File not found");
+        }
 
         try {
             worker.createNewFile(file);
@@ -38,11 +64,7 @@ public class FileWorkerTest {
             assertEquals(e.getMessage(), "Wrong input data");
         }
 
-        try {
-            worker.deleteFile(file);
-        } catch (IOException e) {
-            assertEquals(e.getMessage(), "File not found");
-        }
+
     }
 
     @Test
@@ -66,6 +88,7 @@ public class FileWorkerTest {
 
         assertTrue(file.length()>10);
     }
+
     @Test
     public void deleteFileTest() throws Exception {
         File file = new File(".\\testfile5.txt");
@@ -73,6 +96,15 @@ public class FileWorkerTest {
         FileWorker worker = new FileWorker();
 
         worker.deleteFile(file);
+    }
+
+    @Test
+    public void readFromFileTest() throws Exception {
+        File file = new File(".\\testfile4.txt");
+
+        FileWorker worker = new FileWorker();
+
+        worker.readFromFile(file);
     }
 
 }

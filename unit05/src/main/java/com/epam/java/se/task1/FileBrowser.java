@@ -12,14 +12,18 @@ public class FileBrowser {
     private String path;
 
 
-    public void showAbsolutePath(File file) throws FileNotFoundException {
-        if (file.exists()) {
-            path = file.getAbsolutePath();
-            System.out.println("Absolute pathname " + path);
-        } else throw new FileNotFoundException("File not found");
+    public void showAbsolutePath(File file) throws FileNotFoundException, NullPointerException {
+        try {
+            if (file.exists()) {
+                path = file.getAbsolutePath();
+                System.out.println("Absolute pathname " + path);
+            } else throw new FileNotFoundException("File not found");
+        } catch (NullPointerException e){
+            System.out.println("File not found");
+        }
     }
 
-    public void showDirectoryContent(File directory) {
+    public void showDirectoryContent(File directory) throws NullPointerException{
         try {
             if (directory.isDirectory()) {
                 for (File file : directory.listFiles()) {
@@ -33,7 +37,7 @@ public class FileBrowser {
         }
     }
 
-    public void searchOnlyTXTFiles(File directory) {
+    public void searchOnlyTXTFiles(File directory) throws NullPointerException{
         try {
             FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
             String[] fileList = directory.list(filter);
@@ -45,14 +49,18 @@ public class FileBrowser {
         }
     }
 
-    public void goUp(File file) throws FileNotFoundException {
-        if (file.exists()) {
-            path = file.getParent();
-            System.out.println(path);
-        } else throw new FileNotFoundException("File not found");
+    public void goUp(File file) throws FileNotFoundException, NullPointerException {
+        try {
+            if (file.exists()) {
+                path = file.getParent();
+                System.out.println(path);
+            } else throw new FileNotFoundException("File not found");
+        } catch (NullPointerException e){
+            System.out.println("File not found");
+        }
     }
 
-    public void goDown(File directory, String catalogue) {
+    public void goDown(File directory, String catalogue) throws NullPointerException{
         try {
             if (directory.isDirectory()) {
                 path = directory.getAbsolutePath() + "\\" + catalogue;
@@ -63,7 +71,7 @@ public class FileBrowser {
         }
     }
 
-    public void createNewDirectory(File directory) {
+    public void createNewDirectory(File directory) throws NullPointerException{
         try {
             if (directory.mkdir()) {
                 System.out.println("New directory created");
@@ -73,11 +81,14 @@ public class FileBrowser {
         }
     }
 
-    public void renameDirectory(File directory, File newDirectory) throws NotDirectoryException{
-        boolean isRenamed = directory.renameTo(newDirectory);
-        if (isRenamed || newDirectory.exists()){
-            System.out.println("Directory renamed");
+    public void renameDirectory(File directory, File newDirectory) throws NotDirectoryException, NullPointerException{
+        try {
+            boolean isRenamed = directory.renameTo(newDirectory);
+            if (isRenamed || newDirectory.exists()) {
+                System.out.println("Directory renamed");
+            } else throw new NotDirectoryException("Wrong path or directory");
+        } catch (NullPointerException e){
+            System.out.println("Empty data");
         }
-        else throw new NotDirectoryException("Wrong path or directory");
     }
 }

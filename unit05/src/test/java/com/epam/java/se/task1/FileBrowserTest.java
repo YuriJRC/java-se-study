@@ -26,20 +26,28 @@ public class FileBrowserTest {
 
     @Test
     public void NullPointerExceptionCaughtTest() throws Exception {
-        File fakeFile = new File("fake.txt");
-        File fakeDir = new File("\\fake");
-        String fakeCatalogue = "fake";
-
         FileBrowser browser = new FileBrowser();
-
         try {
-            browser.showDirectoryContent(fakeFile);
-            browser.searchOnlyTXTFiles(fakeFile);
-            browser.goDown(fakeDir, fakeCatalogue);
-            browser.createNewDirectory(fakeDir);
+            browser.showDirectoryContent(null);
+            browser.searchOnlyTXTFiles(null);
+            browser.goDown(null, null);
+            browser.createNewDirectory(null);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Directory not found");
         }
+
+        try {
+            browser.renameDirectory(null, null);
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(), "Empty dara");
+        }
+
+        try {
+            browser.goUp(null);
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(), "File not found");
+        }
+
     }
     @Test
             (expected = NotDirectoryException.class)
