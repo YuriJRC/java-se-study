@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.NotDirectoryException;
 
 /**
  * Created by Мария on 06.03.2017.
@@ -24,7 +25,7 @@ public class FileBrowserTest {
     }
 
     @Test
-    public void NullPointerExceptionTest() throws Exception {
+    public void NullPointerExceptionCatchTest() throws Exception {
         File fakeFile = new File("fake.txt");
         File fakeDir = new File("\\fake");
         String fakeCatalogue = "fake";
@@ -35,11 +36,22 @@ public class FileBrowserTest {
             browser.showDirectoryContent(fakeFile);
             browser.searchOnlyTXTFiles(fakeFile);
             browser.goDown(fakeDir, fakeCatalogue);
+            browser.createNewDirectory(fakeDir);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Directory not found");
         }
     }
+    @Test
+            (expected = NotDirectoryException.class)
+    public void NotDirectoryExceptionTest() throws Exception{
+        File fakeDir = new File("C:\\Users\\fake\\fake");
+        File fakeNewDir = new File("C:\\Users\\fake\\newFake");
 
+        FileBrowser browser = new FileBrowser();
+
+        browser.renameDirectory(fakeDir, fakeNewDir);
+
+    }
     @Test
     public void showAbsolutePathTest() throws Exception {
         File compare = new File("testfile.txt");
@@ -88,7 +100,26 @@ public class FileBrowserTest {
         FileBrowser browser = new FileBrowser();
 
         browser.goDown(directory, catalogue);
+    }
 
+    @Test
+    public void createNewDirectoryTest() throws Exception {
+        File newDirectory = new File("C:\\Users\\Мария\\testDir");
+
+        FileBrowser browser = new FileBrowser();
+
+        browser.createNewDirectory(newDirectory);
+
+        assertTrue(newDirectory.exists());
+    }
+    @Test
+    public void renameDirectoryTest() throws Exception {
+        File directory = new File("C:\\Users\\Мария\\testDir");
+        File newDirectory = new File("C:\\Users\\Мария\\newTestDir");
+
+        FileBrowser browser = new FileBrowser();
+
+        browser.renameDirectory(directory, newDirectory);
     }
 
 }
