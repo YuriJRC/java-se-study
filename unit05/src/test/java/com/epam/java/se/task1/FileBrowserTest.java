@@ -25,7 +25,7 @@ public class FileBrowserTest {
     }
 
     @Test
-    public void NullPointerExceptionCatchTest() throws Exception {
+    public void NullPointerExceptionCaughtTest() throws Exception {
         File fakeFile = new File("fake.txt");
         File fakeDir = new File("\\fake");
         String fakeCatalogue = "fake";
