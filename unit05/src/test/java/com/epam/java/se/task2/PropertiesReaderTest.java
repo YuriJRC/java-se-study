@@ -2,9 +2,12 @@ package com.epam.java.se.task2;
 
 import org.junit.Test;
 
+import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Мария on 07.03.2017.
@@ -15,14 +18,14 @@ public class PropertiesReaderTest {
         PropertiesReader propReader = new PropertiesReader();
         try {
             propReader.showProperties(null, null);
-            propReader.showPropByKey("test_ru", "ru", null);
+            propReader.showPropertyByKey("test_ru", "ru", null);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Empty data");
         }
     }
 
     @Test
-    public void MissingResourceCaughtTest() throws Exception {
+    public void MissingResourceTest() throws Exception {
         PropertiesReader propReader = new PropertiesReader();
 
         try {
@@ -37,7 +40,7 @@ public class PropertiesReaderTest {
         PropertiesReader propReader = new PropertiesReader();
 
         try {
-            propReader.showPropByKey("test_en_US", "en_US", "fake");
+            propReader.showPropertyByKey("test_en_US", "en_US", "fake");
         } catch (MissingResourceException e) {
             assertEquals(e.getMessage(), "Properties file not found");
         }
@@ -47,11 +50,13 @@ public class PropertiesReaderTest {
     public void propReaderTestRU() throws Exception {
         PropertiesReader propReader = new PropertiesReader();
         propReader.showProperties("test_ru", "ru");
+        propReader.showPropertyByKey("test_ru", "ru", "2");
     }
 
     @Test
     public void propReaderTestEN() throws Exception {
         PropertiesReader propReader = new PropertiesReader();
         propReader.showProperties("test_en_US", "en_US");
+        propReader.showPropertyByKey("test_en_US", "en_US", "3");
     }
 }
