@@ -43,15 +43,30 @@ public class FileBrowserTest {
         }
 
         try {
+            browser.showAbsolutePath(null);
             browser.goUp(null);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "File not found");
         }
-
     }
+
+    @Test
+    public void FileNotFoundExceptionCaughtTest() throws Exception {
+        File file = new File("C:\\Users\\fake\\fake");
+
+        FileBrowser browser = new FileBrowser();
+
+        try {
+            browser.goUp(file);
+            browser.showAbsolutePath(file);
+        } catch (FileNotFoundException e) {
+            assertEquals(e.getMessage(), "File not found");
+        }
+    }
+
     @Test
             (expected = NotDirectoryException.class)
-    public void NotDirectoryExceptionTest() throws Exception{
+    public void NotDirectoryExceptionTest() throws Exception {
         File fakeDir = new File("C:\\Users\\fake\\fake");
         File fakeNewDir = new File("C:\\Users\\fake\\newFake");
 
@@ -60,6 +75,7 @@ public class FileBrowserTest {
         browser.renameDirectory(fakeDir, fakeNewDir);
 
     }
+
     @Test
     public void showAbsolutePathTest() throws Exception {
         File compare = new File("testfile.txt");
@@ -120,6 +136,7 @@ public class FileBrowserTest {
 
         assertTrue(newDirectory.exists());
     }
+
     @Test
     public void renameDirectoryTest() throws Exception {
         File directory = new File("C:\\Users\\Мария\\testDir");

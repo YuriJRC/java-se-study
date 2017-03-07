@@ -45,7 +45,7 @@ public class FileBrowser {
                 for (String s : fileList) {
                     System.out.println(s + " ");
                 }
-            }
+            } else System.out.println("Directory not found");
         } catch (NullPointerException e) {
             System.out.println("Directory not found");
         }
