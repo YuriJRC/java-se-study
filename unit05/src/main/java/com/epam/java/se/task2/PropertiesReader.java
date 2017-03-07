@@ -35,7 +35,7 @@ public class PropertiesReader {
             String getKey = bundle.getString(key);
             System.out.println(getKey);
         } catch (MissingResourceException e) {
-            System.out.println("Properties file not found");
+            System.out.println("Properties file or key not found");
         }
     }
 

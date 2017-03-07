@@ -42,7 +42,7 @@ public class PropertiesReaderTest {
         try {
             propReader.showPropertyByKey("test_en_US", "en_US", "fake");
         } catch (MissingResourceException e) {
-            assertEquals(e.getMessage(), "Properties file not found");
+            assertEquals(e.getMessage(), "Properties file or key not found");
         }
     }
 
