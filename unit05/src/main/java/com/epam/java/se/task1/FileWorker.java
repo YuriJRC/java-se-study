@@ -6,6 +6,34 @@ import java.io.*;
  * Created by Мария on 06.03.2017.
  */
 public class FileWorker {
+    private File file;
+    private String path;
+
+
+    public void showFilePath(File file) throws FileNotFoundException {
+        try {
+            if (file.exists()) {
+                path = file.getAbsolutePath();
+                System.out.println("Absolute pathname: " + path);
+            } else throw new FileNotFoundException("File not found");
+        } catch (NullPointerException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    public void searchOnlyTXTFiles(File directory) {
+        try {
+            if (directory.isDirectory()) {
+                FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
+                String[] fileList = directory.list(filter);
+                for (String s : fileList) {
+                    System.out.println(s + " ");
+                }
+            } else System.out.println("Directory not found");
+        } catch (NullPointerException e) {
+            System.out.println("Directory not found");
+        }
+    }
 
     public void createNewFile(File file) throws IOException{
         try {
