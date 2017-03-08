@@ -1,5 +1,7 @@
 package com.epam.java.se.task4;
 
+import com.epam.java.se.task3.EncodingChanger;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -13,12 +15,18 @@ import static org.junit.Assert.*;
  * Created by Мария on 05.03.2017.
  */
 public class FilmCollectionTest {
+    private FilmCollection films;
     private static final String PATH = "films_collection.ser";
+
+    @Before
+    public void init() throws Exception {
+        films = new FilmCollection();
+    }
+
 
     @Test
             (expected = NullPointerException.class)
     public void nullPointerTest() throws Exception {
-        FilmCollection films = new FilmCollection();
         films.addFilm(null);
         films.removeFilmByName(null);
         films.printFilmCollection();
@@ -28,8 +36,6 @@ public class FilmCollectionTest {
 
     @Test
     public void addFilmTest() throws Exception {
-        FilmCollection films = new FilmCollection();
-
         Film film = new Film("Titanic", "drama", 1998);
         Actor actor = new Actor("Leo Dicaprio");
         Actor actor2 = new Actor("Kate Winslet");
@@ -45,8 +51,6 @@ public class FilmCollectionTest {
 
     @Test
     public void removeFilmTest() throws Exception {
-        FilmCollection films = new FilmCollection();
-
         films.addFilm(new Film("Lord of the rings", "fantasy", 2005),
                 new Actor("aaa"), new Actor("bbb"), new Actor("ccc"));
 
@@ -66,8 +70,6 @@ public class FilmCollectionTest {
 
     @Test
     public void serialize() throws Exception {
-        FilmCollection films = new FilmCollection();
-
         File file = new File(PATH);
 
         films.addFilm(new Film("Lord of the rings", "fantasy", 2005),

@@ -1,5 +1,6 @@
 package com.epam.java.se.task1_task2;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,15 +12,19 @@ import static org.junit.Assert.*;
  * Created by Мария on 02.03.2017.
  */
 public class InputOutputWorkerTest {
+    private InputOutputWorker worker;
     private static String KEYS_PATH = "keys.txt";
     private static String INPUT_FILE_PATH = "java_code.txt";
     private static String OUTPUT_FILE_PATH = "output.txt";
 
+    @Before
+    public void init()throws Exception {
+        worker = new InputOutputWorker();
+    }
+
     @Test
             (expected = NullPointerException.class)
     public void nullPointerTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
-
         worker.printKeys(null);
 
         worker.getArrayOfKeysFromFileWithCharReader(null);
@@ -33,7 +38,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getArrayOfKeysFromFileWithCharReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
         String key = "private";
         String key2 = "hello";
 
@@ -47,7 +51,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getArrayOfKeysFromFileWithByteReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
         String key = "int";
         String key2 = "hello";
 
@@ -61,8 +64,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getStringWithJavaCodeFromFileWithCharReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
-
         String word = "package";
         String javaCode = worker.getStringWithJavaCodeFromFileWithCharReader(INPUT_FILE_PATH);
 
@@ -75,8 +76,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getStringWithJavaCodeFromFileWithByteReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
-
         String word = "final";
         String javaCode = worker.getStringWithJavaCodeFromFileWithByteReader(INPUT_FILE_PATH);
 
@@ -90,8 +89,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getKeyWordsAndTheirCountFromFileWithCharReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
-
         String count = "16";
         String fake = "hello";
 
@@ -107,8 +104,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void getKeyWordsAndTheirCountFromFileWithByteReaderTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
-
         String count = "16";
         String key = "void";
         String fake = "hello";
@@ -125,7 +120,6 @@ public class InputOutputWorkerTest {
     }
     @Test
     public void writeKeyWordsAndTheirCountToFileWithCharWriterTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
         File file = new File(OUTPUT_FILE_PATH);
 
         ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithCharReader(KEYS_PATH);
@@ -142,7 +136,6 @@ public class InputOutputWorkerTest {
 
     @Test
     public void writeKeyWordsAndTheirCountToFileWithByteWriterTest() throws Exception {
-        InputOutputWorker worker = new InputOutputWorker();
         File file = new File(OUTPUT_FILE_PATH);
 
         ArrayList<String> keysList = worker.getArrayOfKeysFromFileWithByteReader(KEYS_PATH);
