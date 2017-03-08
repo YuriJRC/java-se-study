@@ -17,7 +17,7 @@ public class Application {
     public void init() throws IOException {
         chooseLanguage();
         setLocaleAndBundle();
-        getQuestions();
+        getKeys();
         showQuestions();
         showAnswers();
     }
@@ -47,43 +47,40 @@ public class Application {
         }
     }
 
-    public ArrayList<String> getQuestions() throws MissingResourceException {
+    public ArrayList<String> getKeys() throws MissingResourceException {
         if (questions == null) {
             throw new NullPointerException("Empty data");
         }
         return new ArrayList<>(Collections.list(questions.getKeys()));
     }
 
-    public void showQuestions() throws MissingResourceException{
-        if (questions == null) {
+    public void showQuestions() throws MissingResourceException {
+        if (questions == null || getKeys() == null) {
             throw new NullPointerException("Empty data");
         }
-        getQuestions();
-        for (String value : getQuestions()) {
+        for (String value : getKeys()) {
             System.out.println(questions.getString(value));
         }
     }
 
     public void showAnswers() throws IOException, MissingResourceException {
-        if (answers == null){
+        if (getKeys()==null || answers == null) {
             throw new NullPointerException("Empty data");
         }
         System.out.println("Press \"q\" to exit");
         System.out.println("Press \"b\" to return to menu");
-        getQuestions();
+
         while ((input = reader.readLine()) != null) {
-            if (getQuestions().contains(input)) {
+            if (getKeys().contains(input)) {
                 System.out.println(answers.getString(input));
             } else if (quit().equals(input)) {
                 System.exit(0);
             } else if (backToMenu().equals(input)) {
                 init();
-            }
-            else {
+            } else {
                 System.out.println("Wrong input");
             }
         }
-
     }
 
     public String quit() {

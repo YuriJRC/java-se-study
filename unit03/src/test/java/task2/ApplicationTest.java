@@ -24,7 +24,7 @@ public class ApplicationTest {
     public void nullPointerExceptionTest() throws Exception{
         manager.setLocale(null);
         manager.setResourceBundle(null, null);
-        application.getQuestions();
+        application.getKeys();
         application.showAnswers();
 
     }
