@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class FileWorker {
 
-    public void createNewFile(File file) throws IOException, NullPointerException {
+    public void createNewFile(File file) throws IOException{
         try {
             if (file.createNewFile()) {
                 System.out.println("File created");
@@ -19,7 +19,7 @@ public class FileWorker {
         }
     }
 
-    public void deleteFile(File file) throws NullPointerException {
+    public void deleteFile(File file) {
         try {
             if (file.delete()) {
                 System.out.println("File deleted");
@@ -29,7 +29,7 @@ public class FileWorker {
         }
     }
 
-    public void writeToFile(File outputFile, String text) throws FileNotFoundException, NullPointerException {
+    public void writeToFile(File outputFile, String text) throws FileNotFoundException{
         try {
             if (outputFile.exists()) {
                 PrintWriter writer = new PrintWriter(new FileOutputStream(outputFile, true));
@@ -45,7 +45,7 @@ public class FileWorker {
         }
     }
 
-    public void readFromFile(File inputFile) throws IOException, NullPointerException {
+    public void readFromFile(File inputFile) throws IOException{
         String line;
         try {
             if (inputFile.exists()) {

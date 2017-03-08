@@ -12,7 +12,7 @@ public class FileBrowser {
     private String path;
 
 
-    public void showAbsolutePath(File file) throws FileNotFoundException, NullPointerException {
+    public void showAbsolutePath(File file) throws FileNotFoundException{
         try {
             if (file.exists()) {
                 path = file.getAbsolutePath();
@@ -23,7 +23,7 @@ public class FileBrowser {
         }
     }
 
-    public void showDirectoryContent(File directory) throws NullPointerException{
+    public void showDirectoryContent(File directory){
         try {
             if (directory.isDirectory()) {
                 for (File file : directory.listFiles()) {
@@ -37,7 +37,7 @@ public class FileBrowser {
         }
     }
 
-    public void searchOnlyTXTFiles(File directory) throws NullPointerException{
+    public void searchOnlyTXTFiles(File directory){
         try {
             if (directory.isDirectory()) {
                 FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
@@ -51,7 +51,7 @@ public class FileBrowser {
         }
     }
 
-    public void goUp(File file) throws FileNotFoundException, NullPointerException {
+    public void goUp(File file) throws FileNotFoundException{
         try {
             if (file.exists()) {
                 path = file.getParent();
@@ -62,7 +62,7 @@ public class FileBrowser {
         }
     }
 
-    public void goDown(File directory, String catalogue) throws NullPointerException{
+    public void goDown(File directory, String catalogue){
         try {
             if (directory.isDirectory()) {
                 path = directory.getAbsolutePath() + "\\" + catalogue;
@@ -73,7 +73,7 @@ public class FileBrowser {
         }
     }
 
-    public void createNewDirectory(File directory) throws NullPointerException{
+    public void createNewDirectory(File directory) {
         try {
             if (directory.mkdir()) {
                 System.out.println("New directory created");
@@ -83,7 +83,7 @@ public class FileBrowser {
         }
     }
 
-    public void renameDirectory(File directory, File newDirectory) throws NotDirectoryException, NullPointerException{
+    public void renameDirectory(File directory, File newDirectory) throws NotDirectoryException{
         try {
             boolean isRenamed = directory.renameTo(newDirectory);
             if (isRenamed || newDirectory.exists()) {
