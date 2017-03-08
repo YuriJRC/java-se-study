@@ -63,7 +63,7 @@ public class CrazyLoggerTest {
 
         assertTrue(logger.searchEntriesByData("01-01-2017").equals("no matches found"));
 
-        assertTrue(logger.searchEntriesByData("01-03-2017").contains("sit"));
+        assertTrue(logger.searchEntriesByData("07-03-2017").contains("sit"));
 
     }
 }
