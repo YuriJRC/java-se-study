@@ -1,5 +1,6 @@
 package com.epam.java.se.task1;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,12 +13,18 @@ import java.nio.file.NotDirectoryException;
  * Created by Мария on 06.03.2017.
  */
 public class FileBrowserTest {
+    private FileBrowser browser;
+
+    @Before
+    public void init()throws Exception {
+       browser = new FileBrowser();
+    }
+
+
     @Test
             (expected = FileNotFoundException.class)
     public void FileNotFoundExceptionTest() throws Exception {
         File fake = new File("fake.txt");
-
-        FileBrowser browser = new FileBrowser();
 
         browser.showAbsolutePath(fake);
         browser.goUp(fake);
@@ -26,7 +33,6 @@ public class FileBrowserTest {
 
     @Test
     public void NullPointerExceptionCaughtTest() throws Exception {
-        FileBrowser browser = new FileBrowser();
         try {
             browser.showDirectoryContent(null);
             browser.searchOnlyTXTFiles(null);
@@ -54,8 +60,6 @@ public class FileBrowserTest {
     public void FileNotFoundExceptionCaughtTest() throws Exception {
         File file = new File("C:\\Users\\fake\\fake");
 
-        FileBrowser browser = new FileBrowser();
-
         try {
             browser.goUp(file);
             browser.showAbsolutePath(file);
@@ -70,8 +74,6 @@ public class FileBrowserTest {
         File fakeDir = new File("C:\\Users\\fake\\fake");
         File fakeNewDir = new File("C:\\Users\\fake\\newFake");
 
-        FileBrowser browser = new FileBrowser();
-
         browser.renameDirectory(fakeDir, fakeNewDir);
 
     }
@@ -80,7 +82,6 @@ public class FileBrowserTest {
     public void showAbsolutePathTest() throws Exception {
         File compare = new File("testfile.txt");
 
-        FileBrowser browser = new FileBrowser();
         browser.showAbsolutePath(compare);
 
         assertTrue(compare.getAbsolutePath().equals("C:\\Users\\Мария\\IdeaProjects\\unit05\\testfile.txt"));
@@ -89,8 +90,6 @@ public class FileBrowserTest {
     @Test
     public void showDirectoryContentTest() throws Exception {
         File directory = new File("D:\\Application");
-
-        FileBrowser browser = new FileBrowser();
 
         browser.showDirectoryContent(directory);
 
@@ -102,16 +101,12 @@ public class FileBrowserTest {
     public void searchOnlyTXTFilesTest() throws Exception {
         File directory = new File(".\\");
 
-        FileBrowser browser = new FileBrowser();
-
         browser.searchOnlyTXTFiles(directory);
     }
 
     @Test
     public void goUpTest() throws Exception {
         File directory = new File("C:\\Python27\\Doc");
-
-        FileBrowser browser = new FileBrowser();
 
         browser.goUp(directory);
     }
@@ -121,16 +116,12 @@ public class FileBrowserTest {
         File directory = new File("C:\\Python27");
         String catalogue = "Doc";
 
-        FileBrowser browser = new FileBrowser();
-
         browser.goDown(directory, catalogue);
     }
 
     @Test
     public void createNewDirectoryTest() throws Exception {
         File newDirectory = new File("C:\\Users\\Мария\\testDir");
-
-        FileBrowser browser = new FileBrowser();
 
         browser.createNewDirectory(newDirectory);
 
@@ -141,8 +132,6 @@ public class FileBrowserTest {
     public void renameDirectoryTest() throws Exception {
         File directory = new File("C:\\Users\\Мария\\testDir");
         File newDirectory = new File("C:\\Users\\Мария\\newTestDir");
-
-        FileBrowser browser = new FileBrowser();
 
         browser.renameDirectory(directory, newDirectory);
 

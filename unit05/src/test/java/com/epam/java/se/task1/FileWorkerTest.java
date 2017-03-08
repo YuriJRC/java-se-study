@@ -1,5 +1,6 @@
 package com.epam.java.se.task1;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,9 +13,15 @@ import static org.junit.Assert.*;
  * Created by Мария on 06.03.2017.
  */
 public class FileWorkerTest {
+    private FileWorker worker;
+
+    @Before
+    public void init()throws Exception {
+        worker = new FileWorker();
+    }
+
     @Test
     public void NullPointerExceptionCaughtTest() throws Exception{
-        FileWorker worker = new FileWorker();
 
         try {
             worker.createNewFile(null);
@@ -36,8 +43,6 @@ public class FileWorkerTest {
         File file = new File("C:\\Users\\fake\\fake");
         String text = "Testtesttesttest";
 
-        FileWorker worker = new FileWorker();
-
         try {
             worker.writeToFile(file, text);
         } catch (FileNotFoundException e) {
@@ -48,8 +53,6 @@ public class FileWorkerTest {
     @Test
     public void IOExceptionCaughtTest() throws Exception {
         File file = new File("C:\\Users\\fake\\fake");
-
-        FileWorker worker = new FileWorker();
 
         try {
             worker.readFromFile(file);
@@ -71,7 +74,6 @@ public class FileWorkerTest {
     public void createNewFileTest()throws Exception{
         File file = new File(".\\testfile4.txt");
 
-        FileWorker worker = new FileWorker();
         worker.createNewFile(file);
 
         assertTrue(file.exists());
@@ -82,8 +84,6 @@ public class FileWorkerTest {
         File file = new File(".\\testfile4.txt");
         String text = "Testtesttesttest";
 
-        FileWorker worker = new FileWorker();
-
         worker.writeToFile(file, text);
 
         assertTrue(file.length()>10);
@@ -93,16 +93,12 @@ public class FileWorkerTest {
     public void deleteFileTest() throws Exception {
         File file = new File(".\\testfile5.txt");
 
-        FileWorker worker = new FileWorker();
-
         worker.deleteFile(file);
     }
 
     @Test
     public void readFromFileTest() throws Exception {
         File file = new File(".\\testfile4.txt");
-
-        FileWorker worker = new FileWorker();
 
         worker.readFromFile(file);
     }
