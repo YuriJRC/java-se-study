@@ -10,7 +10,7 @@ public class Main {
 
         Application application = new Application();
         application.init();
-        application.showAnswers();
+
 
     }
 }
