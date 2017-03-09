@@ -44,7 +44,7 @@ public class DirectoryBrowser {
             for (File file : directory.listFiles()) {
                 if (file.isDirectory()) {
                     System.out.println(file.getName() + "  \t\tcatalogue");
-                } else System.out.println(file.getName() + " \t\tdirectory");
+                } else System.out.println(file.getName() + " \t\tfile");
             }
         } catch (NullPointerException e) {
             System.out.println("Directory not found");

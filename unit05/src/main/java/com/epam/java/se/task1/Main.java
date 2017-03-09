@@ -24,7 +24,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Main.showCommands();
+        showCommands();
+
         while (true) {
             String command = scanner.nextLine();
             switch (command) {
