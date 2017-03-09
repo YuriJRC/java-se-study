@@ -106,7 +106,6 @@ public class FileWorkerTest {
         assertTrue(compare.exists() && compare.isFile());
     }
 
-
     @Test
     public void writeToFileTest() throws Exception {
         File file = new File(".\\testfile2.txt");

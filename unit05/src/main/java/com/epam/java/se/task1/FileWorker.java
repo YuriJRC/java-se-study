@@ -8,8 +8,6 @@ import java.util.InputMismatchException;
  * Created by Мария on 06.03.2017.
  */
 public class FileWorker {
-//    private File file;
-
 
     public void showFilePath(File directory, String filename) throws FileNotFoundException {
         try {

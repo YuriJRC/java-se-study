@@ -91,6 +91,7 @@ public class DirectoryBrowser {
             File tmpDirectory = new File(directory.getParent() + "\\" + catalogue);
             boolean isRenamed = directory.renameTo(tmpDirectory);
             if (isRenamed || tmpDirectory.exists()) {
+                directory = tmpDirectory;
                 System.out.println("Directory renamed");
             } else throw new NotDirectoryException("Wrong path or directory");
         } catch (NullPointerException | NotDirectoryException e) {

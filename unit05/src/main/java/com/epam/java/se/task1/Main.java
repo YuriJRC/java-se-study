@@ -15,7 +15,7 @@ public class Main {
                 "pth - show file path in current directory\ntxt - show only txt files in current directory\n" +
                 "new - create new file in current directory\ndel - delete file in current directory\n" +
                 "wrt - write to filw in current directory\nread - read from file in current directory\n" +
-                "quit - exit program");
+                "quit - exit program\n");
     }
 
     public static void main(String[] args) throws IOException {
@@ -28,6 +28,7 @@ public class Main {
         showCommands();
 
         while (true) {
+            System.out.println("Input command");
             String command = scanner.nextLine();
             switch (command) {
                 case "cur":
