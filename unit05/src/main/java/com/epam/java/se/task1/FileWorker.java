@@ -1,20 +1,20 @@
 package com.epam.java.se.task1;
 
 import java.io.*;
+import java.nio.file.NotDirectoryException;
 
 /**
  * Created by Мария on 06.03.2017.
  */
 public class FileWorker {
-    private File file;
-    private String path;
+//    private File file;
 
 
-    public void showFilePath(File file) throws FileNotFoundException {
+    public void showFilePath(File directory, String filename) throws FileNotFoundException {
         try {
-            if (file.exists()) {
-                path = file.getAbsolutePath();
-                System.out.println("Absolute pathname: " + path);
+            File newDirectory = new File(directory.getAbsolutePath() + "\\" + filename);
+            if (newDirectory.exists() && !newDirectory.isDirectory()) {
+                System.out.println("Absolute pathname: " + newDirectory.getAbsolutePath());
             } else throw new FileNotFoundException("File not found");
         } catch (NullPointerException e) {
             System.out.println("File not found");
@@ -26,30 +26,33 @@ public class FileWorker {
             if (directory.isDirectory()) {
                 FilenameFilter filter = (dir, name) -> name.endsWith(".txt");
                 String[] fileList = directory.list(filter);
+                if (fileList.length == 0) {
+                    throw new FileNotFoundException(".txt files not found");
+                }
                 for (String s : fileList) {
                     System.out.println(s + " ");
                 }
-            } else System.out.println("Directory not found");
-        } catch (NullPointerException e) {
-            System.out.println("Directory not found");
+            } else throw new NotDirectoryException("Directory not found");
+        } catch (NullPointerException | NotDirectoryException | FileNotFoundException e) {
+            System.out.println("Directory or files not found");
         }
     }
 
-    public void createNewFile(File file) throws IOException{
+    public void createNewFile(File directory, String filename) throws IOException {
         try {
-            if (file.createNewFile()) {
+            File newFile = new File(directory.getAbsolutePath() + "\\" + filename);
+            if (newFile.createNewFile()) {
                 System.out.println("File created");
             } else System.out.println("File already exists");
-        } catch (NullPointerException e) {
-            System.out.println(("Wrong input data"));
-        } catch (IOException e) {
+        } catch (NullPointerException | IOException e) {
             System.out.println(("Wrong input data"));
         }
     }
 
-    public void deleteFile(File file) {
+    public void deleteFile(File directory, String filename) {
         try {
-            if (file.delete()) {
+            File newFile = new File(directory.getAbsolutePath() + "\\" + filename);
+            if (newFile.isFile()&& newFile.delete()) {
                 System.out.println("File deleted");
             } else System.out.println("File not found");
         } catch (NullPointerException e) {
@@ -57,7 +60,7 @@ public class FileWorker {
         }
     }
 
-    public void writeToFile(File outputFile, String text) throws FileNotFoundException{
+    public void writeToFile(File outputFile, String text) throws FileNotFoundException {
         try {
             if (outputFile.exists()) {
                 PrintWriter writer = new PrintWriter(new FileOutputStream(outputFile, true));
@@ -68,12 +71,12 @@ public class FileWorker {
             } else System.out.println("File not found");
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("File not found");
         }
     }
 
-    public void readFromFile(File inputFile) throws IOException{
+    public void readFromFile(File inputFile) throws IOException {
         String line;
         try {
             if (inputFile.exists()) {

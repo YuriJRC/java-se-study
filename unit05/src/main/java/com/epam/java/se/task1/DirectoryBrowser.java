@@ -2,6 +2,8 @@ package com.epam.java.se.task1;
 
 import java.io.File;
 import java.nio.file.NotDirectoryException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by Мария on 06.03.2017.
@@ -21,8 +23,22 @@ public class DirectoryBrowser {
         System.out.println("Current directory: " + directory);
     }
 
-    public String getDirectory() {
+    public String getDirectoryToString() {
         return directory.toString();
+    }
+
+    public File getDirectory() {return directory;}
+
+    public void changeDirectory(String path){
+        try {
+            File tmpDirectory = new File(path);
+            if (tmpDirectory.isDirectory() && tmpDirectory.exists()) {
+                directory = tmpDirectory;
+                System.out.println(directory);
+            } else throw new NotDirectoryException("Directory not found");
+        } catch (NullPointerException | NotDirectoryException e) {
+            System.out.println("Wrong path or directory");
+        }
     }
 
     public void showDirectoryContent() {
@@ -39,8 +55,9 @@ public class DirectoryBrowser {
 
     public void goUp() {
         try {
-            if (directory.isDirectory()) {
-                directory = new File(directory.getParent());
+            File tmpDirectory = new File(directory.getParent());
+            if (tmpDirectory.isDirectory()) {
+                directory = tmpDirectory;
                 System.out.println(directory);
             } else throw new NotDirectoryException("Directory not found");
         } catch (NullPointerException | NotDirectoryException e) {
@@ -50,8 +67,9 @@ public class DirectoryBrowser {
 
     public void goDown(String catalogue) {
         try {
-            directory = new File(directory.getAbsolutePath() + "\\" + catalogue);
-            if (directory.isDirectory() && directory.exists()) {
+            File tmpDirectory = new File(directory.getAbsolutePath() + "\\" + catalogue);
+            if (tmpDirectory.isDirectory() && tmpDirectory.exists()) {
+                directory = tmpDirectory;
                 System.out.println(directory);
             } else throw new NotDirectoryException("Directory not found");
         } catch (NullPointerException | NotDirectoryException e) {
@@ -70,12 +88,11 @@ public class DirectoryBrowser {
         }
     }
 
-
     public void renameDirectory(String catalogue) {
         try {
-            File newDirectory = new File(directory.getParent() + "\\" + catalogue);
-            boolean isRenamed = directory.renameTo(newDirectory);
-            if (isRenamed || newDirectory.exists()) {
+            File tmpDirectory = new File(directory.getParent() + "\\" + catalogue);
+            boolean isRenamed = directory.renameTo(tmpDirectory);
+            if (isRenamed || tmpDirectory.exists()) {
                 System.out.println("Directory renamed");
             } else throw new NotDirectoryException("Wrong path or directory");
         } catch (NullPointerException | NotDirectoryException e) {

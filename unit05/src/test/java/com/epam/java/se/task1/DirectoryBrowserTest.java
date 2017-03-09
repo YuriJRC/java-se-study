@@ -34,7 +34,7 @@ public class DirectoryBrowserTest {
         String currentDir = "C:\\Users\\Мария\\IdeaProjects\\unit05";
         browser.showCurrentDirectory();
 
-        assertTrue(currentDir.equals(browser.getDirectory()));
+        assertTrue(currentDir.equals(browser.getDirectoryToString()));
     }
     @Test
     public void showDirectoryContentTest() throws Exception{
