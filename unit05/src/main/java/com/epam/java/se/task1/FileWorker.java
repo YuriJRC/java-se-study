@@ -2,6 +2,7 @@ package com.epam.java.se.task1;
 
 import java.io.*;
 import java.nio.file.NotDirectoryException;
+import java.util.InputMismatchException;
 
 /**
  * Created by Мария on 06.03.2017.
@@ -52,7 +53,7 @@ public class FileWorker {
     public void deleteFile(File directory, String filename) {
         try {
             File newFile = new File(directory.getAbsolutePath() + "\\" + filename);
-            if (newFile.isFile()&& newFile.delete()) {
+            if (newFile.isFile() && newFile.delete()) {
                 System.out.println("File deleted");
             } else System.out.println("File not found");
         } catch (NullPointerException e) {
@@ -60,19 +61,18 @@ public class FileWorker {
         }
     }
 
-    public void writeToFile(File outputFile, String text) throws FileNotFoundException {
+    public void writeToFile(File directory, String filename, String append, String text) throws FileNotFoundException, InputMismatchException {
         try {
-            if (outputFile.exists()) {
-                PrintWriter writer = new PrintWriter(new FileOutputStream(outputFile, true));
+            File newFile = new File(directory.getAbsolutePath() + "\\" + filename);
+            if (newFile.exists()) {
+                PrintWriter writer = new PrintWriter(new FileOutputStream(newFile, Boolean.valueOf(append)));
                 writer.print(text);
                 writer.flush();
                 writer.close();
                 System.out.println("Written successfully");
-            } else System.out.println("File not found");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (NullPointerException e) {
-            System.out.println("File not found");
+            } else System.out.println("File not found or wrong data");
+        } catch (FileNotFoundException | NullPointerException | InputMismatchException e) {
+            System.out.println("File not found or wrong data");
         }
     }
 

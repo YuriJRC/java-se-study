@@ -38,7 +38,7 @@ public class Main {
                 case "up":
                     directoryBrowser.goUp();
                     break;
-                case "down":
+                case "dwn":
                     System.out.println("Input child's directory name");
                     command = scanner.nextLine();
                     directoryBrowser.goDown(command);
@@ -63,14 +63,26 @@ public class Main {
                     break;
                 case "txt":
                     fileWorker.searchOnlyTXTFiles(directoryBrowser.getDirectory());
+                    break;
                 case "new":
                     System.out.println("Input new file name");
                     command = scanner.nextLine();
                     fileWorker.createNewFile(directoryBrowser.getDirectory(), command);
+                    break;
                 case "del":
                     System.out.println("Input file name to delete");
                     command = scanner.nextLine();
                     fileWorker.deleteFile(directoryBrowser.getDirectory(), command);
+                    break;
+                case "wrt":
+                    System.out.println("Input file name to write to");
+                    command = scanner.nextLine();
+                    System.out.println("Append: true or false");
+                    String append = scanner.nextLine();
+                    System.out.println("Input text");
+                    String text = scanner.nextLine();
+                    fileWorker.writeToFile(directoryBrowser.getDirectory(), command, append, text);
+                    break;
             }
         }
     }
