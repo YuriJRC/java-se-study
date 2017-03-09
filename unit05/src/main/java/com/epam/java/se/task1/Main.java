@@ -13,7 +13,8 @@ public class Main {
                 "con - show content of current directory\nmk - make new directory\n" +
                 "rnm - rename current directory\ncng - change current directory\n" +
                 "pth - show file path in current directory\ntxt - show only txt files in current directory\n" +
-                "new - create new file in current directory\ndel - delete file in current directory");
+                "new - create new file in current directory\ndel - delete file in current directory\n" +
+                "wrt - write to filw in current directory\nread - read from file in current directory");
     }
 
     public static void main(String[] args) throws IOException {
@@ -38,7 +39,7 @@ public class Main {
                 case "up":
                     directoryBrowser.goUp();
                     break;
-                case "dwn":
+                case "down":
                     System.out.println("Input child's directory name");
                     command = scanner.nextLine();
                     directoryBrowser.goDown(command);
@@ -83,6 +84,10 @@ public class Main {
                     String text = scanner.nextLine();
                     fileWorker.writeToFile(directoryBrowser.getDirectory(), command, append, text);
                     break;
+                case "read":
+                    System.out.println("Input file name to read");
+                    command = scanner.nextLine();
+                    fileWorker.readFromFile(directoryBrowser.getDirectory(), command);
             }
         }
     }

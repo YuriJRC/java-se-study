@@ -76,20 +76,19 @@ public class FileWorker {
         }
     }
 
-    public void readFromFile(File inputFile) throws IOException {
+    public void readFromFile(File directory, String filename) throws IOException {
         String line;
         try {
-            if (inputFile.exists()) {
+            File newFile = new File(directory.getAbsolutePath() + "\\" + filename);
+            if (newFile.exists()) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        new FileInputStream(inputFile), "windows-1251"));
+                        new FileInputStream(newFile), "windows-1251"));
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                 }
                 reader.close();
             } else System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("File not found");
-        } catch (NullPointerException e) {
+        } catch (IOException | NullPointerException e) {
             System.out.println("File not found");
         }
     }

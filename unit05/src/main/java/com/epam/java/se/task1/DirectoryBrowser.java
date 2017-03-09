@@ -2,8 +2,6 @@ package com.epam.java.se.task1;
 
 import java.io.File;
 import java.nio.file.NotDirectoryException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Мария on 06.03.2017.
