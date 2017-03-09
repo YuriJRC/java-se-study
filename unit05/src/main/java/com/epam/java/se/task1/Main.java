@@ -14,7 +14,8 @@ public class Main {
                 "rnm - rename current directory\ncng - change current directory\n" +
                 "pth - show file path in current directory\ntxt - show only txt files in current directory\n" +
                 "new - create new file in current directory\ndel - delete file in current directory\n" +
-                "wrt - write to filw in current directory\nread - read from file in current directory");
+                "wrt - write to filw in current directory\nread - read from file in current directory\n" +
+                "quit - exit program");
     }
 
     public static void main(String[] args) throws IOException {
@@ -89,6 +90,12 @@ public class Main {
                     System.out.println("Input file name to read");
                     command = scanner.nextLine();
                     fileWorker.readFromFile(directoryBrowser.getDirectory(), command);
+                    break;
+                case "quit":
+                    System.exit(0);
+                default:
+                    System.out.println("Wrong command");
+                    break;
             }
         }
     }

@@ -46,7 +46,7 @@ public class FileWorker {
                 System.out.println("File created");
             } else System.out.println("File already exists");
         } catch (NullPointerException | IOException e) {
-            System.out.println(("Wrong input data"));
+            System.out.println("Wrong input data");
         }
     }
 
@@ -57,7 +57,7 @@ public class FileWorker {
                 System.out.println("File deleted");
             } else System.out.println("File not found");
         } catch (NullPointerException e) {
-            System.out.println(("File not found"));
+            System.out.println("File not found");
         }
     }
 
