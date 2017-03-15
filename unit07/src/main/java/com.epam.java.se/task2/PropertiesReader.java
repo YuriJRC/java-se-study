@@ -53,14 +53,20 @@ public class PropertiesReader extends Thread {
     }
 
     public void run() {
+        try {
             while (run) {
-                System.out.println("Thread " + getName() + "completed reading\n" );
-                stopThread();
+                System.out.println("Thread " + getName() + "is reading\n");
+                Thread.sleep(500);
+                interrupt();
             }
+        } catch (InterruptedException e){
+            stopThread();
+        }
     }
 
     public void stopThread() {
         run = false;
+        System.out.println("Thread " + getName() + "completed reading\n");
     }
 
 }
