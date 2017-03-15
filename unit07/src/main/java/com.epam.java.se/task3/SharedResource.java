@@ -17,11 +17,14 @@ import java.util.List;
             list.add(element);
         }
 
-        public Integer getElement() {
+    public List<Integer> getList() {
+        return list;
+    }
+
+    public Integer getElement() {
             if (list.size() > 0) {
                 return list.remove(0);
             }
             return null;
-
         }
     }
