@@ -40,7 +40,7 @@ public class IntegerSetterGetter extends Thread{
         synchronized (resource) {
             System.out.println("Поток " + getName() + " хочет извлечь число.");
             number = resource.getElement();
-            for (int i = 0; i < 1 && number == null; i++) {
+            for (int i = 0; i < 10 && number == null; i++) {
                 System.out.println("Поток " + getName() + " ждет пока очередь заполнится.");
                 resource.wait(100);
                 System.out.println("Поток " + getName() + " возобновил работу.");
