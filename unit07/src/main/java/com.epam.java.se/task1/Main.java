@@ -18,5 +18,7 @@ public class Main {
         }
         System.out.println(account1.getBalance());
         System.out.println(account2.getBalance());
+        System.out.println(account1.getBalanceStatistics());
+        System.out.println(account2.getBalanceStatistics());
     }
 }

@@ -14,11 +14,11 @@ public class OperationsBetweenAccounts extends Thread{
         int balanceDeposit = fromOne.getBalance();
         int x = balanceDeposit + amount;
         fromOne.setBalance(x);
-        fromOne.getBalanceStatistics().add(balanceDeposit);
+        fromOne.setStatistics(x);
 
         int balanceWithdraw = toOther.getBalance();
         int y = balanceWithdraw - amount;
         toOther.setBalance(y);
-        toOther.getBalanceStatistics().add(balanceWithdraw);
+        toOther.setStatistics(y);
     }
 }
