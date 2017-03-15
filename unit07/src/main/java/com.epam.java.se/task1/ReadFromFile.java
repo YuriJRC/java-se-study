@@ -12,7 +12,7 @@ public class ReadFromFile {
     private ArrayList <Account> accounts = new ArrayList<>();
 
 
-    public ArrayList<Account> listOfAccounts (String filePath) {
+    public ArrayList<Account> getListOfAccounts (String filePath) {
         if (filePath == null) {
             throw new NullPointerException("Empty data");
         }
@@ -26,5 +26,14 @@ public class ReadFromFile {
             System.out.println("Class not found");
         }
         return accounts;
+    }
+    public void showAccounts(){
+        if (accounts==null){
+            throw new NullPointerException("empty dara");
+        }
+        for (int i=0; i<accounts.size(); i++){
+            System.out.println(accounts.get(i));
+        }
+
     }
 }

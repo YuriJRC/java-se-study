@@ -12,6 +12,9 @@ public class Account implements Serializable{
     private ArrayList <Integer> balanceStatistics;
 
     public Account(int balance) {
+        if (balance<0){
+            throw new NullPointerException("balance cant' be negative");
+        }
         this.balance = balance;
         balanceStatistics = new ArrayList<>();
     }

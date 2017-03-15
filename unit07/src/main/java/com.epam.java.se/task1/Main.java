@@ -22,5 +22,13 @@ public class Main {
         System.out.println(account2.getBalance());
         System.out.println(account1.getBalanceStatistics());
         System.out.println(account2.getBalanceStatistics());
+
+        WriteToFIle writer = new WriteToFIle();
+        writer.writeAccounts("ACCOUNTS.TXT", account1, account2);
+
+        ReadFromFile reader = new ReadFromFile();
+
+        reader.getListOfAccounts("ACCOUNTS.TXT");
+        reader.showAccounts();
     }
 }

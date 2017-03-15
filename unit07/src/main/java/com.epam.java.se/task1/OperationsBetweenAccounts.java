@@ -8,10 +8,15 @@ import javax.naming.OperationNotSupportedException;
 public class OperationsBetweenAccounts extends Thread {
 
     public synchronized void transferMoney(Account fromOne, Account toOther, int amount) throws OperationNotSupportedException {
+        if (fromOne==null || toOther==null){
+            throw new NullPointerException("Empty data");
+        }
+        if (amount<0){
+            throw new OperationNotSupportedException("Amount can't be negative");
+        }
         if (fromOne.equals(toOther)) {
             throw new OperationNotSupportedException("Can't add money to your own account");
         }
-
         int balanceWithdraw = toOther.getBalance();
         int y = balanceWithdraw - amount;
         if (y >= 0) {
