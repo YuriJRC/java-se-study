@@ -21,8 +21,8 @@ public class PropertiesReaderTest {
     @Test
     public void nullPointerExceptionCaughtTest() throws Exception {
         try {
-            propReader.showProperties(null, null);
-            propReader.showPropertyByKey("test_ru", "ru", null);
+            propReader.getProperties(null, null);
+            propReader.getPropertyByKey("test_ru", "ru", null);
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Empty data");
         }
@@ -31,7 +31,7 @@ public class PropertiesReaderTest {
     @Test
     public void MissingResourceTest() throws Exception {
         try {
-            propReader.showProperties("d", "en_US");
+            propReader.getProperties("d", "en_US");
         } catch (MissingResourceException e) {
             assertEquals(e.getMessage(), "Properties file not found");
         }
@@ -40,7 +40,7 @@ public class PropertiesReaderTest {
     @Test
     public void MissingKeyTest() throws Exception {
         try {
-            propReader.showPropertyByKey("test_en_US", "en_US", "fake");
+            propReader.getPropertyByKey("test_en_US", "en_US", "fake");
         } catch (MissingResourceException e) {
             assertEquals(e.getMessage(), "Properties file or key not found");
         }
@@ -48,13 +48,13 @@ public class PropertiesReaderTest {
 
     @Test
     public void propReaderTestRU() throws Exception {
-        propReader.showProperties("test_ru", "ru");
-        propReader.showPropertyByKey("test_ru", "ru", "2");
+        System.out.println(propReader.getProperties("test_ru", "ru"));
+        System.out.println(propReader.getPropertyByKey("test_ru", "ru", "2"));
     }
 
     @Test
     public void propReaderTestEN() throws Exception {
-        propReader.showProperties("test_en_US", "en_US");
-        propReader.showPropertyByKey("test_en_US", "en_US", "3");
+        System.out.println(propReader.getProperties("test_en_US", "en_US"));
+        System.out.println(propReader.getPropertyByKey("test_en_US", "en_US", "3"));
     }
 }
