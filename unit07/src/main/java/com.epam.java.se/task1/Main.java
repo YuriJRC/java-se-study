@@ -32,12 +32,12 @@ public class Main {
         WriteToFile writer = new WriteToFile();
         writer.writeAccounts("ACCOUNTS.TXT", account1, account2);
 
-        ReadFromFile reader = new ReadFromFile("ACCOUNTS.TXT");
-        ReadFromFile reader2 = new ReadFromFile("ACCOUNTS.TXT");
-        ReadFromFile reader3 = new ReadFromFile("ACCOUNTS.TXT");
-        ReadFromFile reader4 = new ReadFromFile("ACCOUNTS.TXT");
-        ReadFromFile reader5 = new ReadFromFile("ACCOUNTS.TXT");
-        ReadFromFile reader6 = new ReadFromFile("ACCOUNTS.TXT");
+        ReadFromFileSync reader = new ReadFromFileSync("ACCOUNTS.TXT");
+        ReadFromFileSync reader2 = new ReadFromFileSync("ACCOUNTS.TXT");
+        ReadFromFileSync reader3 = new ReadFromFileSync("ACCOUNTS.TXT");
+        ReadFromFileSync reader4 = new ReadFromFileSync("ACCOUNTS.TXT");
+        ReadFromFileSync reader5 = new ReadFromFileSync("ACCOUNTS.TXT");
+        ReadFromFileSync reader6 = new ReadFromFileSync("ACCOUNTS.TXT");
 
         reader.start();
         reader2.start();
@@ -46,8 +46,6 @@ public class Main {
         reader5.start();
         reader6.start();
 
-        Thread.sleep(100);
-
         reader.join();
         reader2.join();
         reader3.join();
@@ -55,16 +53,20 @@ public class Main {
         reader5.join();
         reader6.join();
 
+        ReadFromFileConcurrent newReader = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+        ReadFromFileConcurrent newReader2 = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+        ReadFromFileConcurrent newReader3 = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+        ReadFromFileConcurrent newReader4 = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+        ReadFromFileConcurrent newReader5 = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+        ReadFromFileConcurrent newReader6 = new ReadFromFileConcurrent("ACCOUNTS.TXT");
+
         ExecutorService executor = Executors.newCachedThreadPool();
-        executor.execute(reader);
-        executor.execute(reader2);
-        executor.execute(reader3);
-        executor.execute(reader4);
-        executor.execute(reader5);
-        executor.execute(reader6);
-
-        Thread.sleep(100);
-
+        executor.execute(newReader);
+        executor.execute(newReader2);
+        executor.execute(newReader3);
+        executor.execute(newReader4);
+        executor.execute(newReader5);
+        executor.execute(newReader6);
         executor.shutdown();
     }
 }

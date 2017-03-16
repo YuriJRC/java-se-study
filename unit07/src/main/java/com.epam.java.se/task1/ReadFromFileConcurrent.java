@@ -4,31 +4,31 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Мария on 15.03.2017.
  */
-public class ReadFromFile extends Thread {
+public class ReadFromFileConcurrent extends Thread {
     private ArrayList<Account> accounts = new ArrayList<>();
     private String filePath;
     private boolean run;
+    private static Lock lock = new ReentrantLock();
 
-    public ReadFromFile(String filePath) {
+    public ReadFromFileConcurrent(String filePath) {
         this.filePath = filePath;
         run = true;
     }
 
     public void run() {
-        try {
-            while (run) {
-                System.out.println(getName() + "is reading\n");
-                Thread.sleep(500);
-                getListOfAccounts();
-                showAccounts();
-                stopThread();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (run) {
+            System.out.println(getName() + "is reading\n");
+            lock.lock();
+            getListOfAccounts();
+            showAccounts();
+            stopThread();
+            lock.unlock();
         }
     }
 
@@ -42,11 +42,9 @@ public class ReadFromFile extends Thread {
             throw new NullPointerException("Empty data");
         }
         try {
-            synchronized (accounts) {
-                ObjectInputStream objectReader = new ObjectInputStream(new FileInputStream(filePath));
-                accounts = (ArrayList<Account>) objectReader.readObject();
-                objectReader.close();
-            }
+            ObjectInputStream objectReader = new ObjectInputStream(new FileInputStream(filePath));
+            accounts = (ArrayList<Account>) objectReader.readObject();
+            objectReader.close();
         } catch (IOException e) {
             System.out.println("File not found");
         } catch (ClassNotFoundException e) {
