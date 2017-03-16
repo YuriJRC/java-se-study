@@ -8,10 +8,10 @@ import java.util.ArrayList;
 /**
  * Created by Мария on 15.03.2017.
  */
-public class WriteToFIle {
+public class WriteToFile {
     private ArrayList <Account> accounts;
 
-    public WriteToFIle (){
+    public WriteToFile(){
         accounts = new ArrayList<>();
     }
 

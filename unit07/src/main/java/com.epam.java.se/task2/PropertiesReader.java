@@ -10,12 +10,24 @@ public class PropertiesReader extends Thread {
     private ResourceBundle bundle;
     private StringBuilder builder;
     private boolean run;
+    private String resource;
+    private String locale;
+    private String key;
 
-    public PropertiesReader(){
+    public PropertiesReader(String resource, String locale){
         run = true;
+        this.resource=resource;
+        this.locale=locale;
     }
 
-    public String getProperties(String resource, String locale) throws MissingResourceException {
+    public PropertiesReader(String resource, String locale, String key){
+        run = true;
+        this.resource=resource;
+        this.locale=locale;
+        this.key=key;
+    }
+
+    public String getProperties() throws MissingResourceException {
         builder = new StringBuilder();
         if (resource == null || locale == null) {
             throw new NullPointerException("Empty data");
@@ -33,7 +45,7 @@ public class PropertiesReader extends Thread {
         return builder.toString();
     }
 
-    public String getPropertyByKey(String resource, String locale, String key) throws MissingResourceException {
+    public String getPropertyByKey() throws MissingResourceException {
         builder = new StringBuilder();
         if (key == null || locale == null || resource == null) {
             throw new NullPointerException("Empty data");
@@ -49,24 +61,29 @@ public class PropertiesReader extends Thread {
         return builder.toString();
     }
     public void showResult(){
-        System.out.println("Thread " + getName() + "\n" + builder + "\n");
+        if (builder==null){
+            throw new NullPointerException("Empty data");
+        }
+        System.out.println(getName() + "\n" + builder);
     }
 
     public void run() {
         try {
             while (run) {
-                System.out.println("Thread " + getName() + "is reading\n");
+                System.out.println(getName() + "is reading\n");
                 Thread.sleep(500);
+                getProperties();
                 interrupt();
             }
         } catch (InterruptedException e){
+            showResult();
             stopThread();
         }
     }
 
     public void stopThread() {
         run = false;
-        System.out.println("Thread " + getName() + "completed reading\n");
+        System.out.println(getName() + "completed reading\n");
     }
 
 }

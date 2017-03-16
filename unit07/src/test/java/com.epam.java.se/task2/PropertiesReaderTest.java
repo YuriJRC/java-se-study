@@ -11,18 +11,22 @@ import static org.junit.Assert.assertEquals;
  * Created by Мария on 15.03.2017.
  */
 public class PropertiesReaderTest {
-    private PropertiesReader propReader;
+    private PropertiesReader propReaderENG;
+    private PropertiesReader propReaderRUS;
 
     @Before
-    public void init()throws Exception {
-        propReader = new PropertiesReader();
+    public void init() throws Exception {
+        propReaderENG = new PropertiesReader("test_en_US", "en_US", "3");
+        propReaderRUS = new PropertiesReader("test_ru", "ru", "2");
     }
 
     @Test
     public void nullPointerExceptionCaughtTest() throws Exception {
         try {
-            propReader.getProperties(null, null);
-            propReader.getPropertyByKey("test_ru", "ru", null);
+            propReaderENG = new PropertiesReader(null, null, null);
+            propReaderENG.getProperties();
+            propReaderENG.getPropertyByKey();
+            propReaderENG.showResult();
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(), "Empty data");
         }
@@ -31,7 +35,8 @@ public class PropertiesReaderTest {
     @Test
     public void MissingResourceTest() throws Exception {
         try {
-            propReader.getProperties("d", "en_US");
+            propReaderRUS = new PropertiesReader("d", "en_US");
+            propReaderRUS.getProperties();
         } catch (MissingResourceException e) {
             assertEquals(e.getMessage(), "Properties file not found");
         }
@@ -40,7 +45,8 @@ public class PropertiesReaderTest {
     @Test
     public void MissingKeyTest() throws Exception {
         try {
-            propReader.getPropertyByKey("test_en_US", "en_US", "fake");
+            propReaderENG = new PropertiesReader("test_en_US", "en_US", "fake");
+            propReaderENG.getPropertyByKey();
         } catch (MissingResourceException e) {
             assertEquals(e.getMessage(), "Properties file or key not found");
         }
@@ -48,13 +54,13 @@ public class PropertiesReaderTest {
 
     @Test
     public void propReaderTestRU() throws Exception {
-        System.out.println(propReader.getProperties("test_ru", "ru"));
-        System.out.println(propReader.getPropertyByKey("test_ru", "ru", "2"));
+        propReaderRUS.getProperties();
+        propReaderRUS.showResult();
     }
 
     @Test
     public void propReaderTestEN() throws Exception {
-        System.out.println(propReader.getProperties("test_en_US", "en_US"));
-        System.out.println(propReader.getPropertyByKey("test_en_US", "en_US", "3"));
+        propReaderENG.getProperties();
+        propReaderENG.showResult();
     }
 }
