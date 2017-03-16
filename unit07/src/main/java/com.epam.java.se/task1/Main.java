@@ -46,7 +46,7 @@ public class Main {
         reader5.start();
         reader6.start();
 
-        Thread.sleep(1000);
+        Thread.sleep(100);
 
         reader.join();
         reader2.join();
@@ -55,14 +55,16 @@ public class Main {
         reader5.join();
         reader6.join();
 
-
-        ExecutorService executor = Executors.newFixedThreadPool(6);
+        ExecutorService executor = Executors.newCachedThreadPool();
         executor.execute(reader);
         executor.execute(reader2);
         executor.execute(reader3);
         executor.execute(reader4);
         executor.execute(reader5);
         executor.execute(reader6);
+
+        Thread.sleep(100);
+
         executor.shutdown();
     }
 }

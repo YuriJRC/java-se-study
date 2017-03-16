@@ -5,7 +5,7 @@ import javax.naming.OperationNotSupportedException;
 /**
  * Created by Мария on 15.03.2017.
  */
-public class OperationsBetweenAccounts extends Thread {
+public class OperationsBetweenAccounts {
 
 
     public void transferMoney(Account fromOne, Account toOther, int amount) throws OperationNotSupportedException {
