@@ -24,11 +24,11 @@ public class ReadFromFile extends Thread {
                 System.out.println(getName() + "is reading\n");
                 Thread.sleep(100);
                 getListOfAccounts();
-                interrupt();
+                showAccounts();
+                stopThread();
             }
         } catch (InterruptedException e) {
-            stopThread();
-            showAccounts();
+            e.printStackTrace();
         }
     }
 

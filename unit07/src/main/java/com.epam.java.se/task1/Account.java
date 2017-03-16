@@ -6,13 +6,16 @@ import java.util.ArrayList;
 /**
  * Created by Мария on 15.03.2017.
  */
-public class Account implements Serializable{
+public class Account implements Serializable {
+    private int id;
+    private static int staticId=1;
     private static final long serialVersionUID = 1L;
     private int balance;
-    private ArrayList <Integer> balanceStatistics;
+    private ArrayList<Integer> balanceStatistics;
 
     public Account(int balance) {
-        if (balance<0){
+        id=staticId++;
+        if (balance < 0) {
             throw new NullPointerException("balance cant' be negative");
         }
         this.balance = balance;
@@ -55,8 +58,7 @@ public class Account implements Serializable{
 
     @Override
     public String toString() {
-        return "Account{" +
-                "balance=" + balance +
-                '}';
+        String format = "Account %d {balance= %d} Statistics: "+ balanceStatistics;
+        return String.format(format, id, balance);
     }
 }
