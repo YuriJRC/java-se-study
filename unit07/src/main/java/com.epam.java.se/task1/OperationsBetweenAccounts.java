@@ -8,15 +8,15 @@ import javax.naming.OperationNotSupportedException;
 public class OperationsBetweenAccounts {
 
 
-    public void transferMoney(Account fromOne, Account toOther, int amount) throws OperationNotSupportedException {
+    public void transferMoney(Account fromOne, Account toOther, int amount) throws IllegalArgumentException {
         if (fromOne == null || toOther == null) {
             throw new NullPointerException("Empty data");
         }
         if (amount < 0) {
-            throw new OperationNotSupportedException("Amount can't be negative");
+            throw new IllegalArgumentException("Amount can't be negative");
         }
         if (fromOne.equals(toOther)) {
-            throw new OperationNotSupportedException("Can't add money to your own account");
+            throw new IllegalArgumentException("Can't add money to your own account");
         }
         int balanceWithdraw = toOther.getBalance();
         int y = balanceWithdraw - amount;
@@ -29,7 +29,7 @@ public class OperationsBetweenAccounts {
             fromOne.setBalance(x);
             fromOne.setStatistics(x);
         } else {
-            throw new OperationNotSupportedException("Balance can't be <0");
+            throw new IllegalArgumentException("Balance can't be <0");
         }
     }
 }

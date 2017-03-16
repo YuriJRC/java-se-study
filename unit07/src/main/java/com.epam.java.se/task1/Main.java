@@ -21,7 +21,7 @@ public class Main {
             op.transferMoney(account2, account1, 600);
             op.transferMoney(account2, account1, 100);
 
-        } catch (OperationNotSupportedException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         System.out.println(account1.getBalance());

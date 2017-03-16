@@ -16,7 +16,7 @@ public class Account implements Serializable {
     public Account(int balance) {
         id=staticId++;
         if (balance < 0) {
-            throw new NullPointerException("balance cant' be negative");
+            throw new IllegalArgumentException("balance cant' be negative");
         }
         this.balance = balance;
         balanceStatistics = new ArrayList<>();
@@ -27,6 +27,9 @@ public class Account implements Serializable {
     }
 
     public void setBalance(int balance) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("balance cant' be negative");
+        }
         this.balance = balance;
     }
 
@@ -35,6 +38,9 @@ public class Account implements Serializable {
     }
 
     public void setStatistics(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount cant' be negative");
+        }
         balanceStatistics.add(amount);
     }
 

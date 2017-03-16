@@ -14,6 +14,9 @@ public class ReadFromFileSync extends Thread {
     private boolean run;
 
     public ReadFromFileSync(String filePath) {
+        if (filePath == null) {
+            throw new NullPointerException("Empty data");
+        }
         accounts = new ArrayList<>();
         this.filePath = filePath;
         run = true;

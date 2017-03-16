@@ -17,6 +17,9 @@ public class ReadFromFileConcurrent extends Thread {
     private static Lock lock = new ReentrantLock();
 
     public ReadFromFileConcurrent(String filePath) {
+        if (filePath == null) {
+            throw new NullPointerException("Empty data");
+        }
         accounts = new ArrayList<>();
         this.filePath = filePath;
         run = true;
