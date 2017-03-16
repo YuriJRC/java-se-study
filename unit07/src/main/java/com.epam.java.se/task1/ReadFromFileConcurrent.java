@@ -11,19 +11,20 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by Мария on 15.03.2017.
  */
 public class ReadFromFileConcurrent extends Thread {
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<Account> accounts;
     private String filePath;
     private boolean run;
     private static Lock lock = new ReentrantLock();
 
     public ReadFromFileConcurrent(String filePath) {
+        accounts = new ArrayList<>();
         this.filePath = filePath;
         run = true;
     }
 
     public void run() {
         while (run) {
-            System.out.println(getName() + "is reading\n");
+            System.out.println(getName() + " is reading\n");
             lock.lock();
             getListOfAccounts();
             showAccounts();

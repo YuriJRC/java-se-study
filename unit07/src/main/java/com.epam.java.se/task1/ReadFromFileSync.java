@@ -9,11 +9,12 @@ import java.util.ArrayList;
  * Created by Мария on 16.03.2017.
  */
 public class ReadFromFileSync extends Thread {
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<Account> accounts;
     private String filePath;
     private boolean run;
 
     public ReadFromFileSync(String filePath) {
+        accounts = new ArrayList<>();
         this.filePath = filePath;
         run = true;
     }
@@ -21,7 +22,7 @@ public class ReadFromFileSync extends Thread {
     public void run() {
         try {
             while (run) {
-                System.out.println(getName() + "is reading\n");
+                System.out.println(getName() + " is reading\n");
                 getListOfAccounts();
                 Thread.sleep(100);
                 interrupt();
