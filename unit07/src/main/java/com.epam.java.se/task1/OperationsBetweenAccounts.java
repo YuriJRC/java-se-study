@@ -18,16 +18,16 @@ public class OperationsBetweenAccounts {
         if (fromOne.equals(toOther)) {
             throw new IllegalArgumentException("Can't add money to your own account");
         }
-        int balanceWithdraw = toOther.getBalance();
+        int balanceWithdraw = fromOne.getBalance();
         int y = balanceWithdraw - amount;
         if (y >= 0) {
-            toOther.setBalance(y);
-            toOther.setStatistics(y);
+            fromOne.setBalance(y);
+            fromOne.setStatistics(y);
 
-            int balanceDeposit = fromOne.getBalance();
+            int balanceDeposit = toOther.getBalance();
             int x = balanceDeposit + amount;
-            fromOne.setBalance(x);
-            fromOne.setStatistics(x);
+            toOther.setBalance(x);
+            toOther.setStatistics(x);
         } else {
             throw new IllegalArgumentException("Balance can't be <0");
         }

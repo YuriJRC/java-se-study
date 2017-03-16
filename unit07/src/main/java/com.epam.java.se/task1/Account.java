@@ -33,7 +33,10 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public ArrayList<Integer> getBalanceStatistics() {
+    public ArrayList<Integer> getStatistics() {
+        if (balanceStatistics==null){
+            throw new NullPointerException("Empty data");
+        }
         return balanceStatistics;
     }
 

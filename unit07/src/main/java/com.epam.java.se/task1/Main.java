@@ -1,6 +1,5 @@
 package com.epam.java.se.task1;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,8 +25,8 @@ public class Main {
         }
         System.out.println(account1.getBalance());
         System.out.println(account2.getBalance());
-        System.out.println(account1.getBalanceStatistics());
-        System.out.println(account2.getBalanceStatistics());
+        System.out.println(account1.getStatistics());
+        System.out.println(account2.getStatistics());
 
         WriteToFile writer = new WriteToFile();
         writer.writeAccounts("ACCOUNTS.TXT", account1, account2);
