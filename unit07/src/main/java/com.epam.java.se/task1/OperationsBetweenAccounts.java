@@ -6,11 +6,9 @@ import javax.naming.OperationNotSupportedException;
  * Created by Мария on 15.03.2017.
  */
 public class OperationsBetweenAccounts extends Thread {
-//        private Account fromOne;
-//        private Account toOther;
 
 
-    public synchronized void transferMoney(Account fromOne, Account toOther, int amount) throws OperationNotSupportedException {
+    public void transferMoney(Account fromOne, Account toOther, int amount) throws OperationNotSupportedException {
         if (fromOne == null || toOther == null) {
             throw new NullPointerException("Empty data");
         }
