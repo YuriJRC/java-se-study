@@ -1,7 +1,5 @@
 package com.epam.java.se.task1;
 
-import javax.naming.OperationNotSupportedException;
-
 /**
  * Created by Мария on 15.03.2017.
  */

@@ -3,6 +3,9 @@ package com.epam.java.se.task1;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,12 +15,14 @@ public class AccountOperationsTest {
     private OperationsBetweenAccounts op;
     private Account account1;
     private Account account2;
+    private WriteToFile writer;
 
     @Before
     public void init()throws Exception{
         op = new OperationsBetweenAccounts();
         account1 = new Account(500);
         account2 = new Account(1000);
+        writer = new WriteToFile();
     }
 
     @Test
@@ -32,6 +37,7 @@ public class AccountOperationsTest {
 
         Account account2 = new Account(500);
         op.transferMoney(account, account2, -200);
+        op.transferMoney(account, account2, 6000);
     }
 
     @Test
@@ -42,8 +48,7 @@ public class AccountOperationsTest {
         ReadFromFileSync sync = new ReadFromFileSync(null);
         ReadFromFileConcurrent concurrent = new ReadFromFileConcurrent(null);
 
-        WriteToFile write = new WriteToFile();
-        write.writeAccounts(null, null);
+        writer.writeAccounts(null, null);
     }
 
     @Test
@@ -53,6 +58,20 @@ public class AccountOperationsTest {
         op.transferMoney(account1, account2, 100);
         assertTrue(account1.getStatistics().get(0)==400);
     }
+    @Test
+    public void OperationsTest()throws Exception{
+        op.transferMoney(account1, account2, 300);
 
+        assertTrue(account1.getBalance()==200);
+        assertTrue(account2.getBalance()==1300);
+    }
+    @Test
+    public void WriteToFileTest()throws Exception{
+        File file = new File("ACCOUNTS2.TXT");
+        WriteToFile writer = new WriteToFile();
+        writer.writeAccounts("ACCOUNTS2.TXT", account1, account2);
+
+        assertTrue(file.exists() && file.length()>20);
+    }
 }
 
