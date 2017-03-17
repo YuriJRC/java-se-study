@@ -67,7 +67,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        String format = "Account %d {balance= %d} Statistics: "+ balanceStatistics;
+        String format = "Account %d {balance = %d} Statistics: "+ balanceStatistics;
         return String.format(format, id, balance);
     }
 }
