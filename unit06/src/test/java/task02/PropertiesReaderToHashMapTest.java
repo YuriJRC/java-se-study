@@ -8,6 +8,7 @@ import java.util.HashMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Мария on 22.03.2017.
@@ -54,10 +55,15 @@ public class PropertiesReaderToHashMapTest {
 
     @Test
     public void addKeyThatAlreadyExistsTest(){
-        readerToHashMap.getPropertiesToHashMap("test", "");
-        readerToHashMap.getPropertiesToHashMap("test", "test_ru");
+        HashMap <String, String> mapBeforeWeChangeFirstKey = readerToHashMap.getPropertiesToHashMap("test", "");
 
-//        assertThat();
+        assertThat(mapBeforeWeChangeFirstKey.get("1"), is("aaa"));
+
+        HashMap <String, String> mapAfterWeChangeFirstKey =readerToHashMap.getPropertiesToHashMap("test", "test_ru");
+
+        assertThat(mapAfterWeChangeFirstKey.get("1"), is("ÿÿÿÿ"));
+
+
     }
 
     @Test
