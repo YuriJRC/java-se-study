@@ -38,5 +38,4 @@ public class PropertiesReader {
             System.out.println("Properties file or key not found");
         }
     }
-
 }

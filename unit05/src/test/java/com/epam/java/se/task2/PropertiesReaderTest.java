@@ -28,7 +28,7 @@ public class PropertiesReaderTest {
     }
 
     @Test
-    public void MissingResourceTest() throws Exception {
+    public void MissingResourceExceptionCaughtTest() throws Exception {
         try {
             propReader.showProperties("d", "en_US");
         } catch (MissingResourceException e) {
