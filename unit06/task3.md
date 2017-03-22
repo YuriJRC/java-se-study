@@ -17,4 +17,4 @@ class HeadDoctor extends Doctor{}
 |  List<MedicalStaff> list2 = new ArrayList<Doctor>(); |  [] | [x]  | Arraylist содержащий объекты Doctor не может имплементировать интерфейс List  параметризованный MedicalStaff. Валидной была бы запись List<? extends MedicalStaff> list4 = new ArrayList<Doctor>();|
 | List<Doctor> list3 = new ArrayList<MedicalStaff>();  |[]   | [x]  | Arraylist содержащий объекты MedicalStaff не может имплементировать интерфейс List параметризованный Doctor. ? extends тут не сработает так как Doctor - наследник MedicalStaff.
 |  List<Object> list4 = new ArrayList<Doctor>(); |  [] |  [x] |  Arraylist содержащий объекты Doctor не может имплементировать интерфейс List параметризованный Object. Валидной была бы запись  List<? extends Object> list4 = new ArrayList<Doctor>(); |
-|  List<Object> list5 = new ArrayList<Object>(); |  [] | []  |Arraylist содержащий объекты Object имплементирует интерфейс List параметризованный тем же типом.   |
+|  List<Object> list5 = new ArrayList<Object>(); |  [x] | []  |Arraylist содержащий объекты Object имплементирует интерфейс List параметризованный тем же типом.   |
