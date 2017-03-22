@@ -21,7 +21,7 @@ public class PropertiesReaderToHashMap {
             ResourceBundle bundle = ResourceBundle.getBundle(resource, loc);
             Set<String> bundleKeySet = bundle.keySet();
             for (String key : bundleKeySet) {
-                if (key==null){
+                if (key.equals("null")){
                     throw new NullPointerException("Key can't be null");
                 }
                 propertiesMap.put(key, bundle.getString(key));

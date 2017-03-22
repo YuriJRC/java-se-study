@@ -57,14 +57,16 @@ public class PropertiesReaderToHashMapTest {
         assertThat(valueByKey, is("Key not found"));
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void testThatWeCannotAddNullAsKey() throws Exception {
-
+        readerToHashMap.getPropertiesToHashMap("test_en_US_with_null_key", "en_US");
     }
 
     @Test
-    public void testThatWeCanGetKeyByValue() throws Exception {
+    public void testThatWeCanGetValueByKey() throws Exception {
+        readerToHashMap.getPropertiesToHashMap("test_en_US", "en_US");
 
+        assertThat(readerToHashMap.getValueByKey("2"), is("bbbbbb"));
     }
 
     @Test
