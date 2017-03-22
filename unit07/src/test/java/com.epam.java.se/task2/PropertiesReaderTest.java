@@ -33,7 +33,7 @@ public class PropertiesReaderTest {
     }
 
     @Test
-    public void MissingResourceTest() throws Exception {
+    public void MissingResourceExceptionCaughtTest() throws Exception {
         try {
             propReaderRUS = new PropertiesReader("d", "en_US");
             propReaderRUS.getProperties();
