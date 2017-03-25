@@ -36,6 +36,12 @@ public class CustomHashMapTest {
     }
 
     @Test
+    public void testThatIfWeAddDataMapIsNotEmpty() {
+        m.put(new Integer(3), "abc");
+        assertThat(m.isEmpty(), is(false));
+    }
+
+    @Test
     public void testThatOnNewMapContainKeyMethodReturnFalseForAnyObject() {
         assertThat(m.containsKey(new Integer(1)), is(false));
     }
@@ -60,8 +66,9 @@ public class CustomHashMapTest {
     }
 
     @Test
-    public void testThatIfCapacityIsNotEnoughItWillIncrease() {
-
+    public void testThatIfThereIsNoKeyReturnFalse() {
+        m.put(new Integer(3), "abc");
+        assertThat(m.containsKey(20), is(false));
     }
 
     @Test(expected = NullPointerException.class)
@@ -70,11 +77,25 @@ public class CustomHashMapTest {
     }
 
     @Test
+    public void testThatNewMapHasZeroSize() {
+        assertThat(m.size(), is(0));
+    }
+
+    @Test
+    public void testIfWeAddDataSizeWillIncrease() {
+        m.put(new Integer(3), "abc");
+        m.put(new Integer(5), "abc");
+        assertThat(m.size(), is(2));
+    }
+
+
+    @Test
     public void testThatWeCanPutNullValue() {
     }
 
     @Test(expected = OutOfMemoryError.class)
     public void testThatMapHaveInfiniteCapacity() {
+
     }
 
     @Test

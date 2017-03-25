@@ -1,4 +1,5 @@
 package com.epam.java.se;
+
 import java.util.*;
 
 /**
@@ -10,25 +11,33 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     private CustomEntry<K, V>[] buckets = new CustomEntry[DEFAULT_CAPACITY];
 
-    Map m = new HashMap();
-
     @Override
     public int size() {
-        return 0;
+        int count = 0;
+        for (CustomEntry<K, V> n : buckets) {
+            if (n != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
     public boolean isEmpty() {
+        for (CustomEntry<K, V> n : buckets) {
+            if (n != null) {
+                return false;
+            }
+        }
         return true;
     }
 
     @Override
     public boolean containsKey(Object key) {
         Objects.requireNonNull(key);
-
-        int hash = hashCode((K)key);
+        int hash = hashCode((K) key);
         CustomEntry<K, V> bucket = buckets[hash];
-        if(bucket != null){
+        if (bucket != null) {
             return bucket.key.equals(key);
         }
         return false;
@@ -79,7 +88,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
-    private int hashCode(K key){
+    private int hashCode(K key) {
         return Math.abs(key.hashCode()) % DEFAULT_CAPACITY;
     }
 
