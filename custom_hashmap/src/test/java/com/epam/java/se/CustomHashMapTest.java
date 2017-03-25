@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 public class CustomHashMapTest {
 
     private Map<Integer, String> m;
+    private Map<String, String> m2;
 
     @Before
     public void init() {
@@ -90,14 +91,6 @@ public class CustomHashMapTest {
         assertThat(m.size(), is(2));
     }
 
-
-    @Test
-    public void testThatWeCanPutNullValue() {
-        m.put(new Integer(5), null);
-
-        assertThat((m.containsValue(null)), is(true));
-    }
-
     @Test
     public void testThatMapCanPutPairWithKeyThatAlreadyPresented() {
         m.put(new Integer(5), "dwd");
@@ -111,32 +104,58 @@ public class CustomHashMapTest {
     }
 
     @Test
-    public void testThatMapCanContainsKeysWithSameHashCode() {
+    public void testThatGetMethodCanReturnValueByKey() {
+        m.put(new Integer(5), "aaa");
+
+        assertThat(m.get(5), is("aaa"));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testThatContainsKeyMethodThrowsExceptionOnNullKey() {
+    public void testThatGetMethodThrowsExceptionOnNullKey() {
+        assertThat(m.get(null), is(false));
     }
 
-    @Test(expected = ClassCastException.class)
-    public void testThatContainsKeyMethodThrowsExceptionOnWrongKeyClass() {
+
+    @Test(expected = NullPointerException.class)
+    public void testThatContainsKeyMethodThrowsExceptionOnNullKey() {
+        assertThat(m.containsKey(null), is(false));
+    }
+
+    @Test
+    public void testThatContainsKeyMethodReturnsFalseOnWrongKeyClass() {
+        m.put(1, "ggg");
+        assertThat(m.containsKey("zzz"), is(false));
     }
 
     @Test
     public void testContainsValueMethodWorksProperlyOn() {
+        m.put(new Integer(10), "zzz");
+
+        assertThat((m.containsValue("zzz")), is(true));
     }
 
     @Test
     public void testContainsValueMethodWorksProperlyOnNullInputValue() {
-    }
+        m.put(new Integer(5), null);
 
-    @Test(expected = ClassCastException.class)
-    public void testValueContainsMethodThrowsExceptionOnWrongInputValueClass() {
+        assertThat((m.containsValue(null)), is(true));
     }
 
     @Test
-    public void testThatMapCalculateItsSizeProperly() {
+    public void testValueContainsMethodReturnsFalseOnWrongInputValueClass() {
+        m.put(100, "ffff");
+        assertThat(m.containsValue(120), is(false));
     }
 
+
+    @Test
+    public void testThatWeCanDeleteByKey() {
+
+    }
+
+    @Test
+    public void testThatWeCanClearEntireMap() {
+
+    }
 
 }
