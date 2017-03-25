@@ -50,10 +50,9 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             if (buckets[i] != null) {
                 CustomEntry<K, V> currentBucket = buckets[i];
                 while (currentBucket != null) {
-                    if (value==null && currentBucket.getValue()==null){
+                    if (value == null && currentBucket.getValue() == null) {
                         return true;
-                    }
-                    else if (currentBucket.getValue().equals(value)) {
+                    } else if (currentBucket.getValue().equals(value)) {
                         return true;
                     }
                     currentBucket = currentBucket.next();
@@ -70,8 +69,8 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         int hash = hashCode((K) key);
         CustomEntry<K, V> currentEntry = buckets[hash];
 
-        while(currentEntry != null){
-            if(currentEntry.getKey().equals(key)){
+        while (currentEntry != null) {
+            if (currentEntry.getKey().equals(key)) {
                 return currentEntry.getValue();
             }
             currentEntry = currentEntry.next();
@@ -107,17 +106,41 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object key) {
+        Objects.requireNonNull(key);
+
+        int hash = hashCode((K) key);
+
+        CustomEntry<K, V> previousEntry = null;
+        CustomEntry<K, V> currentEntry = buckets[hash];
+
+        while (currentEntry != null) {
+            if (currentEntry.getKey().equals(key)) {
+                if (previousEntry == null) {
+                    buckets[hash] = buckets[hash].next();
+                } else {
+                    previousEntry.next().setValue(currentEntry.next().getValue());
+                }
+            }
+            previousEntry = currentEntry;
+            currentEntry = currentEntry.next();
+
+
+        }
         return null;
-    }
-
-    @Override
-    public void putAll(Map<? extends K, ? extends V> m) {
-
     }
 
     @Override
     public void clear() {
 
+    }
+
+    private int hashCode(K key) {
+        return Math.abs(key.hashCode()) % DEFAULT_CAPACITY;
+    }
+
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
     }
 
     @Override
@@ -128,10 +151,6 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     @Override
     public Collection<V> values() {
         return null;
-    }
-
-    private int hashCode(K key) {
-        return Math.abs(key.hashCode()) % DEFAULT_CAPACITY;
     }
 
     @Override

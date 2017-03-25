@@ -150,7 +150,19 @@ public class CustomHashMapTest {
 
     @Test
     public void testThatWeCanDeleteByKey() {
+        m.put(100, "ffff");
+        m.put(100, "ffff");
+        m.put(25, "aaaa");
+        m.remove(100);
+        m.remove(25);
+        assertThat(m.containsKey(100), is(false));
+        assertThat(m.containsKey(25), is(false));
+    }
 
+    @Test
+    public void testRemoveUnexistentKeyReturnsNull() {
+        m.put(100, "ffff");
+        assertEquals(m.remove(10), null);
     }
 
     @Test
