@@ -50,7 +50,10 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             if (buckets[i] != null) {
                 CustomEntry<K, V> currentBucket = buckets[i];
                 while (currentBucket != null) {
-                    if (currentBucket.getValue().equals(value)) {
+                    if (value==null && currentBucket.getValue()==null){
+                        return true;
+                    }
+                    else if (currentBucket.getValue().equals(value)) {
                         return true;
                     }
                     currentBucket = currentBucket.next();
