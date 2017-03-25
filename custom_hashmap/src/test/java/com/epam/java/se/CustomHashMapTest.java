@@ -167,7 +167,17 @@ public class CustomHashMapTest {
 
     @Test
     public void testThatWeCanClearEntireMap() {
+        m.put(14, "ffff");
+        m.put(100, "ffff");
+        m.put(2, "aaaa");
+        m.put(234, "aaaa");
+        m.put(232, "aaaa");
+        m.put(4, "aaaa");
+        m.put(423423, "aaaa");
 
+        m.clear();
+
+        assertThat(m.size(), is(0));
     }
 
 }
