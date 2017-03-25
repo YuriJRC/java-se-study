@@ -35,6 +35,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     @Override
     public boolean containsKey(Object key) {
         Objects.requireNonNull(key);
+
         int hash = hashCode((K) key);
         CustomEntry<K, V> bucket = buckets[hash];
         if (bucket != null) {
@@ -45,6 +46,17 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsValue(Object value) {
+        for (int i = 0; i < buckets.length; i++) {
+            if (buckets[i] != null) {
+                CustomEntry<K, V> currentBucket = buckets[i];
+                while (currentBucket != null) {
+                    if (currentBucket.getValue().equals(value)) {
+                        return true;
+                    }
+                    currentBucket = currentBucket.next();
+                }
+            }
+        }
         return false;
     }
 
@@ -56,11 +68,27 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     @Override
     public V put(K key, V value) {
         Objects.requireNonNull(key);
+
         int hash = hashCode(key);
-        buckets[hash] = new CustomEntry<>(key, value);
+        CustomEntry<K, V> currentEntry = buckets[hash];
 
+        if (currentEntry != null) {
+            boolean finished = false;
 
-        return null; //TODO implement return prev value
+            while (!finished) {
+                if (key.equals(currentEntry.getKey())) {
+                    currentEntry.setValue(value);
+                    finished = true;
+                } else if (currentEntry.next() == null) {
+                    currentEntry.setNext(new CustomEntry<>(key, value));
+                    finished = true;
+                }
+                currentEntry = currentEntry.next();
+            }
+        } else {
+            buckets[hash] = new CustomEntry<>(key, value);
+        }
+        return null;
     }
 
     @Override
@@ -97,6 +125,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+
     private class CustomEntry<K, V> implements Iterator<CustomEntry<K, V>> {
 
         private final K key;
@@ -110,6 +139,18 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
         public boolean hasNext() {
             return this.next != null;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+
+        public V getValue() {
+            return value;
         }
 
         public CustomEntry<K, V> next() {

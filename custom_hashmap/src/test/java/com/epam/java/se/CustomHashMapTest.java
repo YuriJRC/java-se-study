@@ -9,6 +9,7 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Мария on 25.03.2017.
@@ -85,21 +86,28 @@ public class CustomHashMapTest {
     public void testIfWeAddDataSizeWillIncrease() {
         m.put(new Integer(3), "abc");
         m.put(new Integer(5), "abc");
+
         assertThat(m.size(), is(2));
     }
 
 
     @Test
     public void testThatWeCanPutNullValue() {
-    }
+        m.put(new Integer(5), null);
 
-    @Test(expected = OutOfMemoryError.class)
-    public void testThatMapHaveInfiniteCapacity() {
-
+        assertThat((m.containsValue(null)), is(true));
     }
 
     @Test
     public void testThatMapCanPutPairWithKeyThatAlreadyPresented() {
+        m.put(new Integer(5), "dwd");
+        m.put(new Integer(5), "4r");
+        m.put(new Integer(4), "dwd");
+        m.put(new Integer(5), "4r");
+
+        assertThat(m.containsValue("dwd"), is(true));
+        assertThat(m.containsValue("4r"), is(true));
+
     }
 
     @Test
