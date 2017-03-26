@@ -3,6 +3,11 @@ package com.epam.java.se;
 import java.util.*;
 
 /**
+ * Class represents an implementation of Custom HashMap with
+ * limited size. A map cannot contain duplicate keys. Keys are not
+ * sorted. Values are put in this map by hash-function. If collision
+ * occurred key-value pairs are lined up in the chain in each bucket.
+ *
  * Created by Мария on 25.03.2017.
  */
 public class CustomHashMap<K, V> implements Map<K, V> {
@@ -11,6 +16,9 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     private CustomEntry<K, V>[] buckets = new CustomEntry[DEFAULT_CAPACITY];
 
+    /**
+     * @return the number of key-value mappings in this map
+     */
     @Override
     public int size() {
         int count = 0;
@@ -22,6 +30,9 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return count;
     }
 
+    /**
+     * @return true if this map contains no key-value mappings
+     */
     @Override
     public boolean isEmpty() {
         for (CustomEntry<K, V> n : buckets) {
@@ -32,6 +43,12 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return true;
     }
 
+    /**
+     * @param key key whose presence in this map is to be tested
+     * @return true if this map contains a mapping for
+     * the specified key. Key location is calculated by hash-function.
+     * @throws NullPointerException if the specified key is null.
+     */
     @Override
     public boolean containsKey(Object key) {
         Objects.requireNonNull(key);
@@ -44,6 +61,11 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    /**
+     * @param value value whose presence in this map is to be tested,
+     * allows null values. Searches value even if collisions occurred.
+     * @return true specified value is presented in one or more keys
+     */
     @Override
     public boolean containsValue(Object value) {
         for (int i = 0; i < buckets.length; i++) {
@@ -62,6 +84,13 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    /**
+     *
+     * @param key the key whose associated value is to be returned
+     * @return value to which the specified key is or null
+     * if this map contains no mapping for the key.
+     * @throws NullPointerException if the specified key is null.
+     */
     @Override
     public V get(Object key) {
         Objects.requireNonNull(key);
@@ -78,6 +107,17 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+    /**
+     * Put key-value pairs in this map. If collision occurred
+     * key-value pairs are lined up in the chain in each bucket.
+     * Allows null values. If the map previously contained a mapping for
+     * the key, the old value is replaced by the specified value.
+     * @param key key with which the specified value is to be associated
+     * @param value value to be associated with the specified key
+     * @return the previous value associated with key, or
+     * null if there was no mapping for key.
+     * @throws NullPointerException if the specified key is null.
+     */
     @Override
     public V put(K key, V value) {
         Objects.requireNonNull(key);
@@ -104,6 +144,14 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+    /**
+     * Removes key-value pairs in this map. If there are any collisions
+     * target key-values will be removed and other pairs will be rebuild.
+     * @param key key whose mapping is to be removed from the map
+     * @return the previous value associated with key, or
+     * null if there was no mapping for key.
+     * @throws NullPointerException if the specified key is null.
+     */
     @Override
     public V remove(Object key) {
         Objects.requireNonNull(key);
@@ -124,11 +172,13 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             previousEntry = currentEntry;
             currentEntry = currentEntry.next();
 
-
         }
         return null;
     }
 
+    /**
+     * Clears entire map.
+     */
     @Override
     public void clear() {
         for (int i = 0; i < buckets.length; i++) {
@@ -138,6 +188,11 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         }
     }
 
+    /**
+     * @param key to calculate by hash-function
+     * position of key in bucket.
+     * @return position in bucket.
+     */
     private int hashCode(K key) {
         return Math.abs(key.hashCode()) % DEFAULT_CAPACITY;
     }
@@ -163,6 +218,12 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     }
 
 
+    /**
+     * Inner class that represents single entry of key-value pair in
+     * array of buckets.
+     * @param <K> key
+     * @param <V> value
+     */
     private class CustomEntry<K, V> implements Iterator<CustomEntry<K, V>> {
 
         private final K key;
