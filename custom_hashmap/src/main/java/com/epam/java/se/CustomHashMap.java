@@ -66,8 +66,10 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             if (buckets[i] != null) {
                 CustomEntry<K, V> currentBucket = buckets[i];
                 while (currentBucket != null) {
-                    if (value == null && currentBucket.getValue() == null) {
-                        return true;
+                    if (currentBucket.getValue() == null) {
+                        if (value == null) {
+                            return true;
+                        }
                     } else if (currentBucket.getValue().equals(value)) {
                         return true;
                     }
@@ -180,11 +182,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     @Override
     public void clear() {
         size = 0;
-        for (int i = 0; i < buckets.length; i++) {
-            if (buckets[i] != null) {
-                buckets[i] = null;
-            }
-        }
+        buckets = new CustomEntry[DEFAULT_CAPACITY];
     }
 
     /**

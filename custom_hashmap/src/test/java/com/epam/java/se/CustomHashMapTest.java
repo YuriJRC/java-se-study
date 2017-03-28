@@ -201,7 +201,6 @@ public class CustomHashMapTest {
         assertThat(m.containsValue(120), is(false));
     }
 
-
     @Test
     public void testThatWeCanDeleteByKey() {
         m.put(100, "ffff");
