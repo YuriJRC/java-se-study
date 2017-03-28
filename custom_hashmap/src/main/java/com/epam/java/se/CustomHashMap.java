@@ -7,7 +7,7 @@ import java.util.*;
  * limited size. A map cannot contain duplicate keys. Keys are not
  * sorted. Values are put in this map by hash-function. If collision
  * occurred key-value pairs are lined up in the chain in each bucket.
- *
+ * <p>
  * Created by Мария on 25.03.2017.
  */
 public class CustomHashMap<K, V> implements Map<K, V> {
@@ -55,15 +55,20 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
         int hash = hashCode((K) key);
         CustomEntry<K, V> bucket = buckets[hash];
-        if (bucket != null) {
-            return bucket.key.equals(key);
+
+        while (bucket != null) {
+            if (bucket.key.equals(key)) {
+                return true;
+            } else {
+                bucket = bucket.next();
+            }
         }
         return false;
     }
 
     /**
      * @param value value whose presence in this map is to be tested,
-     * allows null values. Searches value even if collisions occurred.
+     *              allows null values. Searches value even if collisions occurred.
      * @return true specified value is presented in one or more keys
      */
     @Override
@@ -85,7 +90,6 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     }
 
     /**
-     *
      * @param key the key whose associated value is to be returned
      * @return value to which the specified key is or null
      * if this map contains no mapping for the key.
@@ -112,8 +116,9 @@ public class CustomHashMap<K, V> implements Map<K, V> {
      * key-value pairs are lined up in the chain in each bucket.
      * Allows null values. If the map previously contained a mapping for
      * the key, the old value is replaced by the specified value.
-     * @param key key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
+     *
+     * @param key   key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
      * @return the previous value associated with key, or
      * null if there was no mapping for key.
      * @throws NullPointerException if the specified key is null.
@@ -147,7 +152,8 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     /**
      * Removes key-value pairs in this map. If there are any collisions
      * target key-values will be removed and other pairs will be rebuild.
-     * @param key key whose mapping is to be removed from the map
+     *
+     * @param key key whose mapping is to be removed from the map.
      * @return the previous value associated with key, or
      * null if there was no mapping for key.
      * @throws NullPointerException if the specified key is null.
@@ -190,7 +196,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     /**
      * @param key to calculate by hash-function
-     * position of key in bucket.
+     *            position of key in bucket.
      * @return position in bucket.
      */
     private int hashCode(K key) {
@@ -221,6 +227,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     /**
      * Inner class that represents single entry of key-value pair in
      * array of buckets.
+     *
      * @param <K> key
      * @param <V> value
      */

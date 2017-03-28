@@ -5,6 +5,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -62,7 +63,7 @@ public class CustomHashMapTest {
         assertThat(m.containsKey(5), is(true));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testThatMapCantContainNullKey() {
         assertThat(m.containsKey(null), is(false));
     }
@@ -101,6 +102,30 @@ public class CustomHashMapTest {
         assertThat(m.containsValue("dwd"), is(true));
         assertThat(m.containsValue("4r"), is(true));
 
+    }
+
+    @Test
+    public void testThatWeCanPut1000DifferentKeysInMap() {
+        IntStream.range(1, 1000).forEach(
+                i -> m.put(i, String.valueOf(i))
+        );
+        IntStream.range(1, 1000).forEach(
+                i -> assertTrue(m.containsKey(i))
+        );
+    }
+
+    @Test
+    public void testThatMapCanContainKeysWithSameHashCode() {
+        Character testChar = 'z';
+        Integer testInt = Integer.valueOf(testChar);
+
+        assertEquals(testChar.hashCode(), testInt.hashCode());
+
+        m.put((int) testChar, "sss");
+        m.put(testInt, "aaa");
+
+        assertTrue(m.containsKey((int) testChar));
+        assertTrue(m.containsKey(testInt));
     }
 
     @Test
