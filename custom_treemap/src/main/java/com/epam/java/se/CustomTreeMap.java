@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Class represents an implementation of Custom TreeMap which is
  * a Binary Search Tree with balanced Red-Black Tree put method.
- *
+ * <p>
  * Created by Мария on 26.03.2017.
  */
 public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
@@ -19,8 +19,9 @@ public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     /**
      * Calculates a size of TreeMap
      * Associated methods:
-     * @see CustomTreeMap#size(Node)
+     *
      * @return the number of key-value mappings in this map
+     * @see CustomTreeMap#size(Node)
      */
     @Override
     public int size() {
@@ -60,11 +61,12 @@ public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     /**
      * Searches values through entire TreeMap
      * Associated methods:
+     *
+     * @param value value whose presence in this map is to be tested,
+     *              allows null values.
+     * @return true specified value is presented in one or more keys
      * @see CustomTreeMap#getLeftValue(Node, Object)
      * @see CustomTreeMap#getRightValue(Node, Object)
-     * @param value value whose presence in this map is to be tested,
-     * allows null values.
-     * @return true specified value is presented in one or more keys
      */
     @Override
     public boolean containsValue(Object value) {
@@ -128,17 +130,18 @@ public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
      * This method is balanced by implementation of red-black sorting
      * rules, so the height of branches of this map has minimum difference.
      * Associated methods:
+     *
+     * @param key   key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return the previous value associated with key, or
+     * null if there was no mapping for key.
+     * @throws NullPointerException if the specified key is null.
      * @see CustomTreeMap#put(Node, Comparable, Object)
      * @see CustomTreeMap#find(Node, Comparable)
      * @see CustomTreeMap#rotateLeft(Node)
      * @see CustomTreeMap#rotateRight(Node)
      * @see CustomTreeMap#flipColors(Node)
      * @see CustomTreeMap#isRed(Node)
-     * @param key key with which the specified value is to be associated.
-     * @param value value to be associated with the specified key.
-     * @return the previous value associated with key, or
-     * null if there was no mapping for key.
-     * @throws NullPointerException if the specified key is null.
      */
     @Override
     public V put(K key, V value) {
@@ -225,13 +228,14 @@ public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
      * Removes key-value pairs in this map. And than rebuild
      * this map for keep sorting order.
      * Associated methods:
-     * @see CustomTreeMap#remove(Node, Comparable)
-     * @see CustomTreeMap#removeMin(Node)
-     * @see CustomTreeMap#findMin(Node)
+     *
      * @param key key whose mapping is to be removed from the map
      * @return the previous value associated with key, or
      * null if there was no mapping for key.
      * @throws NullPointerException if the specified key is null.
+     * @see CustomTreeMap#remove(Node, Comparable)
+     * @see CustomTreeMap#removeMin(Node)
+     * @see CustomTreeMap#findMin(Node)
      */
     @Override
     public V remove(Object key) {
@@ -333,5 +337,4 @@ public class CustomTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
 
     }
-
 }
