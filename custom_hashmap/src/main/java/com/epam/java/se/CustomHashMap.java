@@ -13,21 +13,15 @@ import java.util.*;
 public class CustomHashMap<K, V> implements Map<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
-
     private CustomEntry<K, V>[] buckets = new CustomEntry[DEFAULT_CAPACITY];
+    private int size = 0;
 
     /**
      * @return the number of key-value mappings in this map
      */
     @Override
     public int size() {
-        int count = 0;
-        for (CustomEntry<K, V> n : buckets) {
-            if (n != null) {
-                count++;
-            }
-        }
-        return count;
+        return size;
     }
 
     /**
@@ -35,12 +29,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean isEmpty() {
-        for (CustomEntry<K, V> n : buckets) {
-            if (n != null) {
-                return false;
-            }
-        }
-        return true;
+        return size == 0;
     }
 
     /**
@@ -139,12 +128,14 @@ public class CustomHashMap<K, V> implements Map<K, V> {
                     finished = true;
                 } else if (currentEntry.next() == null) {
                     currentEntry.setNext(new CustomEntry<>(key, value));
+                    size++;
                     finished = true;
                 }
                 currentEntry = currentEntry.next();
             }
         } else {
             buckets[hash] = new CustomEntry<>(key, value);
+            size++;
         }
         return null;
     }
@@ -171,13 +162,14 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             if (currentEntry.getKey().equals(key)) {
                 if (previousEntry == null) {
                     buckets[hash] = buckets[hash].next();
+                    size--;
                 } else {
                     previousEntry.next().setValue(currentEntry.next().getValue());
+                    size--;
                 }
             }
             previousEntry = currentEntry;
             currentEntry = currentEntry.next();
-
         }
         return null;
     }
@@ -187,6 +179,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
      */
     @Override
     public void clear() {
+        size = 0;
         for (int i = 0; i < buckets.length; i++) {
             if (buckets[i] != null) {
                 buckets[i] = null;

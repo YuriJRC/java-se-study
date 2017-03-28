@@ -20,11 +20,12 @@ import static org.junit.Assert.*;
 public class CustomHashMapTest {
 
     private Map<Integer, String> m;
-    private Map<String, String> m2;
+    private Map<Object, String> m2;
 
     @Before
     public void init() {
         m = new CustomHashMap<>();
+        m2 = new CustomHashMap<>();
     }
 
     @Test
@@ -116,16 +117,44 @@ public class CustomHashMapTest {
 
     @Test
     public void testThatMapCanContainKeysWithSameHashCode() {
-        Character testChar = 'z';
-        Integer testInt = Integer.valueOf(testChar);
+        Object testChar = new Character('z');
+        Object testInt = new Integer(122);
 
         assertEquals(testChar.hashCode(), testInt.hashCode());
 
-        m.put((int) testChar, "sss");
-        m.put(testInt, "aaa");
+        m2.put(testChar, "dwd");
+        m2.put(testInt, "sqq");
 
-        assertTrue(m.containsKey((int) testChar));
-        assertTrue(m.containsKey(testInt));
+        assertTrue(m2.containsKey(testChar));
+        assertTrue(m2.containsKey(testInt));
+
+    }
+    @Test
+    public void testThatIfMapContainsKeyWithSameHashCodeAfterPutSizeWillChange() {
+        Object testChar = new Character('z');
+        Object testInt = new Integer(122);
+
+        assertEquals(testChar.hashCode(), testInt.hashCode());
+
+        m2.put(testChar, "dwd");
+        m2.put(testInt, "sqq");
+
+        assertThat(m2.size(), is(2));
+    }
+
+    @Test
+    public void testThatIfMapContainsKeyWithSameHashCodeAfterRemoveSizeWillChange() {
+        Object testChar = new Character('z');
+        Object testInt = new Integer(122);
+
+        assertEquals(testChar.hashCode(), testInt.hashCode());
+
+        m2.put(testChar, "dwd");
+        m2.put(testInt, "sqq");
+
+        m2.remove(testChar);
+
+        assertThat(m2.size(), is(1));
     }
 
     @Test
