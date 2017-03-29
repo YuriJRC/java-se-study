@@ -127,7 +127,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             while (!finished) {
                 if (key.equals(currentEntry.getKey())) {
                     currentEntry.setValue(value);
-                    finished = true;
+                    return currentEntry.getValue();
                 } else if (currentEntry.next() == null) {
                     currentEntry.setNext(new CustomEntry<>(key, value));
                     size++;
@@ -166,8 +166,9 @@ public class CustomHashMap<K, V> implements Map<K, V> {
                     buckets[hash] = buckets[hash].next();
                     size--;
                 } else {
-                    previousEntry.next().setValue(currentEntry.next().getValue());
+                    previousEntry.next().setValue(currentEntry.getValue());
                     size--;
+                    return previousEntry.getValue();
                 }
             }
             previousEntry = currentEntry;
@@ -193,7 +194,6 @@ public class CustomHashMap<K, V> implements Map<K, V> {
     private int hashCode(K key) {
         return Math.abs(key.hashCode()) % DEFAULT_CAPACITY;
     }
-
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {

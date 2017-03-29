@@ -129,6 +129,23 @@ public class CustomHashMapTest {
         assertTrue(m2.containsKey(testInt));
 
     }
+
+    @Test
+    public void testThatThatIfMapContainsKeyWithSameHashCodePutMethodWillReturnPreviousValue() {
+        Object testChar = new Character('z');
+        Object testInt = new Integer(122);
+
+        assertEquals(testChar.hashCode(), testInt.hashCode());
+
+        String testValue1 = m2.put(testChar, "dwd");
+        String testValue2 = m2.put(testInt, "sqq");
+
+        assertThat(testValue1, is(testValue2));
+
+        assertEquals(testValue2, null);
+
+    }
+
     @Test
     public void testThatIfMapContainsKeyWithSameHashCodeAfterPutSizeWillChange() {
         Object testChar = new Character('z');
@@ -152,9 +169,22 @@ public class CustomHashMapTest {
         m2.put(testChar, "dwd");
         m2.put(testInt, "sqq");
 
-        m2.remove(testChar);
+        m2.remove(testInt);
 
         assertThat(m2.size(), is(1));
+    }
+
+    @Test
+    public void testThatIfMapContainsKeyWithSameHashCodeAfterRemovePreviousValueReturns() {
+        Object testChar = new Character('z');
+        Object testInt = new Integer(122);
+
+        assertEquals(testChar.hashCode(), testInt.hashCode());
+
+        m2.put(testChar, "dwd");
+        m2.put(testInt, "sqq");
+
+        assertThat(m2.remove(testInt), is("dwd"));
     }
 
     @Test
