@@ -184,7 +184,14 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean isContaining = true;
+        for (Object element : c) {
+            if (!this.contains(element)) {
+                isContaining = false;
+                break;
+            }
+        }
+        return isContaining;
     }
 
     @Override
