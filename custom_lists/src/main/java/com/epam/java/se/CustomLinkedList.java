@@ -147,42 +147,39 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public int lastIndexOf(Object o) {
         for (int i = size; i >= 1; i--) {
-            Node<T> last = getNodeByIndex(i - 1);
+            int index = i - 1;
+            Node<T> last = getNodeByIndex(index);
             if (last.value == null) {
                 if (o == null) {
-                    return i - 1;
+                    return index;
                 }
             } else if (last.value.equals(o)) {
-                return i - 1;
+                return index;
             }
         }
         return -1;
     }
 
-
-    @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
-
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] array = new Object[size];
+        Node<T> node = head.next;
+        for (int i = 0; i < size; i++) {
+            array[i]=node.value;
+            node = node.next;
+        }
+        return array;
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
-    }
-
-    @Override
-    public ListIterator<T> listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return null;
+        Object[] array = new Object[size];
+        Node<T> node = head.next;
+        for (int i = 0; i < size; i++) {
+            array[i]=node.value;
+            node = node.next;
+        }
+        return (T1[])array;
     }
 
     @Override
@@ -208,6 +205,21 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return null;
     }
 
     private Node<T> getNodeByIndex(int index) {
