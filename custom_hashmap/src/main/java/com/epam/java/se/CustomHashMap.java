@@ -221,7 +221,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return null;
+        return new CustomEntrySet();
     }
 
 
@@ -232,7 +232,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
      * @param <K> key
      * @param <V> value
      */
-    private class CustomEntry<K, V> implements Iterator<CustomEntry<K, V>> {
+    private class CustomEntry<K, V> implements Map.Entry<K, V>{
 
         private final K key;
         private V value;
@@ -251,8 +251,10 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             return key;
         }
 
-        public void setValue(V value) {
+        public V setValue(V value) {
+            V prev = this.value;
             this.value = value;
+            return prev;
         }
 
         public V getValue() {
@@ -295,7 +297,8 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             CustomHashMap.this.clear();
         }
     }
-    private class CustomValueCollection extends AbstractCollection<V>{
+
+    private class CustomValueCollection extends AbstractCollection<V> {
         @Override
         public int size() {
             return size;
@@ -317,6 +320,41 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         }
     }
 
+    private class CustomEntrySet extends AbstractSet<Entry<K, V>> {
+        @Override
+        public boolean remove(Object o) {
+            return CustomHashMap.this.remove(((CustomEntry<K, V>) o).key) != null;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            if (o instanceof CustomEntry) {
+                CustomEntry<K, V> inputEntry = (CustomEntry<K, V>) o;
+                K inputEntryKey = inputEntry.getKey();
+
+                CustomEntry<K, V> entryToCompare = new CustomEntry<>(inputEntryKey, CustomHashMap.this.get(inputEntryKey));
+
+                return entryToCompare.equals(inputEntry);
+            }
+            return false;
+        }
+
+        @Override
+        public void clear() {
+            CustomHashMap.this.clear();
+        }
+
+        @Override
+        public Iterator<Entry<K, V>> iterator() {
+            return new IteratorForEntrySet();
+        }
+
+        @Override
+        public int size() {
+            return size;
+        }
+    }
+
     private abstract class CustomIterator implements Iterator {
         protected CustomEntry<K, V>[] entries = new CustomEntry[size];
         protected int cursor = 0;
@@ -328,7 +366,12 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
         @Override
         public boolean hasNext() {
-            return cursor < entries.length-1;
+            return cursor < entries.length - 1;
+        }
+
+        @Override
+        public void remove() {
+            CustomHashMap.this.remove(entries[cursor].key);
         }
 
         private void init() {
@@ -356,6 +399,13 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         @Override
         public Object next() {
             return entries[++cursor].value;
+        }
+    }
+
+    private class IteratorForEntrySet extends CustomIterator {
+        @Override
+        public Object next() {
+            return entries[++cursor];
         }
     }
 }

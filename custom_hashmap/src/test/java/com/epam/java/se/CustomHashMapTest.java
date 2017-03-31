@@ -269,53 +269,84 @@ public class CustomHashMapTest {
         assertThat(m.containsKey(100), is(true));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testThatWeCantCopyAnotherMapToOurMapIfItsKeyIsNull() {
         Map<Integer, String> hashmap = new HashMap<>();
         hashmap.put(null, "d");
         m.putAll(hashmap);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testThatWeCatnCopyAnotherMapToOurMapIfItsNull() {
-      m.putAll(null);
+    @Test(expected = NullPointerException.class)
+    public void testThatWeCantCopyAnotherMapToOurMapIfItsNull() {
+        m.putAll(null);
     }
 
     @Test
     public void keySetTest() {
         fillMap();
 
-        Set<Integer> keySet =  m.keySet();
+        Set<Integer> keySet = m.keySet();
         keySet.remove(14);
         assertThat(m.containsKey(14), is(false));
 
         Iterator<Integer> iterator = keySet.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             assertTrue(m.containsKey(iterator.next()));
         }
 
         keySet.clear();
         assertThat(m.isEmpty(), is(true));
 
+        assertEquals(keySet.size(), m.size());
     }
 
     @Test
     public void valueCollectionTest() {
         fillMap();
 
-        Collection<String> valueCollection =  m.values();
+        Collection<String> valueCollection = m.values();
 
         assertThat(valueCollection.contains("qwswd"), is(true));
 
         Iterator<String> iterator = valueCollection.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             assertTrue(m.containsValue(iterator.next()));
         }
 
         valueCollection.clear();
         assertThat(m.isEmpty(), is(true));
+
+        assertEquals(valueCollection.size(), m.size());
     }
 
+    @Test
+    public void entrySetTest() {
+        fillMap();
+
+        Set<Map.Entry<Integer, String>> entrySet = m.entrySet();
+        Iterator<Map.Entry<Integer, String>> iterator = entrySet.iterator();
+
+        assertEquals(entrySet.size(), m.size());
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+        assertThat(m.isEmpty(), is(true));
+
+        fillMap();
+
+        for (Map.Entry<Integer, String> entry : entrySet) {
+            assertThat(m.containsKey(entry.getKey()), is(true));
+            assertThat(m.get(entry.getKey()), is(entry.getValue()));
+            if (m.containsKey(entry.getKey() == 14)) {
+                assertThat(entrySet.contains(entry), is(true));
+            }
+            if (m.containsKey(entry.getKey() == 250)) {
+                assertThat(entrySet.contains(entry), is(false));
+            }
+        }
+    }
 
     private void fillMap() {
         m.put(14, "ffff");
