@@ -209,16 +209,37 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         }
     }
 
+    /**
+     * Returns a Set of the keys contained in this map.
+     * Changes to the map are reflected in the set, and vice-versa.
+     * Set supports iterate, remove, clear operations.
+     * Set doesn't support add operations.
+     * @return a set of the keys contained in this map
+     */
     @Override
     public Set<K> keySet() {
         return new CustomKeySet();
     }
 
+    /**
+     * Returns a Collection of values contained in this map.
+     * Changes to the map are reflected in the set, and vice-versa.
+     * Collection supports iterate, remove, clear operations.
+     * Collection doesn't support add operations.
+     * @return a collection of values contained in this map
+     */
     @Override
     public Collection<V> values() {
         return new CustomValueCollection();
     }
 
+    /**
+     * Returns a Set of the key-value pairs contained in this map.
+     * Changes to the map are reflected in the set, and vice-versa.
+     * Set supports iterate, remove, clear operations.
+     * Set doesn't support add operations.
+     * @return a set of the key-value pairs contained in this map
+     */
     @Override
     public Set<Entry<K, V>> entrySet() {
         return new CustomEntrySet();
