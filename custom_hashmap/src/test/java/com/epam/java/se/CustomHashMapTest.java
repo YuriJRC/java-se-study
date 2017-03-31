@@ -5,7 +5,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -280,6 +282,24 @@ public class CustomHashMapTest {
     @Test (expected = NullPointerException.class)
     public void testThatWeCatnCopyAnotherMapToOurMapIfItsNull() {
       m.putAll(null);
+    }
+
+    @Test
+    public void keySetTest() {
+        fillMap();
+
+        Set<Integer> keySet =  m.keySet();
+        keySet.remove(14);
+        assertThat(m.containsKey(14), is(false));
+
+        Iterator<Integer> iterator = keySet.iterator();
+        while (iterator.hasNext()){
+            assertTrue(m.containsKey(iterator.next()));
+        }
+
+        keySet.clear();
+        assertThat(m.isEmpty(), is(true));
+
     }
 
     private void fillMap() {

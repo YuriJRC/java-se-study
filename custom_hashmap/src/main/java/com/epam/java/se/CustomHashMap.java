@@ -57,7 +57,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     /**
      * @param value value whose presence in this map is to be tested,
-     * allows null values. Searches value even if collisions occurred.
+     *              allows null values. Searches value even if collisions occurred.
      * @return true specified value is presented in one or more keys
      */
     @Override
@@ -197,6 +197,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     /**
      * Copies all of the mappings from the specified map to this map
+     *
      * @param m - mappings from specified map to be stored in this map
      * @throws NullPointerException if specified map or it's key is null.
      */
@@ -210,7 +211,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        return null;
+        return new CustomKeySet();
     }
 
     @Override
@@ -264,6 +265,69 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
         void setNext(CustomEntry<K, V> next) {
             this.next = next;
+        }
+    }
+
+    private class CustomKeySet extends AbstractSet<K> {
+
+        @Override
+        public Iterator<K> iterator() {
+            return new IteratorForKeySet();
+        }
+
+        @Override
+        public int size() {
+            return size;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return CustomHashMap.this.containsKey(o);
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return CustomHashMap.this.remove(o) != null;
+        }
+
+        @Override
+        public void clear() {
+            CustomHashMap.this.clear();
+        }
+    }
+
+    private abstract class CustomIterator implements Iterator {
+        protected CustomEntry<K, V>[] entries = new CustomEntry[size];
+        protected int cursor = 0;
+
+        public CustomIterator() {
+            init();
+            cursor = -1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cursor < entries.length-1;
+        }
+
+        private void init() {
+            for (int i = 0; i < buckets.length; i++) {
+                if (buckets[i] != null) {
+                    CustomEntry<K, V> currentEntry = buckets[i];
+                    while (currentEntry != null) {
+                        entries[cursor] = currentEntry;
+                        cursor++;
+                        currentEntry = currentEntry.next();
+                    }
+                }
+            }
+        }
+    }
+
+    private class IteratorForKeySet extends CustomIterator {
+        @Override
+        public Object next() {
+            return entries[++cursor].key;
         }
     }
 }
