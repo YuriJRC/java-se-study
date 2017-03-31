@@ -216,7 +216,7 @@ public class CustomHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Collection<V> values() {
-        return null;
+        return new CustomValueCollection();
     }
 
     @Override
@@ -295,6 +295,27 @@ public class CustomHashMap<K, V> implements Map<K, V> {
             CustomHashMap.this.clear();
         }
     }
+    private class CustomValueCollection extends AbstractCollection<V>{
+        @Override
+        public int size() {
+            return size;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return CustomHashMap.this.containsValue(o);
+        }
+
+        @Override
+        public Iterator<V> iterator() {
+            return new IteratorForValueCollection();
+        }
+
+        @Override
+        public void clear() {
+            CustomHashMap.this.clear();
+        }
+    }
 
     private abstract class CustomIterator implements Iterator {
         protected CustomEntry<K, V>[] entries = new CustomEntry[size];
@@ -328,6 +349,13 @@ public class CustomHashMap<K, V> implements Map<K, V> {
         @Override
         public Object next() {
             return entries[++cursor].key;
+        }
+    }
+
+    private class IteratorForValueCollection extends CustomIterator {
+        @Override
+        public Object next() {
+            return entries[++cursor].value;
         }
     }
 }

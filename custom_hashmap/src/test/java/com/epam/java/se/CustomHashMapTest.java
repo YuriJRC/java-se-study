@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -301,6 +298,24 @@ public class CustomHashMapTest {
         assertThat(m.isEmpty(), is(true));
 
     }
+
+    @Test
+    public void valueCollectionTest() {
+        fillMap();
+
+        Collection<String> valueCollection =  m.values();
+
+        assertThat(valueCollection.contains("qwswd"), is(true));
+
+        Iterator<String> iterator = valueCollection.iterator();
+        while (iterator.hasNext()){
+            assertTrue(m.containsValue(iterator.next()));
+        }
+
+        valueCollection.clear();
+        assertThat(m.isEmpty(), is(true));
+    }
+
 
     private void fillMap() {
         m.put(14, "ffff");
