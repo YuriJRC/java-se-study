@@ -301,6 +301,30 @@ public class CustomHashMapTest {
     }
 
     @Test
+    public void testThatIfKeySetChangesElementsOurHashMapWillChangeToo(){
+        fillMap();
+
+        Set<Integer> keySet = m.keySet();
+
+        assertThat(keySet.size(), is(m.size()));
+
+        for (Integer key : keySet) {
+            keySet.remove(key);
+        }
+
+        assertThat(keySet.isEmpty(), is(true));
+        assertThat(m.isEmpty(), is(true));
+    }
+
+
+    @Test (expected = UnsupportedOperationException.class)
+    public void testThatWeCantAddToKeySet() {
+        Set<Integer> keySet = m.keySet();
+
+        keySet.add(new Integer(2));
+    }
+
+    @Test
     public void valueCollectionTest() {
         fillMap();
 
@@ -320,10 +344,35 @@ public class CustomHashMapTest {
     }
 
     @Test
+    public void testThatValueCollectionChangesElementsOurHashMapWillChangeToo(){
+        fillMap();
+
+        Collection<String> valueCollection = m.values();
+
+        assertThat(valueCollection.size(), is(m.size()));
+
+        for (String value : valueCollection) {
+            valueCollection.remove(value);
+        }
+
+        assertThat(valueCollection.isEmpty(), is(true));
+        assertThat(m.isEmpty(), is(true));
+    }
+
+    @Test (expected = UnsupportedOperationException.class)
+    public void testThatWeCantAddToValueCollection() {
+        Collection<String> valueCollection = m.values();
+
+        valueCollection.add(new String("s"));
+    }
+
+
+    @Test
     public void entrySetTest() {
         fillMap();
 
         Set<Map.Entry<Integer, String>> entrySet = m.entrySet();
+
         Iterator<Map.Entry<Integer, String>> iterator = entrySet.iterator();
 
         assertEquals(entrySet.size(), m.size());
@@ -347,6 +396,29 @@ public class CustomHashMapTest {
             }
         }
     }
+    @Test (expected = UnsupportedOperationException.class)
+    public void testThatWeCantAddToEnrtySet() {
+        Set entrySet = m.entrySet();
+
+        entrySet.add(new Integer(1));
+    }
+
+    @Test
+    public void testThatIfEntrySetChangesElementsOurHashMapWillChangeToo(){
+        fillMap();
+
+        Set<Map.Entry<Integer, String>> entrySet = m.entrySet();
+
+        assertThat(entrySet.size(), is(m.size()));
+
+        for (Map.Entry<Integer, String> entry : entrySet) {
+            entrySet.remove(entry);
+        }
+
+        assertThat(entrySet.isEmpty(), is(true));
+        assertThat(m.isEmpty(), is(true));
+    }
+
 
     private void fillMap() {
         m.put(14, "ffff");
