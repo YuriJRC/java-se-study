@@ -19,7 +19,7 @@ public class FilmCollection implements Serializable {
         if (film == null || actors == null) {
             throw new NullPointerException("Empty data");
         }
-        ArrayList actorsInFilm = new ArrayList();
+        ArrayList <Actor> actorsInFilm = new ArrayList<>();
         for (Actor a : actors) {
             actorsInFilm.add(a);
         }
